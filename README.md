@@ -1,2 +1,6 @@
 # CentralisUHC
-A Minecraft Spigot plugin that creates a UHC game/environment for players on the https://c.uhc.gg/#/list website to play on.
+A Minecraft Spigot plugin that creates a UHC (Ultra HardCore) game/environment for players at https://c.uhc.gg/#/list to play on.
+
+This codebase was built using the Spigot API (https://hub.spigotmc.org/javadocs/bukkit/) which is a Minecraft Java framework that is designed for plugin development.
+
+The whole codebase took roughly 20 hours to produce and was played tested through 5 complete games of UHC.
