@@ -1,0 +1,31 @@
+name: UHC
+author: Centy
+version: 1.0
+main: me.centy.uhc.main.Main
+
+commands:
+  whitelist:
+    permission: uhc.staff
+    aliases: [wl]
+  practice:
+    aliases: [prac, p]
+  ping:
+  broadcast:
+    permission: uhc.staff
+  mute:
+    permission: uhc.staff
+  start:
+    permission: uhc.staff
+  mutechat:
+    permission: uhc.staff
+  calculate:
+    permission: uhc.staff
+  scenario:
+    permission: uhc.staff
+    aliases: [scen, scenarios]
+  staff:
+    permission: uhc.staff
+  latescatter:
+    aliases: [ls]
+    
+depend: [Netherboard]

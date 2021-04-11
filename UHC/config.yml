@@ -1,0 +1,22 @@
+SETTINGS:
+  PREFIX: '&7[&aUHC&7] '
+  MAIN-COLOR: '&a'
+  SECONDARY-COLOR: '&f'
+SETUP:
+  MAP-RADIUS: 1500
+  HEAL-TIME: 10
+  GRACE-TIME: 20
+  FIRST-SHRINK: 45
+  LOGOUT-TIMER: 10
+MYSQL:
+  ENABLED: false
+  HOST: localhost
+  DATABASE: aurityuhc
+  USERNAME: root
+  PASSWORD: password
+  PORT: 3306
+CHAT:
+  HOST-PREFIX: '&4&l[Host] '
+  MOD-PREFIX: '&3&l[UHC-Mod] '
+  SPECTATOR-PREFIX: '&7[Spectator] '
+  TEAM-PREFIX: '&7[&aTeam %teamNumber%&7] '
