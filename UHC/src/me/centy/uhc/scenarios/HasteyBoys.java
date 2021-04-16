@@ -15,7 +15,6 @@ public class HasteyBoys implements Listener {
 	@EventHandler
 	public void onToolCraft(PrepareItemCraftEvent event) {
 		if (GameManager.getInstance().isScenarioActive("HasteyBoys")) {
-
 			ItemStack item = event.getRecipe().getResult();
 			CraftingInventory inventory = event.getInventory();
 			String name = item.getType().name();

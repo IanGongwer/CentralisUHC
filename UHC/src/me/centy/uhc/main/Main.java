@@ -38,7 +38,7 @@ import me.centy.uhc.listeners.Weather;
 import me.centy.uhc.runnables.CombatLogRunnable;
 import me.centy.uhc.runnables.EndRunnable;
 import me.centy.uhc.runnables.GameRunnable;
-import me.centy.uhc.scenarios.CutClean;
+import me.centy.uhc.scenarios.CutCleanandBD;
 import me.centy.uhc.scenarios.HasteyBoys;
 import me.centy.uhc.scenarios.Timber;
 
@@ -75,7 +75,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerScenarios() {
-		getServer().getPluginManager().registerEvents(new CutClean(), this);
+		getServer().getPluginManager().registerEvents(new CutCleanandBD(), this);
 		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
 		getServer().getPluginManager().registerEvents(new Timber(), this);
 	}

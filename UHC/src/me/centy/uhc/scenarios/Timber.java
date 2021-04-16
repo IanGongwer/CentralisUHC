@@ -15,13 +15,7 @@ public class Timber implements Listener {
 	public void onBlockBreak(BlockBreakEvent e) {
 		if (GameManager.getInstance().isScenarioActive("Timber")) {
 			Block block = e.getBlock();
-
-			if (block.getType() != Material.LOG && block.getType() != Material.LOG_2) {
-				return;
-			}
-
 			block = block.getRelative(BlockFace.UP);
-
 			while (block.getType() == Material.LOG || block.getType() == Material.LOG_2) {
 				block.breakNaturally();
 				block = block.getRelative(BlockFace.UP);
