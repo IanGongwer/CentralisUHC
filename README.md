@@ -8,5 +8,5 @@ The whole codebase took roughly 20 hours to produce and was played tested throug
 Additional features I plan on adding:
 
 - Teams Mode (Team Management, scattering teams, scenarios regarding teams, etc.)
-- Various Scenarios (Blood Diamonds, TimeBomb, Moles, etc.)
+- Various Scenarios (TimeBomb, Moles, etc.)
 - Special Golden Apples (Golden Head drops from player's death, gives special effects to killer)
