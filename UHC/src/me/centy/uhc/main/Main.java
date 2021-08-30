@@ -39,6 +39,7 @@ import me.centy.uhc.runnables.CombatLogRunnable;
 import me.centy.uhc.runnables.EndRunnable;
 import me.centy.uhc.runnables.GameRunnable;
 import me.centy.uhc.scenarios.CutCleanandBD;
+import me.centy.uhc.scenarios.Fireless;
 import me.centy.uhc.scenarios.HasteyBoys;
 import me.centy.uhc.scenarios.Timber;
 
@@ -78,6 +79,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new CutCleanandBD(), this);
 		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
 		getServer().getPluginManager().registerEvents(new Timber(), this);
+		getServer().getPluginManager().registerEvents(new Fireless(), this);
 	}
 
 	public void registerCommands() {
