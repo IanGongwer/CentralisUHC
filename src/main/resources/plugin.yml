@@ -1,0 +1,39 @@
+name: UHC
+author: Centralis
+version: 1.0
+main: com.iangongwer.main.Main
+
+commands:
+  whitelist:
+    permission: uhc.staff
+    aliases: [wl]
+  practice:
+    aliases: [prac, p]
+  broadcast:
+    permission: uhc.staff
+  mute:
+    permission: uhc.staff
+  start:
+    permission: uhc.staff
+  mutechat:
+    permission: uhc.staff
+  calculate:
+    permission: uhc.staff
+  scenario:
+    permission: uhc.staff
+    aliases: [scen, scenarios]
+  staff:
+    permission: uhc.staff
+  latescatter:
+    aliases: [ls]
+  team:
+    aliases: [t, teams]
+  teamchat:
+    aliases: [tc]
+  teamcoords:
+    aliases: [tl, sendcoords, pmcoords, teamloc]
+  respawn:
+    permission: uhc.staff
+  stats:
+    
+depend: [Netherboard]
