@@ -1,7 +1,7 @@
 # CentralisUHC
 A Minecraft Spigot plugin that creates a UHC (Ultra HardCore) game/environment for players at https://c.uhc.gg/#/list to play on.
 
-This codebase was built using the Spigot API (https://hub.spigotmc.org/javadocs/bukkit/) which is a Minecraft Java framework that is designed for plugin development. This codebase has Maven dependency support and an SQL statistics-based system implemented with holograms.
+This codebase was built using the Spigot API (https://hub.spigotmc.org/javadocs/bukkit/) which is a Minecraft Java framework that is designed for plugin development. This codebase has Maven dependency support and an SQL + Redis statistics-based system implemented with holograms.
 
 The whole codebase was play tested through around 60 complete games of UHC. There is even a discord community that I have built in reference to the players that play alongside this codebase. Discord: https://discord.gg/YTEM7Dq
 
