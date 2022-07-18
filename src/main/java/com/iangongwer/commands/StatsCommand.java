@@ -7,12 +7,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.mysql.ConnectionMYSQL;
+import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.utils.Util;
 
 public class StatsCommand implements CommandExecutor {
 
 	Util u = Util.getInstance();
 	ConnectionMYSQL dbm = ConnectionMYSQL.getInstance();
+	ConnectionRedis cr = ConnectionRedis.getInstance();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("stats") && sender instanceof Player) {
@@ -25,6 +27,10 @@ public class StatsCommand implements CommandExecutor {
 				player.sendMessage(u.messageFormat("Kills: " + dbm.getKills(player.getUniqueId()), "a"));
 				player.sendMessage(u.messageFormat("Deaths: " + dbm.getDeaths(player.getUniqueId()), "a"));
 				player.sendMessage(u.messageFormat("Wins: " + dbm.getWins(player.getUniqueId()), "a"));
+
+				player.sendMessage(u.messageFormat("Kills: " + cr.getKills(player.getUniqueId()), "a"));
+				player.sendMessage(u.messageFormat("Deaths: " + cr.getDeaths(player.getUniqueId()), "a"));
+				player.sendMessage(u.messageFormat("Wins: " + cr.getWins(player.getUniqueId()), "a"));
 			}
 			if (args.length == 1) {
 				Player player2 = Bukkit.getPlayer(args[0]);
@@ -33,6 +39,10 @@ public class StatsCommand implements CommandExecutor {
 					player.sendMessage(u.messageFormat("Kills: " + dbm.getKills(player2.getUniqueId()), "a"));
 					player.sendMessage(u.messageFormat("Deaths: " + dbm.getDeaths(player2.getUniqueId()), "a"));
 					player.sendMessage(u.messageFormat("Wins: " + dbm.getWins(player2.getUniqueId()), "a"));
+
+					player.sendMessage(u.messageFormat("Kills: " + cr.getKills(player2.getUniqueId()), "a"));
+					player.sendMessage(u.messageFormat("Deaths: " + cr.getDeaths(player2.getUniqueId()), "a"));
+					player.sendMessage(u.messageFormat("Wins: " + cr.getWins(player2.getUniqueId()), "a"));
 				} else {
 					player.sendMessage(u.messageFormat(args[0] + " is not online", "c"));
 				}

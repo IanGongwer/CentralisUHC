@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.iangongwer.mysql.ConnectionMYSQL;
+import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
@@ -34,6 +35,7 @@ public class GameManager {
 	}
 
 	ConnectionMYSQL dbm = ConnectionMYSQL.getInstance();
+	ConnectionRedis cr = ConnectionRedis.getInstance();
 
 	Random random = new Random();
 
@@ -231,6 +233,8 @@ public class GameManager {
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(killer)) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
 					dbm.addWin(playerUUID);
+					cr.addWin(playerUUID);
+
 				}
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
 				Bukkit.broadcastMessage("");
@@ -246,6 +250,7 @@ public class GameManager {
 						Util.getInstance().messageFormat("Winner: " + Bukkit.getPlayer(killer).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
 				dbm.addWin(Bukkit.getPlayer(killer).getUniqueId());
+				cr.addWin(Bukkit.getPlayer(killer).getUniqueId());
 			}
 		}
 	}
@@ -262,6 +267,7 @@ public class GameManager {
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(getPlayers().get(0))) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
 					dbm.addWin(playerUUID);
+					cr.addWin(playerUUID);
 				}
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
 				Bukkit.broadcastMessage("");
@@ -277,6 +283,7 @@ public class GameManager {
 						.messageFormat("Winner: " + Bukkit.getPlayer(getPlayers().get(0)).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
 				dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
+				cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
 			}
 		}
 	}

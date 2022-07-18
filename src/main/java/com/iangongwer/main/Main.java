@@ -41,6 +41,7 @@ import com.iangongwer.listeners.Sheep;
 import com.iangongwer.listeners.VillagerDeath;
 import com.iangongwer.listeners.Weather;
 import com.iangongwer.mysql.ConnectionMYSQL;
+import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.EndRunnable;
 import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.runnables.QuitLogRunnable;
@@ -55,6 +56,8 @@ import com.iangongwer.utils.YMLFile;
 public class Main extends JavaPlugin {
 
 	private static Main instance;
+
+	ConnectionRedis cr = ConnectionRedis.getInstance();
 
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
@@ -115,6 +118,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		new YMLFile();
+		cr.connectToRedis();
 		ConnectionMYSQL.getInstance().connect();
 		registerRunnables();
 		registerListeners();
@@ -134,7 +138,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-
+		cr.closePool();
 	}
 
 	public static Main getInstance() {
