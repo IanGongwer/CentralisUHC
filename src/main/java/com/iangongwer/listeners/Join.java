@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.holograms.LobbyHolograms;
+import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.QuitLogRunnable;
@@ -24,8 +25,11 @@ public class Join implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		event.setJoinMessage("");
 		Player joinedPlayer = event.getPlayer();
-		dbm.createPlayer(joinedPlayer.getUniqueId());
-		cr.createPlayer(joinedPlayer.getUniqueId());
+		if(!Main.isRedisEnabled()) {
+			dbm.createPlayer(joinedPlayer.getUniqueId());
+		} else {
+			cr.createPlayer(joinedPlayer.getUniqueId());
+		}
 
 		if (Bukkit.getOnlinePlayers().size() == 1) {
 			LobbyHolograms lbho = new LobbyHolograms();

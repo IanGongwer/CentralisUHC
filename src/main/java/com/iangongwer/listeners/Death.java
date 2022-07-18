@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.TeamManager;
@@ -34,14 +35,20 @@ public class Death implements Listener {
 					+ ChatColor.GREEN + player.getDisplayName());
 		}
 		if (!u.isLobby()) {
-			dbm.addDeath(player.getUniqueId());
-			cr.addDeath(player.getUniqueId());
+			if(!Main.isRedisEnabled()) {
+				dbm.addDeath(player.getUniqueId());
+			} else {
+				cr.addDeath(player.getUniqueId());
+			}
 			if (!gm.isPvPEnabled()) {
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance.", "a"));
 			}
 			if (killer instanceof Player) {
-				dbm.addKill(killer.getUniqueId());
-				cr.addKill(killer.getUniqueId());
+				if(!Main.isRedisEnabled()) {
+					dbm.addKill(killer.getUniqueId());
+				} else {
+					cr.addKill(killer.getUniqueId());
+				}
 				event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
 						+ ChatColor.GREEN + player.getDisplayName());
 				gm.setPlayerKills(killer.getUniqueId(), gm.getPlayerKills(killer.getUniqueId()) + 1);

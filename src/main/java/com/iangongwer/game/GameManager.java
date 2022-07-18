@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.Team;
@@ -232,8 +233,12 @@ public class GameManager {
 				ArrayList<String> members = new ArrayList<String>();
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(killer)) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
-					dbm.addWin(playerUUID);
-					cr.addWin(playerUUID);
+					
+					if(!Main.isRedisEnabled()) {
+						dbm.addWin(playerUUID);
+					} else {
+						cr.addWin(playerUUID);
+					}
 
 				}
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
@@ -249,8 +254,12 @@ public class GameManager {
 				Bukkit.broadcastMessage(
 						Util.getInstance().messageFormat("Winner: " + Bukkit.getPlayer(killer).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
-				dbm.addWin(Bukkit.getPlayer(killer).getUniqueId());
-				cr.addWin(Bukkit.getPlayer(killer).getUniqueId());
+
+				if(!Main.isRedisEnabled()) {
+					dbm.addWin(Bukkit.getPlayer(killer).getUniqueId());
+				} else {
+					cr.addWin(Bukkit.getPlayer(killer).getUniqueId());
+				}
 			}
 		}
 	}
@@ -266,8 +275,12 @@ public class GameManager {
 				ArrayList<String> members = new ArrayList<String>();
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(getPlayers().get(0))) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
-					dbm.addWin(playerUUID);
-					cr.addWin(playerUUID);
+
+					if(!Main.isRedisEnabled()) {
+						dbm.addWin(playerUUID);
+					} else {
+						cr.addWin(playerUUID);
+					}
 				}
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
 				Bukkit.broadcastMessage("");
@@ -282,8 +295,12 @@ public class GameManager {
 				Bukkit.broadcastMessage(Util.getInstance()
 						.messageFormat("Winner: " + Bukkit.getPlayer(getPlayers().get(0)).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
-				dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
-				cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
+
+				if(!Main.isRedisEnabled()) {
+					dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
+				} else {
+					cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
+				}
 			}
 		}
 	}

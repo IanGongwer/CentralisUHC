@@ -59,6 +59,8 @@ public class Main extends JavaPlugin {
 
 	ConnectionRedis cr = ConnectionRedis.getInstance();
 
+	private static boolean redisEnabled = true;
+
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new QuitLogRunnable(), 0L, 40L);
@@ -118,8 +120,11 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		new YMLFile();
-		cr.connectToRedis();
-		ConnectionMYSQL.getInstance().connect();
+		if(isRedisEnabled()) {
+			cr.connectToRedis();
+		} else {
+			ConnectionMYSQL.getInstance().connect();
+		}
 		registerRunnables();
 		registerListeners();
 		registerScenarios();
@@ -143,6 +148,10 @@ public class Main extends JavaPlugin {
 
 	public static Main getInstance() {
 		return instance;
+	}
+
+	public static boolean isRedisEnabled() {
+		return redisEnabled;
 	}
 
 }

@@ -2,7 +2,10 @@ package com.iangongwer.redis;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+
+import org.bukkit.Bukkit;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import redis.clients.jedis.Jedis;
@@ -91,6 +94,54 @@ public class ConnectionRedis {
         connectToRedis();
         Jedis jedis = pool.getResource();
         return jedis.hget(playerUUID.toString(), "wins");
+    }
+
+    public String getMostKillsUUID() {
+        connectToRedis();
+        Jedis jedis = pool.getResource();
+        Set<String> allPlayers = jedis.keys("*");
+        int highestKills = 0;
+        String highestKillsPlayer = "";
+        for (String playerString : allPlayers) {
+            String value = jedis.hget(playerString, "kills");
+            if(Integer.valueOf(value) > highestKills) {
+                highestKills = Integer.valueOf(jedis.hget(playerString, "kills"));
+                highestKillsPlayer = playerString;
+            }
+        }
+        return highestKillsPlayer;
+    }
+
+    public String getMostDeathsUUID() {
+        connectToRedis();
+        Jedis jedis = pool.getResource();
+        Set<String> allPlayers = jedis.keys("*");
+        int highestDeaths = 0;
+        String highestDeathsPlayer = "";
+        for (String playerString : allPlayers) {
+            String value = jedis.hget(playerString, "deaths");
+            if(Integer.valueOf(value) > highestDeaths) {
+                highestDeaths = Integer.valueOf(jedis.hget(playerString, "deaths"));
+                highestDeathsPlayer = playerString;
+            }
+        }
+        return highestDeathsPlayer;
+    }
+
+    public String getMostWinsUUID() {
+        connectToRedis();
+        Jedis jedis = pool.getResource();
+        Set<String> allPlayers = jedis.keys("*");
+        int highestWins = 0;
+        String highestWinsPlayer = "";
+        for (String playerString : allPlayers) {
+            String value = jedis.hget(playerString, "wins");
+            if(Integer.valueOf(value) > highestWins) {
+                highestWins = Integer.valueOf(jedis.hget(playerString, "wins"));
+                highestWinsPlayer = playerString;
+            }
+        }
+        return highestWinsPlayer;
     }
 
     public void closePool() {
