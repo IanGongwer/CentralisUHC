@@ -13,14 +13,15 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
@@ -215,9 +216,11 @@ public class Util {
 			worldcreate.environment(World.Environment.NORMAL);
 			worldcreate.type(WorldType.NORMAL);
 			worldcreate.createWorld();
-//			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set 500 500 0 0");
-//			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " fill");
-//			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb fill confirm");
+			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set
+			// 500 500 0 0");
+			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + "
+			// fill");
+			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb fill confirm");
 			clearZeroZero();
 			Bukkit.getLogger().info("Loading uhc_world...");
 		}
@@ -419,16 +422,14 @@ public class Util {
 		quitLoggedVillager.setCustomNameVisible(true);
 	}
 
-	public void despawnVillager(Player player) {
-		for (Entity entity : Bukkit.getWorld("uhc_world").getEntities()) {
-			if (entity.getType().equals(EntityType.VILLAGER)) {
-				if (entity.getCustomName().equals(player.getDisplayName())
-						|| entity.getCustomName().equals(player.getName())
-						|| entity.getName().equalsIgnoreCase(player.getName())
-						|| entity.getName().equals(player.getDisplayName())
-						|| entity.getCustomName() == player.getDisplayName()) {
-					player.sendMessage("" + entity.getCustomName());
-					player.sendMessage("" + player.getDisplayName());
+	public void despawnVillager(OfflinePlayer player) {
+		for (LivingEntity entity : Bukkit.getWorld("uhc_world").getLivingEntities()) {
+			if (entity instanceof Villager && entity.getCustomName() != null) {
+				if (entity.getCustomName()
+						.equalsIgnoreCase(player.getName())) {
+					entity.damage(20);
+					gm.setQuitLogTime(player.getUniqueId(), -1);
+					gm.removeQuitLoggedPlayer(player.getUniqueId());
 				}
 			}
 		}

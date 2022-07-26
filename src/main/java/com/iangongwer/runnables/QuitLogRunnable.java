@@ -30,7 +30,7 @@ public class QuitLogRunnable extends BukkitRunnable {
 					if (entity instanceof Villager && entity.getCustomName() != null) {
 						if (entity.getCustomName()
 								.equalsIgnoreCase(Bukkit.getOfflinePlayer(quitPlayerObject.getKey()).getName())) {
-							entity.damage(.1111);
+							entity.damage(.1333);
 						}
 					}
 				}
@@ -38,7 +38,12 @@ public class QuitLogRunnable extends BukkitRunnable {
 			if (quitPlayerObject.getValue() == 0) {
 				gm.removePlayer(quitPlayerObject.getKey());
 				gm.addSpectator(quitPlayerObject.getKey());
-				tm.addDeceasedMember(quitPlayerObject.getKey());
+				gm.setQuitLogTime(quitPlayerObject.getKey(), -1);
+				gm.removeQuitLoggedPlayer(quitPlayerObject.getKey());
+				
+				if(TeamManager.getInstance().areTeamsEnabled()) {
+					tm.addDeceasedMember(quitPlayerObject.getKey());
+				}
 			}
 		}
 	}

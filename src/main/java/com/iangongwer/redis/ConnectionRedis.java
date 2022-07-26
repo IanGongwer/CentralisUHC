@@ -14,45 +14,50 @@ import redis.clients.jedis.JedisPool;
 public class ConnectionRedis {
 
     // Singleton of ConnectionRedis class
-	private static ConnectionRedis single_instance;
+    private static ConnectionRedis single_instance;
 
-	public static ConnectionRedis getInstance() {
-		if (single_instance == null) {
-			single_instance = new ConnectionRedis();
-		}
-		return single_instance;
-	}
+    public static ConnectionRedis getInstance() {
+        if (single_instance == null) {
+            single_instance = new ConnectionRedis();
+        }
+        return single_instance;
+    }
 
     Dotenv env = Dotenv.load();
 
     public static JedisPool pool;
 
     static Map<String, String> playerCreationMap = new HashMap<>();
-    
+
+    private boolean connectedSuccessfully = false;
+
     public void connectToRedis() {
         Main.setRedisEnabled(true);
-		pool = new JedisPool(env.get("REDIS_IP"), 11192);
-		Jedis j = null;
-		try {
-			j = pool.getResource();
-			// If you want to use a password, use
-			j.auth(env.get("REDIS_PASSWORD"));
-		 } finally {
-			// Be sure to close it! It can and will cause memory leaks.
-            if(j != null) {
+        pool = new JedisPool(env.get("REDIS_IP"), 11192);
+        Jedis j = null;
+        try {
+            j = pool.getResource();
+            // If you want to use a password, use
+            j.auth(env.get("REDIS_PASSWORD"));
+            connectedSuccessfully = true;
+        } catch (Exception e) {
+            connectedSuccessfully = false;
+        } finally {
+            // Be sure to close it! It can and will cause memory leaks.
+            if (j != null) {
                 j.close();
             }
-		 }
+        }
 
-         playerCreationMap.put("kills", "0");
-         playerCreationMap.put("deaths", "0");
-         playerCreationMap.put("wins", "0");
-	}
+        playerCreationMap.put("kills", "0");
+        playerCreationMap.put("deaths", "0");
+        playerCreationMap.put("wins", "0");
+    }
 
     public void createPlayer(UUID playerUUID) {
         connectToRedis();
         Jedis jedis = pool.getResource();
-        if(!jedis.exists(playerUUID.toString())) {
+        if (!jedis.exists(playerUUID.toString())) {
             jedis.hmset(playerUUID.toString(), playerCreationMap);
         }
         jedis.close();
@@ -105,7 +110,7 @@ public class ConnectionRedis {
         String highestKillsPlayer = "";
         for (String playerString : allPlayers) {
             String value = jedis.hget(playerString, "kills");
-            if(Integer.valueOf(value) > highestKills) {
+            if (Integer.valueOf(value) > highestKills) {
                 highestKills = Integer.valueOf(jedis.hget(playerString, "kills"));
                 highestKillsPlayer = playerString;
             }
@@ -121,7 +126,7 @@ public class ConnectionRedis {
         String highestDeathsPlayer = "";
         for (String playerString : allPlayers) {
             String value = jedis.hget(playerString, "deaths");
-            if(Integer.valueOf(value) > highestDeaths) {
+            if (Integer.valueOf(value) > highestDeaths) {
                 highestDeaths = Integer.valueOf(jedis.hget(playerString, "deaths"));
                 highestDeathsPlayer = playerString;
             }
@@ -137,7 +142,7 @@ public class ConnectionRedis {
         String highestWinsPlayer = "";
         for (String playerString : allPlayers) {
             String value = jedis.hget(playerString, "wins");
-            if(Integer.valueOf(value) > highestWins) {
+            if (Integer.valueOf(value) > highestWins) {
                 highestWins = Integer.valueOf(jedis.hget(playerString, "wins"));
                 highestWinsPlayer = playerString;
             }
@@ -147,5 +152,9 @@ public class ConnectionRedis {
 
     public void closePool() {
         pool.close();
+    }
+
+    public boolean isConnectedSuccessfully() {
+        return connectedSuccessfully;
     }
 }

@@ -35,10 +35,9 @@ public class Join implements Listener {
 			joinedPlayer.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 			if (gm.getPlayers().contains(joinedPlayer.getUniqueId())) {
 				u.createGameScoreboard(joinedPlayer);
-				gm.setQuitLogTime(joinedPlayer.getUniqueId(), -1);
-				gm.removeQuitLoggedPlayer(joinedPlayer.getUniqueId());
 				QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
 				u.despawnVillager(joinedPlayer);
+				QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				u.createStaffSpecScoreboard(joinedPlayer);
 			} else if (gm.isSpectator(joinedPlayer.getUniqueId())) {

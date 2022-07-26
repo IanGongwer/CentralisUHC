@@ -28,6 +28,8 @@ public class ConnectionMYSQL {
 
 	private Connection connection;
 
+	private boolean connectedSuccessfully = false;
+
 	public void connect() {
 		try {
 			Main.setRedisEnabled(false);
@@ -37,8 +39,10 @@ public class ConnectionMYSQL {
 							+ yml.getString("Configuration.Database") + "?useSSL=false",
 					yml.getString("Configuration.Username"),
 					yml.getString("Configuration.Password"));
+			connectedSuccessfully = true;
 		} catch (SQLException e) {
 			Main.setRedisEnabled(true);
+			connectedSuccessfully = false;
 		}
 	}
 
@@ -255,6 +259,10 @@ public class ConnectionMYSQL {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public boolean isConnectedSuccessfully() {
+		return connectedSuccessfully;
 	}
 
 }

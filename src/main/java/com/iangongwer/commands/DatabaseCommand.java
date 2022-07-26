@@ -29,7 +29,11 @@ public class DatabaseCommand implements CommandExecutor {
 						dbm.disconnect();
 						cr.connectToRedis();
 						lh.createLobbyHologram();
-						player.sendMessage(Util.getInstance().messageFormat("Redis is now enabled", "a"));
+						if(cr.isConnectedSuccessfully()) {
+							player.sendMessage(Util.getInstance().messageFormat("Redis is now enabled", "a"));
+						} else {
+							player.sendMessage(Util.getInstance().messageFormat("Could not connect to Redis", "c"));
+						}
 						return true;
 					} else {
 						player.sendMessage(Util.getInstance().messageFormat("Redis is already enabled", "c"));
@@ -40,7 +44,11 @@ public class DatabaseCommand implements CommandExecutor {
 					cr.closePool();
 					dbm.connect();
 					lh.createLobbyHologram();
-					player.sendMessage(Util.getInstance().messageFormat("MySQL is now enabled", "a"));
+					if(dbm.isConnectedSuccessfully()) {
+						player.sendMessage(Util.getInstance().messageFormat("MySQL is now enabled", "a"));
+					} else {
+						player.sendMessage(Util.getInstance().messageFormat("Could not connect to MySQL", "c"));
+					}
 					return true;
 					} else {
 						player.sendMessage(Util.getInstance().messageFormat("MySQL is already enabled", "c"));

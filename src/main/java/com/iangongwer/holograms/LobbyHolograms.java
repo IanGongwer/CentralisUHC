@@ -131,23 +131,23 @@ public class LobbyHolograms {
 						+ dbm.getWins(mostPlayerUUID) + " wins");
 			}
 		} else {
-			String mostPlayerUUIDString = cr.getMostWinsUUID();
-			if (mostPlayerUUIDString.length() != 0) {
-				UUID mostPlayerUUID = UUID.fromString(
-						mostPlayerUUIDString.substring(0, 9) + "-" + mostPlayerUUIDString.substring(9, 13) + "-"
-								+ mostPlayerUUIDString.substring(13, 17) + "-" + mostPlayerUUIDString.substring(17, 21)
-								+ "-" + mostPlayerUUIDString.substring(21));
-				if (Bukkit.getPlayer(mostPlayerUUID) != null) {
-					hologram.setCustomName("Most Wins: " + Bukkit.getPlayer(mostPlayerUUID).getDisplayName() + " has "
-							+ cr.getWins(Bukkit.getPlayer(mostPlayerUUID).getUniqueId()) + " wins");
-				} else {
-					hologram.setCustomName(
-							"Most Wins: " + Bukkit.getOfflinePlayer(mostPlayerUUID).getName() + " has "
-									+ cr.getWins(mostPlayerUUID) + " wins");
-				}
-			} else {
-				hologram.setCustomName("Most Wins: Insufficient data...");
-			}
+			// String mostPlayerUUIDString = cr.getMostWinsUUID();
+			// if (mostPlayerUUIDString.length() != 0) {
+			// 	UUID mostPlayerUUID = UUID.fromString(
+			// 			mostPlayerUUIDString.substring(0, 9) + "-" + mostPlayerUUIDString.substring(9, 13) + "-"
+			// 					+ mostPlayerUUIDString.substring(13, 17) + "-" + mostPlayerUUIDString.substring(17, 21)
+			// 					+ "-" + mostPlayerUUIDString.substring(21));
+			// 	if (Bukkit.getPlayer(mostPlayerUUID) != null) {
+			// 		hologram.setCustomName("Most Wins: " + Bukkit.getPlayer(mostPlayerUUID).getDisplayName() + " has "
+			// 				+ cr.getWins(Bukkit.getPlayer(mostPlayerUUID).getUniqueId()) + " wins");
+			// 	} else {
+			// 		hologram.setCustomName(
+			// 				"Most Wins: " + Bukkit.getOfflinePlayer(mostPlayerUUID).getName() + " has "
+			// 						+ cr.getWins(mostPlayerUUID) + " wins");
+			// 	}
+			// } else {
+			// 	hologram.setCustomName("Most Wins: Insufficient data...");
+			// }
 		}
 	}
 
