@@ -13,7 +13,7 @@ Future features to add:
 # Welcome Screen
 ![image](https://user-images.githubusercontent.com/63007329/147863412-bece200a-a100-4628-8ef3-af7919da3b6f.png)
 
-# MySQL Player Statistics
+# MySQL + Redis Player Statistics
 ![image](https://user-images.githubusercontent.com/63007329/167938656-ddcbb117-d13d-42f6-846a-49afdd27c021.png)
 
 # Practice Arena Setup
