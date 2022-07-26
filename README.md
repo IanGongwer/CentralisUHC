@@ -5,6 +5,8 @@ This codebase was built using the Spigot API (https://hub.spigotmc.org/javadocs/
 
 The whole codebase was play tested through around 60 complete games of UHC. There is even a discord community that I have built in reference to the players that play alongside this codebase. Discord: https://discord.gg/YTEM7Dq
 
+If you would like to use this plugin in your server, please download the centralisuhc-1.0-SNAPSHOT-shaded.jar file from the target folder in this repository and import it into your spigot plugins folder.
+
 Future features to add:
 
 - Scenarios regarding teams
