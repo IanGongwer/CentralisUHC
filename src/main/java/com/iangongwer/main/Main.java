@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.iangongwer.commands.BroadcastCommand;
 import com.iangongwer.commands.CalculateCommand;
+import com.iangongwer.commands.DatabaseCommand;
 import com.iangongwer.commands.LateScatterCommand;
 import com.iangongwer.commands.MuteChatCommand;
 import com.iangongwer.commands.MuteCommand;
@@ -20,6 +21,7 @@ import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.game.GameState;
+import com.iangongwer.holograms.LobbyHolograms;
 import com.iangongwer.listeners.Break;
 import com.iangongwer.listeners.Chat;
 import com.iangongwer.listeners.CommandBlock;
@@ -57,9 +59,7 @@ public class Main extends JavaPlugin {
 
 	private static Main instance;
 
-	ConnectionRedis cr = ConnectionRedis.getInstance();
-
-	private static boolean redisEnabled = true;
+	private static boolean redisEnabled = false;
 
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
@@ -115,16 +115,20 @@ public class Main extends JavaPlugin {
 		getCommand("start").setExecutor((CommandExecutor) new StartCommand());
 		getCommand("whitelist").setExecutor((CommandExecutor) new WhitelistCommand());
 		getCommand("stats").setExecutor((CommandExecutor) new StatsCommand());
+		getCommand("database").setExecutor((CommandExecutor) new DatabaseCommand());
 	}
 
 	public void onEnable() {
 		instance = this;
 		new YMLFile();
-		if(isRedisEnabled()) {
-			cr.connectToRedis();
-		} else {
+		try {
+			Main.setRedisEnabled(false);
 			ConnectionMYSQL.getInstance().connect();
+		} catch (Exception e) {
+			Main.setRedisEnabled(true);
+			ConnectionRedis.getInstance().connectToRedis();
 		}
+		new LobbyHolograms().createLobbyHologram();
 		registerRunnables();
 		registerListeners();
 		registerScenarios();
@@ -143,7 +147,9 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		cr.closePool();
+		if(isRedisEnabled()) {
+			ConnectionRedis.getInstance().closePool();
+		}
 	}
 
 	public static Main getInstance() {
@@ -152,6 +158,10 @@ public class Main extends JavaPlugin {
 
 	public static boolean isRedisEnabled() {
 		return redisEnabled;
+	}
+
+	public static void setRedisEnabled(boolean clause) {
+		redisEnabled = clause;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import com.iangongwer.main.Main;
+
 import io.github.cdimascio.dotenv.Dotenv;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -28,6 +30,7 @@ public class ConnectionRedis {
     static Map<String, String> playerCreationMap = new HashMap<>();
     
     public void connectToRedis() {
+        Main.setRedisEnabled(true);
 		pool = new JedisPool(env.get("REDIS_IP"), 11192);
 		Jedis j = null;
 		try {

@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import com.iangongwer.utils.YMLFile;
+import com.iangongwer.main.Main;
 
 public class ConnectionMYSQL {
 
@@ -23,20 +24,21 @@ public class ConnectionMYSQL {
 		return single_instance;
 	}
 
-	YMLFile yml = new YMLFile();
+	FileConfiguration yml = Main.getInstance().getConfig();
 
 	private Connection connection;
 
 	public void connect() {
 		try {
+			Main.setRedisEnabled(false);
 			this.connection = DriverManager.getConnection(
-					"jdbc:mysql://" + yml.getFileConfig().getString("Configuration.Host") + ":"
-							+ yml.getFileConfig().getInt("Configuration.Port") + "/"
-							+ yml.getFileConfig().getString("Configuration.Database") + "?useSSL=false",
-					yml.getFileConfig().getString("Configuration.Username"),
-					yml.getFileConfig().getString("Configuration.Password"));
+					"jdbc:mysql://" + yml.getString("Configuration.Host") + ":"
+							+ yml.getInt("Configuration.Port") + "/"
+							+ yml.getString("Configuration.Database") + "?useSSL=false",
+					yml.getString("Configuration.Username"),
+					yml.getString("Configuration.Password"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Main.setRedisEnabled(true);
 		}
 	}
 
@@ -206,7 +208,10 @@ public class ConnectionMYSQL {
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				return Bukkit.getPlayer(playerName).getUniqueId();
+				if(Bukkit.getPlayer(playerName) != null) {
+					return Bukkit.getPlayer(playerName).getUniqueId();
+				}
+				return Bukkit.getOfflinePlayer(playerName).getUniqueId();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,7 +227,10 @@ public class ConnectionMYSQL {
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				return Bukkit.getPlayer(playerName).getUniqueId();
+				if(Bukkit.getPlayer(playerName) != null) {
+					return Bukkit.getPlayer(playerName).getUniqueId();
+				}
+				return Bukkit.getOfflinePlayer(playerName).getUniqueId();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -238,7 +246,10 @@ public class ConnectionMYSQL {
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				return Bukkit.getPlayer(playerName).getUniqueId();
+				if(Bukkit.getPlayer(playerName) != null) {
+					return Bukkit.getPlayer(playerName).getUniqueId();
+				}
+				return Bukkit.getOfflinePlayer(playerName).getUniqueId();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

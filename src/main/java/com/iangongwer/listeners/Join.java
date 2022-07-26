@@ -1,13 +1,11 @@
 package com.iangongwer.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.iangongwer.game.GameManager;
-import com.iangongwer.holograms.LobbyHolograms;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
@@ -25,15 +23,10 @@ public class Join implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		event.setJoinMessage("");
 		Player joinedPlayer = event.getPlayer();
-		if(!Main.isRedisEnabled()) {
+		if (!Main.isRedisEnabled()) {
 			dbm.createPlayer(joinedPlayer.getUniqueId());
 		} else {
 			cr.createPlayer(joinedPlayer.getUniqueId());
-		}
-
-		if (Bukkit.getOnlinePlayers().size() == 1) {
-			LobbyHolograms lbho = new LobbyHolograms();
-			lbho.createLobbyHologram();
 		}
 		if (u.isLobby()) {
 			u.joinLobbyUtil(joinedPlayer);

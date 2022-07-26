@@ -10,17 +10,15 @@ public class YMLFile {
 
 	Main main = Main.getInstance();
 
-	FileConfiguration config = main.getConfig();
-
 	public YMLFile() {
 		File file = new File(main.getDataFolder(), "config.yml");
 		if (!file.exists()) {
-			config.addDefault("Configuration.Host", "localhost");
-			config.addDefault("Configuration.Port", 3306);
-			config.addDefault("Configuration.Database", "uhc");
-			config.addDefault("Configuration.Username", "tutorial");
-			config.addDefault("Configuration.Password", "tutorial");
-			config.options().copyDefaults();
+			getFileConfig().addDefault("Configuration.Host", "localhost");
+			getFileConfig().addDefault("Configuration.Port", 3306);
+			getFileConfig().addDefault("Configuration.Database", "uhc");
+			getFileConfig().addDefault("Configuration.Username", "tutorial");
+			getFileConfig().addDefault("Configuration.Password", "tutorial");
+			getFileConfig().options().copyDefaults();
 			main.saveDefaultConfig();
 		}
 	}

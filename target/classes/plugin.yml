@@ -35,5 +35,8 @@ commands:
   respawn:
     permission: uhc.staff
   stats:
+  database:
+    permission: uhc.staff
+    aliases: [db]
     
 depend: [Netherboard]
