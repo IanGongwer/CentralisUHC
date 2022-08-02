@@ -62,7 +62,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_information (player_name VARCHAR(48), player_uuid VARCHAR(48), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(48), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class ConnectionMYSQL {
 		try {
 			if (!playerExists(playerUUID)) {
 				PreparedStatement ps2 = getConnection().prepareStatement(
-						"INSERT IGNORE INTO player_information (player_name, player_uuid) VALUES(?, ?)");
+						"INSERT IGNORE INTO player_statistics (player_name, player_uuid) VALUES(?, ?)");
 				ps2.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
 				ps2.setString(2, playerUUID.toString());
 				ps2.executeUpdate();
@@ -87,7 +87,7 @@ public class ConnectionMYSQL {
 	public boolean playerExists(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT * FROM player_information WHERE player_uuid = ?");
+					.prepareStatement("SELECT * FROM player_statistics WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ResultSet results = ps.executeQuery();
 			if (results.next()) {
@@ -104,7 +104,7 @@ public class ConnectionMYSQL {
 	public void addKill(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
-					"UPDATE player_information SET player_kills = player_kills + 1 WHERE player_uuid = ?");
+					"UPDATE player_statistics SET player_kills = player_kills + 1 WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -115,7 +115,7 @@ public class ConnectionMYSQL {
 	public int getKills(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_kills FROM player_information WHERE player_uuid = ?");
+					.prepareStatement("SELECT player_kills FROM player_statistics WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ResultSet results = ps.executeQuery();
 			int kills;
@@ -132,7 +132,7 @@ public class ConnectionMYSQL {
 	public void addDeath(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
-					"UPDATE player_information SET player_deaths = player_deaths + 1 WHERE player_uuid = ?");
+					"UPDATE player_statistics SET player_deaths = player_deaths + 1 WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -143,7 +143,7 @@ public class ConnectionMYSQL {
 	public int getDeaths(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_deaths FROM player_information WHERE player_uuid = ?");
+					.prepareStatement("SELECT player_deaths FROM player_statistics WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ResultSet results = ps.executeQuery();
 			int deaths;
@@ -160,7 +160,7 @@ public class ConnectionMYSQL {
 	public void addWin(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("UPDATE player_information SET game_wins = game_wins + 1 WHERE player_uuid = ?");
+					.prepareStatement("UPDATE player_statistics SET game_wins = game_wins + 1 WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -171,7 +171,7 @@ public class ConnectionMYSQL {
 	public int getWins(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT game_wins FROM player_information WHERE player_uuid = ?");
+					.prepareStatement("SELECT game_wins FROM player_statistics WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ResultSet results = ps.executeQuery();
 			int wins;
@@ -187,7 +187,7 @@ public class ConnectionMYSQL {
 
 	public void emptyTable() {
 		try {
-			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_information");
+			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_statistics");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,7 +196,7 @@ public class ConnectionMYSQL {
 
 	public void removePlayer(UUID playerUUID) {
 		try {
-			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_information WHERE UUID?");
+			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_statistics WHERE UUID?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -207,7 +207,7 @@ public class ConnectionMYSQL {
 	public UUID getMostKillsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(player_kills) FROM player_information");
+					.prepareStatement("SELECT player_name, MAX(player_kills) FROM player_statistics GROUP BY player_name, player_kills");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
@@ -226,7 +226,7 @@ public class ConnectionMYSQL {
 	public UUID getMostDeathsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(player_deaths) FROM player_information");
+					.prepareStatement("SELECT player_name, MAX(player_deaths) FROM player_statistics GROUP BY player_name, player_deaths");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
@@ -245,7 +245,7 @@ public class ConnectionMYSQL {
 	public UUID getMostWinsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(game_wins) FROM player_information");
+					.prepareStatement("SELECT player_name, MAX(game_wins) FROM player_statistics GROUP BY player_name, game_wins");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
