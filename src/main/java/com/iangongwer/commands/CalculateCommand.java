@@ -33,6 +33,7 @@ public class CalculateCommand implements CommandExecutor {
 				}
 			}
 			if (TeamManager.getInstance().areTeamsEnabled()) {
+				gm.getPredeterminedLocations().clear();
 				for (Map.Entry<UUID, Team> set : TeamManager.listOfTeams.entrySet()) {
 					UUID leader = set.getKey();
 					Location scatterLocation = gm.checkLocationEligibilityNoTeleport(gm.makeScatterLocation());
@@ -42,6 +43,7 @@ public class CalculateCommand implements CommandExecutor {
 					playerSender.sendMessage(u.messageFormat("All locations calculated.", "a"));
 				}
 			} else {
+				gm.getPredeterminedLocations().clear();
 				for (UUID player : gm.getPlayers()) {
 					Location scatterLocation = gm.checkLocationEligibilityNoTeleport(gm.makeScatterLocation());
 					gm.getPredeterminedLocations().put(player, scatterLocation);

@@ -207,12 +207,13 @@ public class ConnectionMYSQL {
 	public UUID getMostKillsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(player_kills) FROM player_statistics GROUP BY player_name, player_kills");
+					.prepareStatement(
+							"SELECT player_name, player_kills FROM player_statistics ORDER BY player_kills DESC LIMIT 1");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				if(Bukkit.getPlayer(playerName) != null) {
+				if (Bukkit.getPlayer(playerName) != null) {
 					return Bukkit.getPlayer(playerName).getUniqueId();
 				}
 				return Bukkit.getOfflinePlayer(playerName).getUniqueId();
@@ -226,12 +227,13 @@ public class ConnectionMYSQL {
 	public UUID getMostDeathsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(player_deaths) FROM player_statistics GROUP BY player_name, player_deaths");
+					.prepareStatement(
+							"SELECT player_name, player_deaths FROM player_statistics ORDER BY player_deaths DESC LIMIT 1");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				if(Bukkit.getPlayer(playerName) != null) {
+				if (Bukkit.getPlayer(playerName) != null) {
 					return Bukkit.getPlayer(playerName).getUniqueId();
 				}
 				return Bukkit.getOfflinePlayer(playerName).getUniqueId();
@@ -245,12 +247,12 @@ public class ConnectionMYSQL {
 	public UUID getMostWinsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, MAX(game_wins) FROM player_statistics GROUP BY player_name, game_wins");
+					.prepareStatement("SELECT player_name, game_wins FROM player_statistics ORDER BY game_wins DESC LIMIT 1");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
 				playerName = results.getString("player_name");
-				if(Bukkit.getPlayer(playerName) != null) {
+				if (Bukkit.getPlayer(playerName) != null) {
 					return Bukkit.getPlayer(playerName).getUniqueId();
 				}
 				return Bukkit.getOfflinePlayer(playerName).getUniqueId();

@@ -21,7 +21,6 @@ import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.game.GameState;
-import com.iangongwer.holograms.LobbyHolograms;
 import com.iangongwer.listeners.Break;
 import com.iangongwer.listeners.Chat;
 import com.iangongwer.listeners.CommandBlock;
@@ -128,7 +127,7 @@ public class Main extends JavaPlugin {
 			Main.setRedisEnabled(true);
 			ConnectionRedis.getInstance().connectToRedis();
 		}
-		new LobbyHolograms().createLobbyHologram();
+		// new LobbyHolograms().createLobbyHologram(); Not working correctly right now
 		registerRunnables();
 		registerListeners();
 		registerScenarios();
