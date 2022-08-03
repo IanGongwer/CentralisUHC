@@ -29,12 +29,12 @@ commands:
   team:
     aliases: [t, teams]
   teamchat:
-    aliases: [tc]
   teamcoords:
     aliases: [tl, sendcoords, pmcoords, teamloc]
   respawn:
     permission: uhc.staff
   stats:
+    aliases: [stat]
   database:
     permission: uhc.staff
     aliases: [db]

@@ -23,6 +23,7 @@ public class Join implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		event.setJoinMessage("");
 		Player joinedPlayer = event.getPlayer();
+
 		if (!Main.isRedisEnabled()) {
 			dbm.createPlayer(joinedPlayer.getUniqueId());
 		} else {

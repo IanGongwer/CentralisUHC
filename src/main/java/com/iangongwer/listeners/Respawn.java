@@ -30,9 +30,6 @@ public class Respawn implements Listener {
 		if (u.isInGame() || u.isEnd()) {
 			event.setRespawnLocation(Bukkit.getPlayer(gm.getPlayers().get(0)).getLocation());
 			if (gm.isSpectator(player.getUniqueId())) {
-				for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-					allPlayers.hidePlayer(player);
-				}
 				u.makeSpectator(player);
 			}
 		}
