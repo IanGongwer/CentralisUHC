@@ -35,7 +35,7 @@ public class Death implements Listener {
 					+ ChatColor.GREEN + player.getDisplayName());
 		}
 		if (!u.isLobby()) {
-			if(!Main.isRedisEnabled()) {
+			if (!Main.isRedisEnabled()) {
 				dbm.addDeath(player.getUniqueId());
 			} else {
 				cr.addDeath(player.getUniqueId());
@@ -44,7 +44,7 @@ public class Death implements Listener {
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance.", "a"));
 			}
 			if (killer instanceof Player) {
-				if(!Main.isRedisEnabled()) {
+				if (!Main.isRedisEnabled()) {
 					dbm.addKill(killer.getUniqueId());
 				} else {
 					cr.addKill(killer.getUniqueId());
@@ -64,7 +64,11 @@ public class Death implements Listener {
 			gapMeta.setLore(lore);
 			goldenApple.setItemMeta(gapMeta);
 			event.getEntity().getWorld().dropItemNaturally(player.getLocation(), goldenApple);
-			event.setKeepInventory(false);
+			if (!gm.isScenarioActive("TimeBomb")) {
+				event.setKeepInventory(false);
+			} else {
+				event.setKeepInventory(true);
+			}
 			gm.storeDeathInventories(player.getUniqueId(), event.getDrops());
 			gm.getDeathLocations().put(player.getUniqueId(), player.getLocation());
 

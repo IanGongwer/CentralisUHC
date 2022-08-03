@@ -51,6 +51,7 @@ import com.iangongwer.scenarios.CutCleanandBD;
 import com.iangongwer.scenarios.HasteyBoys;
 import com.iangongwer.scenarios.Horseless;
 import com.iangongwer.scenarios.Timber;
+import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.utils.Util;
 import com.iangongwer.utils.YMLFile;
 
@@ -93,9 +94,10 @@ public class Main extends JavaPlugin {
 	public void registerScenarios() {
 		getServer().getPluginManager().registerEvents(new CutCleanandBD(), this);
 		getServer().getPluginManager().registerEvents(new HasteyBoys(), this);
-		getServer().getPluginManager().registerEvents(new Timber(), this);
 		getServer().getPluginManager().registerEvents(new Bowless(), this);
+		getServer().getPluginManager().registerEvents(new Timber(), this);
 		getServer().getPluginManager().registerEvents(new Horseless(), this);
+		getServer().getPluginManager().registerEvents(new TimeBomb(), this);
 	}
 
 	public void registerCommands() {
