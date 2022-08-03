@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +22,6 @@ import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
-import net.md_5.bungee.api.ChatColor;
 
 public class GameManager {
 
@@ -213,12 +213,14 @@ public class GameManager {
 				Bukkit.getPlayer(playerUUID).addPotionEffect(fire_resistance);
 			}
 		}
+
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("The game has started.", "a"));
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString());
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("You can kill sheep for string.", "c"));
 		Bukkit.broadcastMessage("");
+
 		GameState.setState(GameState.InGame);
 		Util.getInstance().setWhitelistStatus(false);
 	}
@@ -234,8 +236,8 @@ public class GameManager {
 				ArrayList<String> members = new ArrayList<String>();
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(killer)) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
-					
-					if(!Main.isRedisEnabled()) {
+
+					if (!Main.isRedisEnabled()) {
 						dbm.addWin(playerUUID);
 					} else {
 						cr.addWin(playerUUID);
@@ -256,7 +258,7 @@ public class GameManager {
 						Util.getInstance().messageFormat("Winner: " + Bukkit.getPlayer(killer).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
 
-				if(!Main.isRedisEnabled()) {
+				if (!Main.isRedisEnabled()) {
 					dbm.addWin(Bukkit.getPlayer(killer).getUniqueId());
 				} else {
 					cr.addWin(Bukkit.getPlayer(killer).getUniqueId());
@@ -277,7 +279,7 @@ public class GameManager {
 				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(getPlayers().get(0))) {
 					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
 
-					if(!Main.isRedisEnabled()) {
+					if (!Main.isRedisEnabled()) {
 						dbm.addWin(playerUUID);
 					} else {
 						cr.addWin(playerUUID);
@@ -297,7 +299,7 @@ public class GameManager {
 						.messageFormat("Winner: " + Bukkit.getPlayer(getPlayers().get(0)).getDisplayName(), "a"));
 				Bukkit.broadcastMessage("");
 
-				if(!Main.isRedisEnabled()) {
+				if (!Main.isRedisEnabled()) {
 					dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
 				} else {
 					cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
