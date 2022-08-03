@@ -57,7 +57,7 @@ public class TimeBomb implements Listener {
     }
 
     public void insertTimeBombTime(Location loc) {
-        timeBombTime.put(loc, 5);
+        timeBombTime.put(loc, 30);
     }
 
     public void removeTimeBombTime(Location loc) {
