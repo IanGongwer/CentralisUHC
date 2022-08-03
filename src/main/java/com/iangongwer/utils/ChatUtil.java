@@ -27,11 +27,7 @@ public class ChatUtil {
     }
 
     public static boolean isMuted(UUID playerUUID) {
-        if (mutedPlayers.contains(playerUUID)) {
-            return true;
-        } else {
-            return false;
-        }
+        return mutedPlayers.contains(playerUUID);
     }
 
     public static String chatMessage(String message, Player player) {

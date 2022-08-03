@@ -36,6 +36,7 @@ import com.iangongwer.listeners.Interact;
 import com.iangongwer.listeners.ItemDrop;
 import com.iangongwer.listeners.Join;
 import com.iangongwer.listeners.Place;
+import com.iangongwer.listeners.PlayerMuted;
 import com.iangongwer.listeners.PvP;
 import com.iangongwer.listeners.Quit;
 import com.iangongwer.listeners.Respawn;
@@ -74,6 +75,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new CommandBlock(), this);
 		getServer().getPluginManager().registerEvents(new Connect(), this);
+		getServer().getPluginManager().registerEvents(new PlayerMuted(), this);
 		getServer().getPluginManager().registerEvents(new Consume(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);
 		getServer().getPluginManager().registerEvents(new ItemDrop(), this);

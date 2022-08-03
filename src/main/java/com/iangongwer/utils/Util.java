@@ -27,7 +27,6 @@ public class Util {
 
 	private boolean whitelistStatus = true;
 	private ArrayList<UUID> whitelistedPlayersUUID = new ArrayList<UUID>();
-	private ArrayList<String> whitelistedPlayersNames = new ArrayList<String>();
 
 	private static ArrayList<UUID> staffMode = new ArrayList<UUID>();
 
@@ -47,18 +46,12 @@ public class Util {
 		return whitelistedPlayersUUID;
 	}
 
-	public ArrayList<String> getWhitelistedPlayersNames() {
-		return whitelistedPlayersNames;
-	}
-
 	public void addWhitelistedPlayer(UUID playerUUID) {
 		whitelistedPlayersUUID.add(playerUUID);
-		whitelistedPlayersNames.add(Bukkit.getPlayer(playerUUID).getDisplayName());
 	}
 
 	public void removeWhitelistedPlayer(UUID playerUUID) {
 		whitelistedPlayersUUID.remove(playerUUID);
-		whitelistedPlayersNames.remove(Bukkit.getPlayer(playerUUID).getDisplayName());
 	}
 
 	public void makeSpectator(Player player) {

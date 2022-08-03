@@ -25,20 +25,11 @@ public class Chat implements Listener {
 				if (event.getMessage().contains("%")) {
 					Bukkit.broadcastMessage(ChatUtil.chatMessage(event.getMessage(), player));
 					event.setCancelled(true);
+					return;
 				} else {
 					event.setFormat(ChatUtil.chatMessage(event.getMessage(), player));
-				}
-			}
-		} else {
-			if (ChatUtil.isMuted(player.getUniqueId())) {
-				player.sendMessage(u.messageFormat("You are currently muted.", "c"));
-				event.setCancelled(true);
-			} else {
-				if (event.getMessage().contains("%")) {
-					Bukkit.broadcastMessage(ChatUtil.chatMessage(event.getMessage(), player));
-					event.setCancelled(true);
-				} else {
-					event.setFormat(ChatUtil.chatMessage(event.getMessage(), player));
+					event.setCancelled(false);
+					return;
 				}
 			}
 		}

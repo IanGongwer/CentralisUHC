@@ -3,7 +3,6 @@ package com.iangongwer.commands;
 import java.util.Map;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,9 +27,7 @@ public class CalculateCommand implements CommandExecutor {
 			u.setWhitelistStatus(true);
 			while (LobbyUtil.getPracticePlayers().size() != 0) {
 				for (int i = 0; i < LobbyUtil.getPracticePlayers().size(); i++) {
-					Bukkit.broadcastMessage("" + LobbyUtil.getPracticePlayers());
 					LobbyUtil.removePracticePlayer(LobbyUtil.getPracticePlayers().get(i));
-					Bukkit.broadcastMessage("" + LobbyUtil.getPracticePlayers().size());
 					i++;
 				}
 			}

@@ -20,7 +20,6 @@ commands:
   calculate:
     permission: uhc.staff
   scenario:
-    permission: uhc.staff
     aliases: [scen, scenarios]
   staff:
     permission: uhc.staff
