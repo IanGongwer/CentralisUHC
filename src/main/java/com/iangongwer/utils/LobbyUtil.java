@@ -50,6 +50,7 @@ public class LobbyUtil {
     }
 
     public static void practiceInventory(Player player) {
+        player.getInventory().clear();
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));

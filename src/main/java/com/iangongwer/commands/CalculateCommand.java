@@ -3,6 +3,7 @@ package com.iangongwer.commands;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import com.iangongwer.game.GameManager;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class CalculateCommand implements CommandExecutor {
@@ -24,6 +26,14 @@ public class CalculateCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("calculate") && sender instanceof Player) {
 			Player playerSender = (Player) sender;
 			u.setWhitelistStatus(true);
+			while (LobbyUtil.getPracticePlayers().size() != 0) {
+				for (int i = 0; i < LobbyUtil.getPracticePlayers().size(); i++) {
+					Bukkit.broadcastMessage("" + LobbyUtil.getPracticePlayers());
+					LobbyUtil.removePracticePlayer(LobbyUtil.getPracticePlayers().get(i));
+					Bukkit.broadcastMessage("" + LobbyUtil.getPracticePlayers().size());
+					i++;
+				}
+			}
 			for (UUID player : gm.getPlayers()) {
 				gm.setPlayerKills(player, 0);
 				if (TeamManager.getInstance().areTeamsEnabled()) {

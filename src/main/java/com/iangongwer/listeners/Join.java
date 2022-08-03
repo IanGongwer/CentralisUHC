@@ -46,10 +46,10 @@ public class Join implements Listener {
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
 			} else {
+				QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
+				WorldUtil.despawnVillager(joinedPlayer);
+				QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 				u.makeSpectator(joinedPlayer);
-			}
-			if (!gm.isPvPEnabled()) {
-				joinedPlayer.sendMessage("Use /latescatter to join.");
 			}
 		}
 	}

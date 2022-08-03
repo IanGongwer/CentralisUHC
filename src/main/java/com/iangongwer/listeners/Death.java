@@ -45,6 +45,7 @@ public class Death implements Listener {
 			goldenApple.setItemMeta(gapMeta);
 			event.getEntity().getWorld().dropItemNaturally(player.getLocation(), goldenApple);
 			event.setKeepInventory(true);
+			player.spigot().respawn();
 		}
 		if (!GameState.isLobby()) {
 			if (!Main.isRedisEnabled()) {

@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
-import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
@@ -17,7 +16,7 @@ public class Connect implements Listener {
 	@EventHandler
 	public void onPlayerConnect(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		if (player.isOp()) {
+		if (player.isOp() || player.hasPermission("uhc.staff")) {
 			event.allow();
 		}
 		if (u.getWhitelistStatus()) {
@@ -35,9 +34,6 @@ public class Connect implements Listener {
 						u.messageFormat("The game is currently in scattering mode. Please wait to connect.", "c"));
 			}
 			if (GameState.isInGame()) {
-				if (!GameManager.getInstance().getPlayers().contains(player.getUniqueId())) {
-					GameManager.getInstance().addSpectator(player.getUniqueId());
-				}
 				event.allow();
 			}
 			if (GameState.isEnd()) {
