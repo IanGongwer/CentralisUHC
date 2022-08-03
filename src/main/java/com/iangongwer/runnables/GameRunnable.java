@@ -65,7 +65,7 @@ public class GameRunnable extends BukkitRunnable {
 				gm.getPlayers().removeAll(toRemove);
 			}
 			if (getFormattedTime().equalsIgnoreCase("30:00")) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 250 250 0 0");
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 500 500 0 0");
 				Bukkit.broadcastMessage(u.messageFormat("Border is now 500x500!", "a"));
 				if (gm.isScenarioActive("SupplyDrops")) {
 					int x = -200 + random.nextInt(200);
@@ -77,19 +77,19 @@ public class GameRunnable extends BukkitRunnable {
 				}
 			}
 			if (getFormattedTime().equalsIgnoreCase("35:00")) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 125 125 0 0");
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 250 250 0 0");
 				Bukkit.broadcastMessage(u.messageFormat("Border is now 250x250!", "a"));
 			}
 			if (getFormattedTime().equalsIgnoreCase("40:00")) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 50 50 0 0");
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 125 125 0 0");
 				Bukkit.broadcastMessage(u.messageFormat("Border is now 100x100!", "a"));
 			}
 			if (getFormattedTime().equalsIgnoreCase("45:00")) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 50 50 0 0");
 				Bukkit.broadcastMessage(u.messageFormat("Border is now 50x50!", "a"));
 			}
 			if (getFormattedTime().equalsIgnoreCase("50:00")) {
-				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 13 13 0 0");
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
 				Bukkit.broadcastMessage(u.messageFormat("Border is now 25x25!", "a"));
 			}
 		}

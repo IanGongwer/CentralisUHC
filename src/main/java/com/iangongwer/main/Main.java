@@ -120,6 +120,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		new YMLFile();
+
 		try {
 			Main.setRedisEnabled(false);
 			ConnectionMYSQL.getInstance().connect();
@@ -127,17 +128,19 @@ public class Main extends JavaPlugin {
 			Main.setRedisEnabled(true);
 			ConnectionRedis.getInstance().connectToRedis();
 		}
-		// new LobbyHolograms().createLobbyHologram(); Not working correctly right now
+
+		// new LobbyHolograms().createLobbyHologram(); Only shows one player's stats
+
 		registerRunnables();
 		registerListeners();
 		registerScenarios();
 		registerCommands();
+
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");
 		Bukkit.getWorld("world").setTime(6000);
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "butcher");
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "butcher -a");
 		Util.getInstance().createWorld("uhc_world");
+
 		if (Bukkit.getWorld("uhc_world") != null) {
 			Bukkit.getWorld("uhc_world").setGameRuleValue("naturalRegeneration", "false");
 			Bukkit.getWorld("uhc_world").setGameRuleValue("doDaylightCycle", "false");
@@ -146,7 +149,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		if(isRedisEnabled()) {
+		if (isRedisEnabled()) {
 			ConnectionRedis.getInstance().closePool();
 		}
 	}

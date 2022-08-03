@@ -32,14 +32,14 @@ public class LobbyHolograms {
 			}
 		}
 
-		ArmorStand hologram = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
-		hologram.setVisible(false);
-		hologram.setGravity(false);
-		hologram.setCustomNameVisible(true);
-		hologram.setCustomName("Server Statistics");
-		mostKills(loc);
-		mostDeaths(loc);
-		mostWins(loc);
+		// ArmorStand hologram = (ArmorStand) loc.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
+		// hologram.setVisible(false);
+		// hologram.setGravity(false);
+		// hologram.setCustomNameVisible(true);
+		// hologram.setCustomName("Server Statistics");
+		// mostKills(loc);
+		// mostDeaths(loc);
+		// mostWins(loc);
 	}
 
 	public void mostKills(Location loc) {

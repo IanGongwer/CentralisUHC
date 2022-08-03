@@ -216,13 +216,10 @@ public class Util {
 			worldcreate.environment(World.Environment.NORMAL);
 			worldcreate.type(WorldType.NORMAL);
 			worldcreate.createWorld();
-			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set
-			// 500 500 0 0");
-			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + "
-			// fill");
-			// Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb fill confirm");
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set 750 750 0 0");
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " fill");
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb fill confirm");
 			clearZeroZero();
-			Bukkit.getLogger().info("Loading uhc_world...");
 		}
 	}
 
@@ -334,10 +331,6 @@ public class Util {
 	}
 
 	public void joinLobbyUtil(Player player) {
-		for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-			allPlayers.showPlayer(player);
-			player.showPlayer(allPlayers);
-		}
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
 		player.setFoodLevel(20);
@@ -359,9 +352,6 @@ public class Util {
 		player.setHealth(20.0);
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
-		for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-			allPlayers.hidePlayer(player);
-		}
 		player.setGameMode(GameMode.SPECTATOR);
 	}
 
@@ -382,9 +372,6 @@ public class Util {
 		gm.removePlayer(playerUUID);
 		gm.removeSpectator(playerUUID);
 		Player player = Bukkit.getPlayer(playerUUID);
-		for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-			allPlayers.hidePlayer(player);
-		}
 		player.sendMessage(messageFormat("You are now in staff mode.", "a"));
 		player.setGameMode(GameMode.SPECTATOR);
 		Util.getInstance().createStaffSpecScoreboard(Bukkit.getPlayer(playerUUID));
@@ -399,9 +386,6 @@ public class Util {
 		}
 		if (isLobby()) {
 			gm.addPlayer(playerUUID);
-			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-				allPlayers.showPlayer(player);
-			}
 			player.setGameMode(GameMode.SURVIVAL);
 		}
 		player.sendMessage(messageFormat("You are now not in staff mode.", "c"));
