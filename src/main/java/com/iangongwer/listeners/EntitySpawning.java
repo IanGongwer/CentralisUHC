@@ -15,7 +15,9 @@ public class EntitySpawning implements Listener {
 	@EventHandler
 	public void onEntitySpawn(EntitySpawnEvent event) {
 		if (GameState.isLobby()) {
-			event.setCancelled(true);
+			if (!event.getEntityType().equals(EntityType.DROPPED_ITEM)) {
+				event.setCancelled(true);
+			}
 		}
 		if (GameState.isScattering()) {
 			event.setCancelled(true);

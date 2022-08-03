@@ -14,6 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 
 public class TimeBomb implements Listener {
 
@@ -34,23 +35,25 @@ public class TimeBomb implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (gm.isScenarioActive("TimeBomb")) {
-            insertTimeBombTime(event.getEntity().getLocation());
-            Block deathBlock = event.getEntity().getLocation().getBlock();
-            Block deathBlock2 = Bukkit.getWorld("uhc_world").getBlockAt(deathBlock.getX() + 1, deathBlock.getY(),
-                    deathBlock.getZ());
-            deathBlock.setType(Material.CHEST);
-            deathBlock2.setType(Material.CHEST);
+            if (GameState.isInGame()) {
+                insertTimeBombTime(event.getEntity().getLocation());
+                Block deathBlock = event.getEntity().getLocation().getBlock();
+                Block deathBlock2 = Bukkit.getWorld("uhc_world").getBlockAt(deathBlock.getX() + 1, deathBlock.getY(),
+                        deathBlock.getZ());
+                deathBlock.setType(Material.CHEST);
+                deathBlock2.setType(Material.CHEST);
 
-            Chest chest1 = (Chest) deathBlock.getState();
-            Chest chest2 = (Chest) deathBlock2.getState();
+                Chest chest1 = (Chest) deathBlock.getState();
+                Chest chest2 = (Chest) deathBlock2.getState();
 
-            int counter = 0;
-            for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
-                if (counter < 27) {
-                    chest1.getInventory().addItem(item);
-                    counter++;
-                } else {
-                    chest2.getInventory().addItem(item);
+                int counter = 0;
+                for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
+                    if (counter < 27) {
+                        chest1.getInventory().addItem(item);
+                        counter++;
+                    } else {
+                        chest2.getInventory().addItem(item);
+                    }
                 }
             }
         }

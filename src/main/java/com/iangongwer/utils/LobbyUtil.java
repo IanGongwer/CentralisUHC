@@ -57,6 +57,7 @@ public class LobbyUtil {
         player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         player.getInventory().addItem(new ItemStack(Material.BOW));
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
+        player.getInventory().addItem(new ItemStack(Material.FISHING_ROD));
         player.teleport(getPracticeSpawnPoint());
         player.sendMessage(u.messageFormat("You are now in practice mode. Use /prac to leave practice mode.", "a"));
     }

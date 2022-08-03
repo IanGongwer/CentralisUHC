@@ -22,42 +22,43 @@ public class Quit implements Listener {
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		UUID player = event.getPlayer().getUniqueId();
+		UUID playerUUID = event.getPlayer().getUniqueId();
 		event.setQuitMessage("");
 		if (GameState.isLobby()) {
-			if (tm.hasTeam(player)) {
-				if (tm.getTeamLeader(player) == player) {
-					tm.deleteTeam(player);
+			if (tm.hasTeam(playerUUID)) {
+				if (tm.getTeamLeader(playerUUID) == playerUUID) {
+					tm.deleteTeam(playerUUID);
 				}
 			}
-			gm.removePlayer(player);
-			if (LobbyUtil.isPracticePlayer(player)) {
-				LobbyUtil.removePracticePlayer(player);
+			gm.removePlayer(playerUUID);
+			if (LobbyUtil.isPracticePlayer(playerUUID)) {
+				LobbyUtil.removePracticePlayer(playerUUID);
 			}
 		}
 		if (GameState.isScattering()) {
-			gm.removePlayer(player);
-			if (tm.hasTeam(player)) {
-				if (tm.getTeamLeader(player) == player) {
-					tm.deleteTeam(player);
+			gm.removePlayer(playerUUID);
+			gm.removeScatteredPlayer(playerUUID);
+			if (tm.hasTeam(playerUUID)) {
+				if (tm.getTeamLeader(playerUUID) == playerUUID) {
+					tm.deleteTeam(playerUUID);
 				}
 			}
 		}
 		if (GameState.isInGame()) {
-			if (gm.isSpectator(player)) {
-				gm.removeSpectator(player);
+			if (gm.isSpectator(playerUUID)) {
+				gm.removeSpectator(playerUUID);
 			}
-			if (!gm.isSpectator(player)) {
-				gm.setQuitLogTime(player, 150);
-				gm.addQuitLoggedPlayer(player);
-				gm.storeQuitLoggedInventories(player);
-				WorldUtil.spawnVillager(Bukkit.getPlayer(player));
+			if (!gm.isSpectator(playerUUID)) {
+				gm.setQuitLogTime(playerUUID, 150);
+				gm.addQuitLoggedPlayer(playerUUID);
+				gm.storeQuitLoggedInventories(playerUUID);
+				WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
 			}
 
 		}
 		if (GameState.isEnd()) {
-			gm.removeSpectator(player);
-			gm.removePlayer(player);
+			gm.removeSpectator(playerUUID);
+			gm.removePlayer(playerUUID);
 		}
 	}
 

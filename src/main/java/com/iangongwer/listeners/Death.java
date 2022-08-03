@@ -36,6 +36,15 @@ public class Death implements Listener {
 		if (GameState.isLobby()) {
 			event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
 					+ ChatColor.GREEN + player.getDisplayName());
+			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
+			ItemMeta gapMeta = goldenApple.getItemMeta();
+			gapMeta.setDisplayName("Golden Head");
+			ArrayList<String> lore = new ArrayList<String>();
+			lore.add(player.getDisplayName() + "'s Head");
+			gapMeta.setLore(lore);
+			goldenApple.setItemMeta(gapMeta);
+			event.getEntity().getWorld().dropItemNaturally(player.getLocation(), goldenApple);
+			event.setKeepInventory(true);
 		}
 		if (!GameState.isLobby()) {
 			if (!Main.isRedisEnabled()) {

@@ -45,7 +45,7 @@ public class Join implements Listener {
 				QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
-			} else if (gm.isSpectator(joinedPlayer.getUniqueId())) {
+			} else {
 				u.makeSpectator(joinedPlayer);
 			}
 			if (!gm.isPvPEnabled()) {
