@@ -17,7 +17,8 @@ public class LobbyUtil {
     static GameManager gm = GameManager.getInstance();
     static Util u = Util.getInstance();
 
-    private static Location practiceSpawnPoint = new Location(Bukkit.getWorld("world"), -211.5, 53.0, -546.5, 90.0f,
+    private static Location lobbySpawnPoint = new Location(Bukkit.getWorld("world"), 1.5, 19.0, 2.5, -90.0f, 0.0f);
+    private static Location practiceSpawnPoint = new Location(Bukkit.getWorld("world"), 464.5, 107.0, 512.5, -180.0f,
             0.0f);
     private static ArrayList<UUID> practicePlayers = new ArrayList<UUID>();
 
@@ -36,7 +37,7 @@ public class LobbyUtil {
         Player player = Bukkit.getPlayer(playerUUID);
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.teleport(gm.getLobbySpawnPoint());
+        player.teleport(getLobbySpawnPoint());
         player.sendMessage(u.messageFormat("You have left practice mode. Use /prac to join practice mode.", "c"));
     }
 
@@ -69,7 +70,7 @@ public class LobbyUtil {
         player.sendMessage("");
         player.sendMessage("Welcome to Centralis UHC. Use /prac to join the practice arena.");
         player.sendMessage("");
-        player.teleport(gm.getLobbySpawnPoint());
+        player.teleport(getLobbySpawnPoint());
         player.getActivePotionEffects().clear();
         player.setExp(0);
         player.setGameMode(GameMode.SURVIVAL);
@@ -83,6 +84,14 @@ public class LobbyUtil {
 
     public static void setPracticeSpawnPoint(String world, double x, double y, double z, float pitch, float yaw) {
         practiceSpawnPoint = new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw);
+    }
+
+    public static Location getLobbySpawnPoint() {
+        return lobbySpawnPoint;
+    }
+
+    public static void setLobbySpawnPoint(String world, double x, double y, double z, float pitch, float yaw) {
+        lobbySpawnPoint = new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw);
     }
 
 }

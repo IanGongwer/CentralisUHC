@@ -61,16 +61,7 @@ public class GameManager {
 	private ArrayList<UUID> players = new ArrayList<UUID>();
 	private ArrayList<UUID> alreadyScattered = new ArrayList<UUID>();
 
-	private Location lobbySpawnPoint = new Location(Bukkit.getWorld("world"), -222.5, 52.0, -631.5, 90.0f, 0.0f);
 	private Location spectatorSpawnPoint = new Location(Bukkit.getWorld("uhc_world"), 0, 100, 0);
-
-	public Location getLobbySpawnPoint() {
-		return lobbySpawnPoint;
-	}
-
-	public void setLobbySpawnPoint(String world, double x, double y, double z, float pitch, float yaw) {
-		lobbySpawnPoint = new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw);
-	}
 
 	// Spectator Handling
 	public Location getSpectatorSpawnPoint() {

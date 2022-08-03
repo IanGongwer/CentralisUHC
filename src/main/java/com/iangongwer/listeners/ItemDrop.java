@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
-public class Drop implements Listener {
+public class ItemDrop implements Listener {
 
 	Util u = Util.getInstance();
 

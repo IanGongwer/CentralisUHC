@@ -27,7 +27,7 @@ import com.iangongwer.listeners.CommandBlock;
 import com.iangongwer.listeners.Connect;
 import com.iangongwer.listeners.Consume;
 import com.iangongwer.listeners.Death;
-import com.iangongwer.listeners.Drop;
+import com.iangongwer.listeners.ItemDrop;
 import com.iangongwer.listeners.EntitySpawning;
 import com.iangongwer.listeners.Fall;
 import com.iangongwer.listeners.FoodLevel;
@@ -75,7 +75,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Connect(), this);
 		getServer().getPluginManager().registerEvents(new Consume(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);
-		getServer().getPluginManager().registerEvents(new Drop(), this);
+		getServer().getPluginManager().registerEvents(new ItemDrop(), this);
 		getServer().getPluginManager().registerEvents(new EntitySpawning(), this);
 		getServer().getPluginManager().registerEvents(new Fall(), this);
 		getServer().getPluginManager().registerEvents(new FoodLevel(), this);

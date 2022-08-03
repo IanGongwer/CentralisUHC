@@ -6,9 +6,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
 import com.iangongwer.runnables.GameRunnable;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class Fall implements Listener {
@@ -20,7 +20,7 @@ public class Fall implements Listener {
 		if (event.getCause() == DamageCause.VOID && event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			event.setCancelled(true);
-			player.teleport(GameManager.getInstance().getLobbySpawnPoint());
+			player.teleport(LobbyUtil.getLobbySpawnPoint());
 		}
 		if (event.getCause() == DamageCause.FALL) {
 			if (GameState.isLobby()) {

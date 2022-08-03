@@ -20,7 +20,7 @@ public class Respawn implements Listener {
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
 		if (GameState.isLobby()) {
-			event.setRespawnLocation(gm.getLobbySpawnPoint());
+			event.setRespawnLocation(LobbyUtil.getLobbySpawnPoint());
 			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 				event.setRespawnLocation(LobbyUtil.getPracticeSpawnPoint());
 				LobbyUtil.practiceInventory(player);
