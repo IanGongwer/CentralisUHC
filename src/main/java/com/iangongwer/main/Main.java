@@ -24,6 +24,7 @@ import com.iangongwer.commands.UnBanPlayerCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.crafts.NoviceItems;
 import com.iangongwer.game.GameState;
+import com.iangongwer.listeners.Anvil;
 import com.iangongwer.listeners.Break;
 import com.iangongwer.listeners.Chat;
 import com.iangongwer.listeners.CommandBlock;
@@ -92,6 +93,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Respawn(), this);
 		getServer().getPluginManager().registerEvents(new Weather(), this);
 		getServer().getPluginManager().registerEvents(new VillagerDeath(), this);
+		getServer().getPluginManager().registerEvents(new Anvil(), this);
 		getServer().getPluginManager().registerEvents(new Sheep(), this);
 		getServer().getPluginManager().registerEvents(new GodAppleCraft(), this);
 	}
