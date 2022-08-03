@@ -20,6 +20,7 @@ import com.iangongwer.commands.TeamChatCommand;
 import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
 import com.iangongwer.commands.WhitelistCommand;
+import com.iangongwer.crafts.NoviceItems;
 import com.iangongwer.game.GameState;
 import com.iangongwer.listeners.Break;
 import com.iangongwer.listeners.Chat;
@@ -27,12 +28,12 @@ import com.iangongwer.listeners.CommandBlock;
 import com.iangongwer.listeners.Connect;
 import com.iangongwer.listeners.Consume;
 import com.iangongwer.listeners.Death;
-import com.iangongwer.listeners.ItemDrop;
 import com.iangongwer.listeners.EntitySpawning;
 import com.iangongwer.listeners.Fall;
 import com.iangongwer.listeners.FoodLevel;
 import com.iangongwer.listeners.GodAppleCraft;
 import com.iangongwer.listeners.Interact;
+import com.iangongwer.listeners.ItemDrop;
 import com.iangongwer.listeners.Join;
 import com.iangongwer.listeners.Place;
 import com.iangongwer.listeners.PvP;
@@ -137,6 +138,8 @@ public class Main extends JavaPlugin {
 		registerListeners();
 		registerScenarios();
 		registerCommands();
+
+		NoviceItems.createNoviceSword();
 
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");

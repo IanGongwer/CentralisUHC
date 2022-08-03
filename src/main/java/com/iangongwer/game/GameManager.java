@@ -211,6 +211,8 @@ public class GameManager {
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString());
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("You can kill sheep for string.", "c"));
+		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
+				"Create a novice sword this game using this recipe: http://centralis.cc/recipes.html", "c"));
 		Bukkit.broadcastMessage("");
 
 		GameState.setState(GameState.InGame);
