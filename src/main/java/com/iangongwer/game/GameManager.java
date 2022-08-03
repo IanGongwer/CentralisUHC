@@ -215,6 +215,7 @@ public class GameManager {
 		}
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("The game has started.", "a"));
+		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString());
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("You can kill sheep for string.", "c"));
 		Bukkit.broadcastMessage("");

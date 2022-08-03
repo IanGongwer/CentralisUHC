@@ -16,7 +16,7 @@ public class Sheep implements Listener {
 	@EventHandler
 	public void onSheepKill(EntityDeathEvent event) {
 		if (event.getEntityType().equals(EntityType.SHEEP)) {
-			event.getDrops().add(new ItemStack(Material.STRING, 3));
+			event.getDrops().add(new ItemStack(Material.STRING, 1));
 		}
 	}
 

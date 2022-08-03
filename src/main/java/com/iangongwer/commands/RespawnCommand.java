@@ -28,9 +28,6 @@ public class RespawnCommand implements CommandExecutor {
 						}
 						gm.addPlayer(respawnPlayer.getUniqueId());
 						gm.removeSpectator(respawnPlayer.getUniqueId());
-						for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-							allPlayers.showPlayer(respawnPlayer);
-						}
 						respawnPlayer.setGameMode(GameMode.SURVIVAL);
 						respawnPlayer.teleport(gm.getDeathLocations().get(respawnPlayer.getUniqueId()));
 						player.sendMessage(

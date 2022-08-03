@@ -22,7 +22,7 @@ public class FoodLevel implements Listener {
 			event.setCancelled(false);
 		}
 		if (u.isEnd()) {
-			event.setCancelled(false);
+			event.setCancelled(true);
 		}
 	}
 
