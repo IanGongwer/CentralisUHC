@@ -34,8 +34,7 @@ public class Death implements Listener {
 		Player player = event.getEntity();
 		Player killer = event.getEntity().getKiller();
 		if (GameState.isLobby()) {
-			event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
-					+ ChatColor.GREEN + player.getDisplayName());
+			event.setDeathMessage("");
 			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
 			ItemMeta gapMeta = goldenApple.getItemMeta();
 			gapMeta.setDisplayName("Golden Head");
