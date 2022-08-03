@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
@@ -48,11 +49,13 @@ public class Quit implements Listener {
 			if (gm.isSpectator(playerUUID)) {
 				gm.removeSpectator(playerUUID);
 			}
-			if (!gm.isSpectator(playerUUID)) {
-				gm.setQuitLogTime(playerUUID, 150);
-				gm.addQuitLoggedPlayer(playerUUID);
-				gm.storeQuitLoggedInventories(playerUUID);
-				WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
+			if (!gm.isSpectator(playerUUID) && !u.isInStaffMode(playerUUID)) {
+				if (GameRunnable.getSecondsPassed() > 60) {
+					gm.setQuitLogTime(playerUUID, 150);
+					gm.addQuitLoggedPlayer(playerUUID);
+					gm.storeQuitLoggedInventories(playerUUID);
+					WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
+				}
 			}
 
 		}

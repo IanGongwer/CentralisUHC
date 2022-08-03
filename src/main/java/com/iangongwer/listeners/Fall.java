@@ -7,7 +7,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import com.iangongwer.game.GameState;
-import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
@@ -30,11 +29,7 @@ public class Fall implements Listener {
 				event.setCancelled(true);
 			}
 			if (GameState.isInGame()) {
-				if (GameRunnable.getSecondsPassed() <= 30) {
-					event.setCancelled(true);
-				} else {
-					event.setCancelled(false);
-				}
+				event.setCancelled(false);
 			}
 			if (GameState.isEnd()) {
 				event.setCancelled(true);

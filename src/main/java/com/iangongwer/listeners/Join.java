@@ -10,6 +10,7 @@ import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
+import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.runnables.QuitLogRunnable;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
@@ -34,6 +35,7 @@ public class Join implements Listener {
 			cr.createPlayer(joinedPlayer.getUniqueId());
 		}
 		if (GameState.isLobby()) {
+			gm.setPlayerKills(joinedPlayer.getUniqueId(), 0);
 			LobbyUtil.joinLobbyUtil(joinedPlayer);
 		}
 		if (GameState.isInGame()) {
@@ -46,10 +48,10 @@ public class Join implements Listener {
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
 			} else {
-				QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
-				WorldUtil.despawnVillager(joinedPlayer);
-				QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 				u.makeSpectator(joinedPlayer);
+				if (GameRunnable.getSecondsPassed() <= 600) {
+					joinedPlayer.sendMessage("Please use /latescatter, if you would like to join in the game.");
+				}
 			}
 		}
 	}

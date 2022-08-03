@@ -50,8 +50,8 @@ public class LateScatterCommand implements CommandExecutor {
 								player.teleport(scatterLocation);
 							}
 
-							gm.playerScatterUtil(player);
 							gm.setPlayerKills(player.getUniqueId(), 0);
+							gm.playerScatterUtil(player);
 							gm.addPlayer(player.getUniqueId());
 							gm.removeSpectator(player.getUniqueId());
 							player.setGameMode(GameMode.SURVIVAL);

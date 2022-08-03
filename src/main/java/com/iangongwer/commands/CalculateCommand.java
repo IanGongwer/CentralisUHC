@@ -35,7 +35,6 @@ public class CalculateCommand implements CommandExecutor {
 				}
 			}
 			for (UUID player : gm.getPlayers()) {
-				gm.setPlayerKills(player, 0);
 				if (TeamManager.getInstance().areTeamsEnabled()) {
 					if (!tm.hasTeam(player)) {
 						tm.createTeam(player);
