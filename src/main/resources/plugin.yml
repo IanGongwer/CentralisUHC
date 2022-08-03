@@ -37,5 +37,9 @@ commands:
   database:
     permission: uhc.staff
     aliases: [db]
+  banplayer:
+    permission: uhc.staff
+  unbanplayer:
+    permission: uhc.staff
     
 depend: [Netherboard]

@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.iangongwer.commands.BanPlayerCommand;
 import com.iangongwer.commands.BroadcastCommand;
 import com.iangongwer.commands.CalculateCommand;
 import com.iangongwer.commands.DatabaseCommand;
@@ -19,6 +20,7 @@ import com.iangongwer.commands.StatsCommand;
 import com.iangongwer.commands.TeamChatCommand;
 import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
+import com.iangongwer.commands.UnBanPlayerCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.crafts.NoviceItems;
 import com.iangongwer.game.GameState;
@@ -104,9 +106,11 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("banplayer").setExecutor((CommandExecutor) new BanPlayerCommand());
 		getCommand("team").setExecutor((CommandExecutor) new TeamCommand());
 		getCommand("respawn").setExecutor((CommandExecutor) new RespawnCommand());
 		getCommand("teamchat").setExecutor((CommandExecutor) new TeamChatCommand());
+		getCommand("unbanplayer").setExecutor((CommandExecutor) new UnBanPlayerCommand());
 		getCommand("teamcoords").setExecutor((CommandExecutor) new TeamCoordsCommand());
 		getCommand("broadcast").setExecutor((CommandExecutor) new BroadcastCommand());
 		getCommand("calculate").setExecutor((CommandExecutor) new CalculateCommand());

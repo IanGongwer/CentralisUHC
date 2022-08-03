@@ -9,6 +9,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\redis\ConnectionRedis.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\Timber.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\HasteyBoys.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\EntitySpawning.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\UnBanPlayerCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\WorldUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamChatCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Sheep.java
@@ -22,6 +23,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StartCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Death.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Quit.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\LateScatterCommand.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\BanPlayerCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Weather.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\RankUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Consume.java

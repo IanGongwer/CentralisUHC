@@ -22,13 +22,13 @@ public class MuteCommand implements CommandExecutor {
 			if (args.length == 1) {
 				Player mutedPlayer = Bukkit.getPlayer(args[0]);
 				if (mutedPlayer != null) {
-					if (ChatUtil.isMuted(player.getUniqueId())) {
-						ChatUtil.removeMutedPlayer(player.getUniqueId());
+					if (ChatUtil.isMuted(mutedPlayer.getUniqueId())) {
+						ChatUtil.removeMutedPlayer(mutedPlayer.getUniqueId());
 						player.sendMessage(u.messageFormat("You have unmuted " + args[0] + ".", "a"));
 						mutedPlayer.sendMessage(u.messageFormat("You are now unmuted.", "a"));
 						return true;
 					} else {
-						ChatUtil.addMutedPlayer(player.getUniqueId());
+						ChatUtil.addMutedPlayer(mutedPlayer.getUniqueId());
 						player.sendMessage(u.messageFormat("You have muted " + args[0] + ".", "c"));
 						mutedPlayer.sendMessage(u.messageFormat("You are now muted.", "c"));
 						return true;

@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
+import com.iangongwer.commands.BanPlayerCommand;
 import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
@@ -21,23 +22,31 @@ public class Connect implements Listener {
 		}
 		if (u.getWhitelistStatus()) {
 			if (!player.isOp()) {
-				event.disallow(Result.KICK_OTHER,
-						u.messageFormat("The game is currently whitelisted. Please wait to connect.", "c"));
+				if (!BanPlayerCommand.bannedPlayers.contains(player.getUniqueId())) {
+					event.disallow(Result.KICK_OTHER,
+							u.messageFormat("The game is currently whitelisted. Please wait to connect.", "c"));
+				} else {
+					event.disallow(Result.KICK_OTHER, u.messageFormat("You are currently banned.", "c"));
+				}
 			}
 		}
 		if (!u.getWhitelistStatus()) {
-			if (GameState.isLobby()) {
-				event.allow();
-			}
-			if (GameState.isScattering()) {
-				event.disallow(Result.KICK_OTHER,
-						u.messageFormat("The game is currently in scattering mode. Please wait to connect.", "c"));
-			}
-			if (GameState.isInGame()) {
-				event.allow();
-			}
-			if (GameState.isEnd()) {
-				event.disallow(Result.KICK_OTHER, u.messageFormat("The game is currrently in ending mode.", "c"));
+			if (!BanPlayerCommand.bannedPlayers.contains(player.getUniqueId())) {
+				if (GameState.isLobby()) {
+					event.allow();
+				}
+				if (GameState.isScattering()) {
+					event.disallow(Result.KICK_OTHER,
+							u.messageFormat("The game is currently in scattering mode. Please wait to connect.", "c"));
+				}
+				if (GameState.isInGame()) {
+					event.allow();
+				}
+				if (GameState.isEnd()) {
+					event.disallow(Result.KICK_OTHER, u.messageFormat("The game is currrently in ending mode.", "c"));
+				}
+			} else {
+				event.disallow(Result.KICK_OTHER, u.messageFormat("You are currently banned.", "c"));
 			}
 		}
 	}
