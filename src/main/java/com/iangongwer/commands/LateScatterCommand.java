@@ -24,7 +24,7 @@ public class LateScatterCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("latescatter") && sender instanceof Player) {
 			Player player = (Player) sender;
 			if (GameState.isInGame()) {
-				if (GameRunnable.getSecondsPassed() <= 600) {
+				if (GameRunnable.getSecondsPassed() <= 900) {
 					if (!u.isInStaffMode(player.getUniqueId())) {
 						if (!gm.getPlayers().contains(player.getUniqueId()) && !GameManager.getInstance()
 								.getAlreadyScatteredPlayers().contains(player.getUniqueId())) {

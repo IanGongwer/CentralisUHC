@@ -41,17 +41,16 @@ public class Join implements Listener {
 		if (GameState.isInGame()) {
 			joinedPlayer.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 			if (gm.getPlayers().contains(joinedPlayer.getUniqueId())) {
-				if (GameRunnable.getSecondsPassed() > 900) {
-					ScoreboardUtil.createGameScoreboard(joinedPlayer);
-					QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
-					WorldUtil.despawnVillager(joinedPlayer);
-					QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
-				}
+				ScoreboardUtil.createGameScoreboard(joinedPlayer);
+				// QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
+				// WorldUtil.despawnVillager(joinedPlayer);
+				// QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
-			} else {
+			} else if (!gm.getPlayers().contains(joinedPlayer.getUniqueId())
+					&& !u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				u.makeSpectator(joinedPlayer);
-				if (GameRunnable.getSecondsPassed() <= 600) {
+				if (GameRunnable.getSecondsPassed() <= 900) {
 					joinedPlayer.sendMessage("Please use /latescatter, if you would like to join in the game.");
 				}
 			}

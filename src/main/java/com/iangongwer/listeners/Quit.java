@@ -50,12 +50,10 @@ public class Quit implements Listener {
 				gm.removeSpectator(playerUUID);
 			}
 			if (!gm.isSpectator(playerUUID) && !u.isInStaffMode(playerUUID)) {
-				if (GameRunnable.getSecondsPassed() > 60) {
-					gm.setQuitLogTime(playerUUID, 150);
-					gm.addQuitLoggedPlayer(playerUUID);
-					gm.storeQuitLoggedInventories(playerUUID);
-					WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
-				}
+				// gm.setQuitLogTime(playerUUID, 150);
+				// gm.addQuitLoggedPlayer(playerUUID);
+				// gm.storeQuitLoggedInventories(playerUUID);
+				// WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
 			}
 
 		}
