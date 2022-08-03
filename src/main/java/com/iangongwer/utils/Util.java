@@ -29,7 +29,7 @@ public class Util {
 	private ArrayList<UUID> whitelistedPlayersUUID = new ArrayList<UUID>();
 	private ArrayList<String> whitelistedPlayersNames = new ArrayList<String>();
 
-	private ArrayList<UUID> staffMode = new ArrayList<UUID>();
+	private static ArrayList<UUID> staffMode = new ArrayList<UUID>();
 
 	public String messageFormat(String message, String color) {
 		return ChatColor.translateAlternateColorCodes('&', '&' + color + message);
@@ -69,7 +69,7 @@ public class Util {
 		player.setGameMode(GameMode.SPECTATOR);
 	}
 
-	public ArrayList<UUID> getStaffMode() {
+	public static ArrayList<UUID> getStaffMode() {
 		return staffMode;
 	}
 

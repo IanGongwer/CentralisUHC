@@ -57,6 +57,10 @@ public class LateScatterCommand implements CommandExecutor {
 							player.setGameMode(GameMode.SURVIVAL);
 							Bukkit.broadcastMessage(
 									u.messageFormat(player.getDisplayName() + " has been latescattered.", "a"));
+							player.sendMessage(u.messageFormat("You can kill sheep for string.", "c"));
+							player.sendMessage(u.messageFormat(
+									"Create a novice sword this game using this recipe: http://centralis.cc/recipes.html",
+									"c"));
 						} else {
 							player.sendMessage(u.messageFormat("You are already scattered.", "c"));
 						}

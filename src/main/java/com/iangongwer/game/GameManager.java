@@ -63,7 +63,7 @@ public class GameManager {
 
 	private Location spectatorSpawnPoint = new Location(Bukkit.getWorld("uhc_world"), 0, 100, 0);
 
-	PotionEffect damageResistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 10);
+	PotionEffect damageResistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 10);
 
 	// Spectator Handling
 	public Location getSpectatorSpawnPoint() {
