@@ -23,7 +23,7 @@ public class BroadcastCommand implements CommandExecutor {
 						message += " ";
 					message += part;
 				}
-				Bukkit.broadcastMessage(Util.getInstance().messageFormat(message + ".", "a"));
+				Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] " + message + ".", "a"));
 			}
 		}
 		return true;
