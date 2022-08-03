@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class Interact implements Listener {
@@ -16,24 +18,24 @@ public class Interact implements Listener {
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
-		if (u.isLobby()) {
-			if (u.isPracticePlayer(player.getUniqueId())) {
+		if (GameState.isLobby()) {
+			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 				event.setCancelled(false);
 			} else {
 				event.setCancelled(true);
 			}
 		}
-		if (u.isScattering()) {
+		if (GameState.isScattering()) {
 			event.setCancelled(true);
 		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			if (gm.isSpectator(player.getUniqueId()) || u.isInStaffMode(player.getUniqueId())) {
 				event.setCancelled(true);
 			} else {
 				event.setCancelled(false);
 			}
 		}
-		if (u.isEnd()) {
+		if (GameState.isEnd()) {
 			event.setCancelled(false);
 		}
 	}

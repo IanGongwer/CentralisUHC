@@ -11,7 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
+import com.iangongwer.scenarios.SupplyDrops;
 import com.iangongwer.scenarios.TimeBomb;
+import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
 
 public class GameRunnable extends BukkitRunnable {
@@ -26,10 +29,10 @@ public class GameRunnable extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-				if (u.hasScoreboard(allPlayers)) {
-					u.updateTime(allPlayers);
+				if (ScoreboardUtil.hasScoreboard(allPlayers)) {
+					ScoreboardUtil.updateTime(allPlayers);
 				}
 			}
 			totalTime++;
@@ -55,7 +58,7 @@ public class GameRunnable extends BukkitRunnable {
 					int x = -501 + random.nextInt(501);
 					int z = -501 + random.nextInt(501);
 					int y = 90;
-					u.spawnSupplyDrop(x, y, z);
+					SupplyDrops.spawnSupplyDrop(x, y, z);
 					Bukkit.broadcastMessage(u.messageFormat(
 							"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
 				}
@@ -65,7 +68,7 @@ public class GameRunnable extends BukkitRunnable {
 					int x = -501 + random.nextInt(501);
 					int z = -501 + random.nextInt(501);
 					int y = 90;
-					u.spawnSupplyDrop(x, y, z);
+					SupplyDrops.spawnSupplyDrop(x, y, z);
 					Bukkit.broadcastMessage(u.messageFormat(
 							"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
 				}
@@ -85,7 +88,7 @@ public class GameRunnable extends BukkitRunnable {
 					int x = -200 + random.nextInt(200);
 					int z = -200 + random.nextInt(200);
 					int y = 90;
-					u.spawnSupplyDrop(x, y, z);
+					SupplyDrops.spawnSupplyDrop(x, y, z);
 					Bukkit.broadcastMessage(u.messageFormat(
 							"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
 				}

@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
@@ -22,7 +23,7 @@ public class LateScatterCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("latescatter") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if (u.isInGame()) {
+			if (GameState.isInGame()) {
 				if (GameRunnable.getSecondsPassed() <= 600) {
 					if (!u.isInStaffMode(player.getUniqueId())) {
 						if (!gm.getPlayers().contains(player.getUniqueId()) && !GameManager.getInstance()

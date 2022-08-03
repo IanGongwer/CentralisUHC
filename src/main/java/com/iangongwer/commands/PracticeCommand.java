@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class PracticeCommand implements CommandExecutor {
@@ -19,11 +21,11 @@ public class PracticeCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("practice") && sender instanceof Player) {
 			Player player = (Player) sender;
 			UUID playerUUID = player.getUniqueId();
-			if (u.isLobby()) {
-				if (u.isPracticePlayer(playerUUID)) {
-					u.removePracticePlayer(playerUUID);
+			if (GameState.isLobby()) {
+				if (LobbyUtil.isPracticePlayer(playerUUID)) {
+					LobbyUtil.removePracticePlayer(playerUUID);
 				} else {
-					u.addPracticePlayer(playerUUID);
+					LobbyUtil.addPracticePlayer(playerUUID);
 				}
 			}
 		}

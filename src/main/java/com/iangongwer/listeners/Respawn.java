@@ -7,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class Respawn implements Listener {
@@ -17,17 +19,17 @@ public class Respawn implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
-		if (u.isLobby()) {
+		if (GameState.isLobby()) {
 			event.setRespawnLocation(gm.getLobbySpawnPoint());
-			if (u.isPracticePlayer(player.getUniqueId())) {
-				event.setRespawnLocation(u.getPracticeSpawnPoint());
-				u.practiceInventory(player);
+			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
+				event.setRespawnLocation(LobbyUtil.getPracticeSpawnPoint());
+				LobbyUtil.practiceInventory(player);
 			}
 		}
-		if (u.isScattering()) {
+		if (GameState.isScattering()) {
 			return;
 		}
-		if (u.isInGame() || u.isEnd()) {
+		if (GameState.isInGame() || GameState.isEnd()) {
 			event.setRespawnLocation(Bukkit.getPlayer(gm.getPlayers().get(0)).getLocation());
 			if (gm.isSpectator(player.getUniqueId())) {
 				u.makeSpectator(player);

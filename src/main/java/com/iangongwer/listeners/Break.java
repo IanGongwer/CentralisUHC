@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class Break implements Listener {
@@ -22,13 +23,7 @@ public class Break implements Listener {
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();
-		if (u.isLobby()) {
-			event.setCancelled(true);
-		}
-		if (u.isScattering()) {
-			event.setCancelled(true);
-		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			if (gm.isSpectator(player.getUniqueId()) || u.isInStaffMode(player.getUniqueId())) {
 				event.setCancelled(true);
 			} else {
@@ -51,8 +46,7 @@ public class Break implements Listener {
 				}
 				event.setCancelled(false);
 			}
-		}
-		if (u.isEnd()) {
+		} else {
 			event.setCancelled(true);
 		}
 		if (player.isOp()) {

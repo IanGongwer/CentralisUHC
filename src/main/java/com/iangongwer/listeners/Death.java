@@ -12,11 +12,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 
 public class Death implements Listener {
 
@@ -30,11 +33,11 @@ public class Death implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		Player killer = event.getEntity().getKiller();
-		if (u.isLobby()) {
+		if (GameState.isLobby()) {
 			event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
 					+ ChatColor.GREEN + player.getDisplayName());
 		}
-		if (!u.isLobby()) {
+		if (!GameState.isLobby()) {
 			if (!Main.isRedisEnabled()) {
 				dbm.addDeath(player.getUniqueId());
 			} else {
@@ -52,7 +55,7 @@ public class Death implements Listener {
 				event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
 						+ ChatColor.GREEN + player.getDisplayName());
 				gm.setPlayerKills(killer.getUniqueId(), gm.getPlayerKills(killer.getUniqueId()) + 1);
-				u.updateKills(killer);
+				ScoreboardUtil.updateKills(killer);
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
 			}
@@ -80,7 +83,7 @@ public class Death implements Listener {
 			if (tm.areTeamsEnabled()) {
 				tm.isFullTeamDead(player.getUniqueId());
 			}
-			u.spawnFireworks(player.getLocation(), 2);
+			WorldUtil.spawnFireworks(player.getLocation(), 2);
 			if (killer == null) {
 				gm.isGameFinishedVillager();
 			} else {

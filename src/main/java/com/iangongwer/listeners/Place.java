@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class Place implements Listener {
@@ -16,20 +17,20 @@ public class Place implements Listener {
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
-		if (u.isLobby()) {
+		if (GameState.isLobby()) {
 			event.setCancelled(true);
 		}
-		if (u.isScattering()) {
+		if (GameState.isScattering()) {
 			event.setCancelled(true);
 		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			if (gm.isSpectator(player.getUniqueId()) || u.isInStaffMode(player.getUniqueId())) {
 				event.setCancelled(true);
 			} else {
 				event.setCancelled(false);
 			}
 		}
-		if (u.isEnd()) {
+		if (GameState.isEnd()) {
 			event.setCancelled(true);
 		}
 		if (player.isOp()) {

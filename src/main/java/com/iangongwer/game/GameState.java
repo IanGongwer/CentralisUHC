@@ -16,4 +16,20 @@ public enum GameState {
 	public static GameState getState() {
 		return state;
 	}
+
+	public static boolean isLobby() {
+		return isState(Lobby);
+	}
+
+	public static boolean isScattering() {
+		return isState(Scattering);
+	}
+
+	public static boolean isInGame() {
+		return isState(InGame);
+	}
+
+	public static boolean isEnd() {
+		return isState(End);
+	}
 }

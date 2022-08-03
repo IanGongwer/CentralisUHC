@@ -6,11 +6,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.QuitLogRunnable;
+import com.iangongwer.utils.LobbyUtil;
+import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 
 public class Join implements Listener {
 
@@ -29,18 +33,18 @@ public class Join implements Listener {
 		} else {
 			cr.createPlayer(joinedPlayer.getUniqueId());
 		}
-		if (u.isLobby()) {
-			u.joinLobbyUtil(joinedPlayer);
+		if (GameState.isLobby()) {
+			LobbyUtil.joinLobbyUtil(joinedPlayer);
 		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			joinedPlayer.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 			if (gm.getPlayers().contains(joinedPlayer.getUniqueId())) {
-				u.createGameScoreboard(joinedPlayer);
+				ScoreboardUtil.createGameScoreboard(joinedPlayer);
 				QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
-				u.despawnVillager(joinedPlayer);
+				WorldUtil.despawnVillager(joinedPlayer);
 				QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
-				u.createStaffSpecScoreboard(joinedPlayer);
+				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
 			} else if (gm.isSpectator(joinedPlayer.getUniqueId())) {
 				u.makeSpectator(joinedPlayer);
 			}

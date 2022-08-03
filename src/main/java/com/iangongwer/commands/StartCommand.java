@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class StartCommand implements CommandExecutor {
@@ -16,7 +17,7 @@ public class StartCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("start") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if (u.isLobby()) {
+			if (GameState.isLobby()) {
 				if (gm.getPredeterminedLocations().size() != 0) {
 					player.sendMessage(u.messageFormat("You have started the scattering process.", "a"));
 					gm.scatterPlayers(gm.getPlayers());

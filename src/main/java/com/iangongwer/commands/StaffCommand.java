@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class StaffCommand implements CommandExecutor {
@@ -16,10 +17,10 @@ public class StaffCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("staff") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if (u.isPracticePlayer(player.getUniqueId())) {
+			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 				player.sendMessage(u.messageFormat("You are currently in practice. Use /prac to leave", "c"));
 			}
-			if (!u.isPracticePlayer(player.getUniqueId())) {
+			if (!LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 				if (!u.isInStaffMode(player.getUniqueId())) {
 					u.addStaffMode(player.getUniqueId());
 				} else {

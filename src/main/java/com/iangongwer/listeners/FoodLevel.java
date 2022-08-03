@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class FoodLevel implements Listener {
@@ -12,16 +13,9 @@ public class FoodLevel implements Listener {
 
 	@EventHandler
 	public void onFoodLevelChange(FoodLevelChangeEvent event) {
-		if (u.isLobby()) {
-			event.setCancelled(true);
-		}
-		if (u.isScattering()) {
-			event.setCancelled(true);
-		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			event.setCancelled(false);
-		}
-		if (u.isEnd()) {
+		} else {
 			event.setCancelled(true);
 		}
 	}

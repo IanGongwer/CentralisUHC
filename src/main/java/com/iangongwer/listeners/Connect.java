@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class Connect implements Listener {
@@ -26,20 +27,20 @@ public class Connect implements Listener {
 			}
 		}
 		if (!u.getWhitelistStatus()) {
-			if (u.isLobby()) {
+			if (GameState.isLobby()) {
 				event.allow();
 			}
-			if (u.isScattering()) {
+			if (GameState.isScattering()) {
 				event.disallow(Result.KICK_OTHER,
 						u.messageFormat("The game is currently in scattering mode. Please wait to connect.", "c"));
 			}
-			if (u.isInGame()) {
+			if (GameState.isInGame()) {
 				if (!GameManager.getInstance().getPlayers().contains(player.getUniqueId())) {
 					GameManager.getInstance().addSpectator(player.getUniqueId());
 				}
 				event.allow();
 			}
-			if (u.isEnd()) {
+			if (GameState.isEnd()) {
 				event.disallow(Result.KICK_OTHER, u.messageFormat("The game is currrently in ending mode.", "c"));
 			}
 		}

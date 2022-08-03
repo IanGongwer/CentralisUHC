@@ -15,6 +15,7 @@ import com.iangongwer.game.GameManager;
 import com.iangongwer.runnables.QuitLogRunnable;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 
 public class VillagerDeath implements Listener {
 
@@ -34,7 +35,7 @@ public class VillagerDeath implements Listener {
 				for (ItemStack item : item_list) {
 					event.getEntity().getWorld().dropItemNaturally(loc, item);
 				}
-				u.spawnFireworks(loc, 2);
+				WorldUtil.spawnFireworks(loc, 2);
 				gm.removePlayer(player.getUniqueId());
 				gm.addSpectator(player.getUniqueId());
 				if (tm.areTeamsEnabled()) {

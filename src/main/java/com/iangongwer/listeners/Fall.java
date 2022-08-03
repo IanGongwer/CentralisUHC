@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.utils.Util;
 
@@ -22,20 +23,20 @@ public class Fall implements Listener {
 			player.teleport(GameManager.getInstance().getLobbySpawnPoint());
 		}
 		if (event.getCause() == DamageCause.FALL) {
-			if (u.isLobby()) {
+			if (GameState.isLobby()) {
 				event.setCancelled(true);
 			}
-			if (u.isScattering()) {
+			if (GameState.isScattering()) {
 				event.setCancelled(true);
 			}
-			if (u.isInGame()) {
+			if (GameState.isInGame()) {
 				if (GameRunnable.getSecondsPassed() <= 30) {
 					event.setCancelled(true);
 				} else {
 					event.setCancelled(false);
 				}
 			}
-			if (u.isEnd()) {
+			if (GameState.isEnd()) {
 				event.setCancelled(true);
 			}
 		}

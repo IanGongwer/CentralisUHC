@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.iangongwer.utils.ChatUtil;
 import com.iangongwer.utils.Util;
 
 public class MuteCommand implements CommandExecutor {
@@ -21,12 +22,12 @@ public class MuteCommand implements CommandExecutor {
 			if (args.length == 1) {
 				Player mutedPlayer = Bukkit.getPlayer(args[0]);
 				if (mutedPlayer.isOnline()) {
-					if (u.isMuted(player.getUniqueId())) {
-						u.removeMutedPlayer(player.getUniqueId());
+					if (ChatUtil.isMuted(player.getUniqueId())) {
+						ChatUtil.removeMutedPlayer(player.getUniqueId());
 						player.sendMessage(u.messageFormat("You have unmuted " + args[0] + ".", "a"));
 						mutedPlayer.sendMessage(u.messageFormat("You are now unmuted.", "a"));
 					} else {
-						u.addMutedPlayer(player.getUniqueId());
+						ChatUtil.addMutedPlayer(player.getUniqueId());
 						player.sendMessage(u.messageFormat("You have muted " + args[0] + ".", "c"));
 						mutedPlayer.sendMessage(u.messageFormat("You are now muted.", "c"));
 					}

@@ -8,8 +8,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 
 public class Quit implements Listener {
 
@@ -21,18 +24,18 @@ public class Quit implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		UUID player = event.getPlayer().getUniqueId();
 		event.setQuitMessage("");
-		if (u.isLobby()) {
+		if (GameState.isLobby()) {
 			if (tm.hasTeam(player)) {
 				if (tm.getTeamLeader(player) == player) {
 					tm.deleteTeam(player);
 				}
 			}
 			gm.removePlayer(player);
-			if (u.isPracticePlayer(player)) {
-				u.removePracticePlayer(player);
+			if (LobbyUtil.isPracticePlayer(player)) {
+				LobbyUtil.removePracticePlayer(player);
 			}
 		}
-		if (u.isScattering()) {
+		if (GameState.isScattering()) {
 			gm.removePlayer(player);
 			if (tm.hasTeam(player)) {
 				if (tm.getTeamLeader(player) == player) {
@@ -40,7 +43,7 @@ public class Quit implements Listener {
 				}
 			}
 		}
-		if (u.isInGame()) {
+		if (GameState.isInGame()) {
 			if (gm.isSpectator(player)) {
 				gm.removeSpectator(player);
 			}
@@ -48,11 +51,11 @@ public class Quit implements Listener {
 				gm.setQuitLogTime(player, 150);
 				gm.addQuitLoggedPlayer(player);
 				gm.storeQuitLoggedInventories(player);
-				u.spawnVillager(Bukkit.getPlayer(player));
+				WorldUtil.spawnVillager(Bukkit.getPlayer(player));
 			}
 
 		}
-		if (u.isEnd()) {
+		if (GameState.isEnd()) {
 			gm.removeSpectator(player);
 			gm.removePlayer(player);
 		}

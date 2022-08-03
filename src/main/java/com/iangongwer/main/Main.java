@@ -52,7 +52,7 @@ import com.iangongwer.scenarios.HasteyBoys;
 import com.iangongwer.scenarios.Horseless;
 import com.iangongwer.scenarios.Timber;
 import com.iangongwer.scenarios.TimeBomb;
-import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 import com.iangongwer.utils.YMLFile;
 
 public class Main extends JavaPlugin {
@@ -141,7 +141,7 @@ public class Main extends JavaPlugin {
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");
 		Bukkit.getWorld("world").setTime(6000);
-		Util.getInstance().createWorld("uhc_world");
+		WorldUtil.createWorld("uhc_world");
 
 		if (Bukkit.getWorld("uhc_world") != null) {
 			Bukkit.getWorld("uhc_world").setGameRuleValue("naturalRegeneration", "false");

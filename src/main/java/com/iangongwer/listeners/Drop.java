@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
+import com.iangongwer.game.GameState;
 import com.iangongwer.utils.Util;
 
 public class Drop implements Listener {
@@ -12,16 +13,9 @@ public class Drop implements Listener {
 
 	@EventHandler
 	public void onItemDrop(PlayerDropItemEvent event) {
-		if (u.isLobby()) {
+		if (GameState.isLobby() || GameState.isScattering()) {
 			event.setCancelled(true);
-		}
-		if (u.isScattering()) {
-			event.setCancelled(true);
-		}
-		if (u.isInGame()) {
-			event.setCancelled(false);
-		}
-		if (u.isEnd()) {
+		} else if (GameState.isInGame() || GameState.isEnd()) {
 			event.setCancelled(false);
 		}
 	}

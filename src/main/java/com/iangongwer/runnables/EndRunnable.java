@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.scenarios.TimeBomb;
-import com.iangongwer.utils.Util;
 
 public class EndRunnable extends BukkitRunnable {
 
@@ -20,7 +20,7 @@ public class EndRunnable extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		if (Util.getInstance().isEnd()) {
+		if (GameState.isEnd()) {
 			if (gm.isScenarioActive("TimeBomb")) {
 				for (Map.Entry<Location, Integer> set : TimeBomb.timeBombTime.entrySet()) {
 					set.setValue(set.getValue() - 1);
