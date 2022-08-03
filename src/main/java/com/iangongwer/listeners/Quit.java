@@ -2,18 +2,15 @@ package com.iangongwer.listeners;
 
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
-import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
-import com.iangongwer.utils.WorldUtil;
 
 public class Quit implements Listener {
 
