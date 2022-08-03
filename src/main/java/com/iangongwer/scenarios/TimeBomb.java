@@ -44,16 +44,9 @@ public class TimeBomb implements Listener {
                 deathBlock2.setType(Material.CHEST);
 
                 Chest chest1 = (Chest) deathBlock.getState();
-                Chest chest2 = (Chest) deathBlock2.getState();
 
-                int counter = 0;
                 for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
-                    if (counter < 27) {
-                        chest1.getInventory().addItem(item);
-                        counter++;
-                    } else {
-                        chest2.getInventory().addItem(item);
-                    }
+                    chest1.getInventory().addItem(item);
                 }
             }
         }

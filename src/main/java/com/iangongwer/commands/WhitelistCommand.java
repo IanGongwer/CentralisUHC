@@ -41,24 +41,47 @@ public class WhitelistCommand implements CommandExecutor {
 			}
 			if (args.length == 2) {
 				if (args[0].equalsIgnoreCase("add")) {
-					UUID playerUUID = Bukkit.getPlayer(args[1]).getUniqueId();
-					if (u.getWhitelistedPlayersUUID().contains(playerUUID)) {
-						player.sendMessage(u.messageFormat(args[1] + " is already whitelisted.", "c"));
+					if (Bukkit.getPlayer(args[1]) != null) {
+						UUID playerUUID = Bukkit.getPlayer(args[1]).getUniqueId();
+						if (u.getWhitelistedPlayersUUID().contains(playerUUID)) {
+							player.sendMessage(u.messageFormat(args[1] + " is already whitelisted.", "c"));
+						} else {
+							u.addWhitelistedPlayer(playerUUID);
+							player.sendMessage(
+									u.messageFormat("You have added " + args[1] + " to the whitelist.", "a"));
+						}
 					} else {
-						u.addWhitelistedPlayer(playerUUID);
-						player.sendMessage(u.messageFormat("You have added " + args[1] + " to the whitelist.", "a"));
+						UUID playerUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+						if (u.getWhitelistedPlayersUUID().contains(playerUUID)) {
+							player.sendMessage(u.messageFormat(args[1] + " is already whitelisted.", "c"));
+						} else {
+							u.addWhitelistedPlayer(playerUUID);
+							player.sendMessage(
+									u.messageFormat("You have added " + args[1] + " to the whitelist.", "a"));
+						}
 					}
 				}
 				if (args[0].equalsIgnoreCase("remove")) {
-					UUID playerUUID = Bukkit.getPlayer(args[1]).getUniqueId();
-					if (!u.getWhitelistedPlayersUUID().contains(playerUUID)) {
-						player.sendMessage(u.messageFormat(args[1] + " is not whitelisted.", "c"));
-					} else {
-						u.removeWhitelistedPlayer(playerUUID);
-						player.sendMessage(
-								u.messageFormat("You have removed " + args[1] + " from the whitelist.", "a"));
-					}
+					if (Bukkit.getPlayer(args[1]) != null) {
+						UUID playerUUID = Bukkit.getPlayer(args[1]).getUniqueId();
+						if (!u.getWhitelistedPlayersUUID().contains(playerUUID)) {
+							player.sendMessage(u.messageFormat(args[1] + " is not whitelisted.", "c"));
+						} else {
+							u.removeWhitelistedPlayer(playerUUID);
+							player.sendMessage(
+									u.messageFormat("You have removed " + args[1] + " from the whitelist.", "a"));
+						}
 
+					} else {
+						UUID playerUUID = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+						if (!u.getWhitelistedPlayersUUID().contains(playerUUID)) {
+							player.sendMessage(u.messageFormat(args[1] + " is not whitelisted.", "c"));
+						} else {
+							u.removeWhitelistedPlayer(playerUUID);
+							player.sendMessage(
+									u.messageFormat("You have removed " + args[1] + " from the whitelist.", "a"));
+						}
+					}
 				}
 			}
 		}
