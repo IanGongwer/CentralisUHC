@@ -60,6 +60,7 @@ public class Util {
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
 		player.setGameMode(GameMode.SPECTATOR);
+		player.teleport(WorldUtil.getSpectatorSpawnPoint());
 	}
 
 	public static ArrayList<UUID> getStaffMode() {

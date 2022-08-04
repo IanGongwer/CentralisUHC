@@ -14,6 +14,7 @@ import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
+import com.iangongwer.utils.WorldUtil;
 
 public class Join implements Listener {
 
@@ -45,6 +46,7 @@ public class Join implements Listener {
 				// QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
+				joinedPlayer.teleport(WorldUtil.getSpectatorSpawnPoint());
 			} else if (!gm.getPlayers().contains(joinedPlayer.getUniqueId())
 					&& !u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				u.makeSpectator(joinedPlayer);
