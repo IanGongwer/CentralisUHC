@@ -27,11 +27,18 @@ public class Break implements Listener {
 			if (gm.isSpectator(player.getUniqueId()) || u.isInStaffMode(player.getUniqueId())) {
 				event.setCancelled(true);
 			} else {
+				if (event.getBlock().getType().equals(Material.STONE)
+						&& (event.getBlock().getData() == 1 || event.getBlock().getData() == 2
+								|| event.getBlock().getData() == 3 || event.getBlock().getData() == 4
+								|| event.getBlock().getData() == 5 || event.getBlock().getData() == 6)) {
+					event.getBlock().getDrops().clear();
+					event.getBlock().getDrops().add(new ItemStack(Material.STONE));
+				}
 				if (event.getBlock().getType().equals(Material.LEAVES)
 						|| event.getBlock().getType().equals(Material.LEAVES_2)) {
 					Random random = new Random();
 					int rate = random.nextInt(101);
-					if (rate <= 5) {
+					if (rate <= 4) {
 						Location appleLocation = event.getBlock().getLocation();
 						Bukkit.getWorld("uhc_world").dropItemNaturally(appleLocation, new ItemStack(Material.APPLE));
 					}
@@ -39,7 +46,7 @@ public class Break implements Listener {
 				if (event.getBlock().getType().equals(Material.GRAVEL)) {
 					Random random = new Random();
 					int rate = random.nextInt(101);
-					if (rate <= 5) {
+					if (rate <= 4) {
 						Location flintLocation = event.getBlock().getLocation();
 						Bukkit.getWorld("uhc_world").dropItemNaturally(flintLocation, new ItemStack(Material.FLINT));
 					}
