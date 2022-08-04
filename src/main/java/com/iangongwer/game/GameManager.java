@@ -215,7 +215,8 @@ public class GameManager {
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance()
 				.messageFormat("[UHC] " + ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString(), "a"));
-		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] You can kill sheep for string.", "a"));
+		Bukkit.broadcastMessage(
+				Util.getInstance().messageFormat("[UHC] Gather 3 wool and craft it to make string.", "a"));
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 				"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
 				"a"));

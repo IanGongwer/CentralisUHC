@@ -65,7 +65,8 @@ public class LateScatterCommand implements CommandExecutor {
 							player.sendMessage(u.messageFormat(
 									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
 									"a"));
-							player.sendMessage(u.messageFormat("[UHC] You can kill sheep for string.", "a"));
+							player.sendMessage(
+									u.messageFormat("[UHC] Gather 3 wool and craft it to make string.", "a"));
 							player.sendMessage(u.messageFormat(
 									"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
 									"a"));
