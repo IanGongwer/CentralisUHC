@@ -47,7 +47,7 @@ public class WorldUtil {
 
     public static void createWorld(String worldName) {
         if (Bukkit.getWorld(worldName) == null) {
-            File deleteFilePath = new File("/" + worldName);
+            File deleteFilePath = new File(Bukkit.getWorldContainer() + "/" + worldName);
             deleteWorld(deleteFilePath);
             WorldCreator worldcreate = new WorldCreator(worldName);
             worldcreate.environment(World.Environment.NORMAL);

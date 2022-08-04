@@ -211,13 +211,14 @@ public class GameManager {
 		}
 
 		Bukkit.broadcastMessage("");
-		Bukkit.broadcastMessage(Util.getInstance().messageFormat("The game has started.", "a"));
+		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] The game has started.", "a"));
 		Bukkit.broadcastMessage("");
-		Bukkit.broadcastMessage(ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString());
-		Bukkit.broadcastMessage(Util.getInstance().messageFormat("You can kill sheep for string.", "c"));
+		Bukkit.broadcastMessage(Util.getInstance()
+				.messageFormat("[UHC] " + ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString(), "a"));
+		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] You can kill sheep for string.", "a"));
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-				"Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
-				"c"));
+				"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
+				"a"));
 		Bukkit.broadcastMessage("");
 
 		GameState.setState(GameState.InGame);

@@ -1,6 +1,7 @@
 package com.iangongwer.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -56,11 +57,15 @@ public class LateScatterCommand implements CommandExecutor {
 							gm.removeSpectator(player.getUniqueId());
 							player.setGameMode(GameMode.SURVIVAL);
 							Bukkit.broadcastMessage(
-									u.messageFormat(player.getDisplayName() + " has been latescattered.", "a"));
-							player.sendMessage(u.messageFormat("You can kill sheep for string.", "c"));
+									u.messageFormat("[UHC] " + player.getDisplayName() + " has been latescattered.",
+											"a"));
 							player.sendMessage(u.messageFormat(
-									"Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
-									"c"));
+									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
+									"a"));
+							player.sendMessage(u.messageFormat("[UHC] You can kill sheep for string.", "a"));
+							player.sendMessage(u.messageFormat(
+									"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
+									"a"));
 						} else {
 							player.sendMessage(u.messageFormat("You are already scattered.", "c"));
 						}
