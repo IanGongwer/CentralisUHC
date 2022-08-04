@@ -51,6 +51,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Final heal is in 5 minutes!", "a"));
 				Bukkit.broadcastMessage("");
 			}
+			if (getFormattedTime().equalsIgnoreCase("7:00")) {
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[UHC] If you are enjoying the game, be sure to join the discord: discord.gg/YTEM7Dq", "a"));
+			}
 			if (getFormattedTime().equalsIgnoreCase("10:00")) {
 				for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 					allPlayers.setHealth(20.0);
@@ -87,6 +91,14 @@ public class GameRunnable extends BukkitRunnable {
 				}
 				gm.getPlayers().removeAll(toRemove);
 			}
+			if (getFormattedTime().equalsIgnoreCase("17:00")) {
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[UHC] If you are enjoying the game, be sure to join the discord: discord.gg/YTEM7Dq", "a"));
+			}
+			if (getFormattedTime().equalsIgnoreCase("27:00")) {
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[UHC] If you are enjoying the game, be sure to join the discord: discord.gg/YTEM7Dq", "a"));
+			}
 			if (getFormattedTime().equalsIgnoreCase("29:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 500x500 in 1 minute", "a"));
@@ -117,6 +129,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 250x250!", "a"));
 				Bukkit.broadcastMessage("");
 			}
+			if (getFormattedTime().equalsIgnoreCase("37:00")) {
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[UHC] If you are enjoying the game, be sure to join the discord: discord.gg/YTEM7Dq", "a"));
+			}
 			if (getFormattedTime().equalsIgnoreCase("39:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 100x100 in 1 minute", "a"));
@@ -138,6 +154,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 50x50!", "a"));
 				Bukkit.broadcastMessage("");
+			}
+			if (getFormattedTime().equalsIgnoreCase("47:00")) {
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[UHC] If you are enjoying the game, be sure to join the discord: discord.gg/YTEM7Dq", "a"));
 			}
 			if (getFormattedTime().equalsIgnoreCase("49:00")) {
 				Bukkit.broadcastMessage("");
