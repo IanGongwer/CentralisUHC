@@ -88,7 +88,7 @@ public class Death implements Listener {
 				tm.addDeceasedMember(player.getUniqueId());
 			}
 			gm.removePlayer(player.getUniqueId());
-			gm.addSpectator(player.getUniqueId());
+			u.makeSpectator(player);
 			if (tm.areTeamsEnabled()) {
 				tm.isFullTeamDead(player.getUniqueId());
 			}
