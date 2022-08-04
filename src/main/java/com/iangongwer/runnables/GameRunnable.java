@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -49,6 +50,10 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("5:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Final heal is in 5 minutes!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("7:00")) {
@@ -61,6 +66,10 @@ public class GameRunnable extends BukkitRunnable {
 				}
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] All players are now healed!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 				if (gm.isScenarioActive("SupplyDrops")) {
 					int x = -501 + random.nextInt(501);
@@ -83,6 +92,10 @@ public class GameRunnable extends BukkitRunnable {
 				gm.setPvPEnabled(true);
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] PvP is now enabled!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 				for (UUID playerUUID : gm.getPlayers()) {
 					if (Bukkit.getPlayer(playerUUID) == null) {
@@ -102,12 +115,20 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("29:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 500x500 in 1 minute", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("30:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 500 500 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 500x500!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 				if (gm.isScenarioActive("SupplyDrops")) {
 					int x = -200 + random.nextInt(200);
@@ -121,12 +142,20 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("34:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 250x250 in 1 minute", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("35:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 250 250 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 250x250!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("37:00")) {
@@ -136,12 +165,20 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("39:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 100x100 in 1 minute", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("40:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 125 125 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 100x100!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 				for (UUID playerUUID : gm.getPlayers()) {
 					if (Bukkit.getPlayer(playerUUID) == null) {
@@ -154,12 +191,20 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("44:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 50x50 in 1 minute", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("45:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 50 50 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 50x50!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			if (getFormattedTime().equalsIgnoreCase("47:00")) {
@@ -169,6 +214,10 @@ public class GameRunnable extends BukkitRunnable {
 			if (getFormattedTime().equalsIgnoreCase("49:00")) {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 25x25 in 1 minute", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 			}
 			gm.getPlayers().removeAll(toRemove);
@@ -176,6 +225,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 25x25!", "a"));
+				for (UUID playerUUID : gm.getPlayers()) {
+					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+				}
 				Bukkit.broadcastMessage("");
 				for (UUID playerUUID : gm.getPlayers()) {
 					if (Bukkit.getPlayer(playerUUID) == null) {
