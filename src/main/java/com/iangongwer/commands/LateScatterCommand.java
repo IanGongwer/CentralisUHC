@@ -59,7 +59,7 @@ public class LateScatterCommand implements CommandExecutor {
 									u.messageFormat(player.getDisplayName() + " has been latescattered.", "a"));
 							player.sendMessage(u.messageFormat("You can kill sheep for string.", "c"));
 							player.sendMessage(u.messageFormat(
-									"Create a novice sword this game using this recipe: http://centralis.cc/recipes.html",
+									"Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
 									"c"));
 						} else {
 							player.sendMessage(u.messageFormat("You are already scattered.", "c"));
