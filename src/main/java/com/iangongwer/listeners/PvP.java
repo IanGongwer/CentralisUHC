@@ -104,8 +104,10 @@ public class PvP implements Listener {
 									+ ChatColor.GREEN + df.format(playerHealth) + ChatColor.WHITE + " hearts");
 						}
 					} else if (GameState.isInGame()) {
-						shooter.sendMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " is at "
-								+ ChatColor.GREEN + df.format(playerHealth) + ChatColor.WHITE + " hearts");
+						if (gm.isPvPEnabled()) {
+							shooter.sendMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " is at "
+									+ ChatColor.GREEN + df.format(playerHealth) + ChatColor.WHITE + " hearts");
+						}
 					}
 				}
 			}
