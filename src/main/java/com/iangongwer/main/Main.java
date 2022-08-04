@@ -1,6 +1,7 @@
 package com.iangongwer.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -65,6 +66,8 @@ public class Main extends JavaPlugin {
 	private static Main instance;
 
 	private static boolean redisEnabled = false;
+
+	public static World uhcWorld;
 
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
@@ -159,6 +162,7 @@ public class Main extends JavaPlugin {
 			Bukkit.getWorld("uhc_world").setGameRuleValue("doDaylightCycle", "false");
 			Bukkit.getWorld("uhc_world").setTime(6000);
 		}
+		uhcWorld = Bukkit.getWorlds().get(1);
 	}
 
 	public void onDisable() {

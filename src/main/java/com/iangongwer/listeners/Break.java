@@ -31,8 +31,9 @@ public class Break implements Listener {
 						&& (event.getBlock().getData() == 1 || event.getBlock().getData() == 2
 								|| event.getBlock().getData() == 3 || event.getBlock().getData() == 4
 								|| event.getBlock().getData() == 5 || event.getBlock().getData() == 6)) {
-					event.getBlock().getDrops().clear();
-					event.getBlock().getDrops().add(new ItemStack(Material.STONE));
+					event.setCancelled(true);
+					event.getBlock().setType(Material.AIR);
+					player.getWorld().dropItem(event.getBlock().getLocation(), new ItemStack(Material.STONE));
 				}
 				if (event.getBlock().getType().equals(Material.LEAVES)
 						|| event.getBlock().getType().equals(Material.LEAVES_2)) {

@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
@@ -60,7 +61,9 @@ public class Util {
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
 		player.setGameMode(GameMode.SPECTATOR);
-		player.teleport(WorldUtil.getSpectatorSpawnPoint());
+		gm.addSpectator(player.getUniqueId());
+		Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
+		player.teleport(loc);
 	}
 
 	public static ArrayList<UUID> getStaffMode() {

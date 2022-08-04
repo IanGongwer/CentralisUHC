@@ -25,9 +25,6 @@ public class WorldUtil {
 
     static GameManager gm = GameManager.getInstance();
 
-    private static Location spectatorSpawnPoint = new Location(Bukkit.getWorld("uhc_world"), 0.5, 100, 0.5, 0.0f,
-            0.0f);
-
     public static void spawnVillager(Player player) {
         Villager quitLoggedVillager = (Villager) player.getWorld().spawnEntity(player.getLocation(),
                 EntityType.VILLAGER);
@@ -108,10 +105,6 @@ public class WorldUtil {
             Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
             fw2.setFireworkMeta(fwm);
         }
-    }
-
-    public static Location getSpectatorSpawnPoint() {
-        return spectatorSpawnPoint;
     }
 
 }

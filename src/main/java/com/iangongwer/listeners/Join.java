@@ -1,5 +1,7 @@
 package com.iangongwer.listeners;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +16,6 @@ import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
-import com.iangongwer.utils.WorldUtil;
 
 public class Join implements Listener {
 
@@ -46,7 +47,8 @@ public class Join implements Listener {
 				// QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
 			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
-				joinedPlayer.teleport(WorldUtil.getSpectatorSpawnPoint());
+				Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
+				joinedPlayer.teleport(loc);
 			} else if (!gm.getPlayers().contains(joinedPlayer.getUniqueId())
 					&& !u.isInStaffMode(joinedPlayer.getUniqueId())) {
 				u.makeSpectator(joinedPlayer);

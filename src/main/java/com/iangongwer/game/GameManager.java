@@ -61,18 +61,7 @@ public class GameManager {
 	private ArrayList<UUID> players = new ArrayList<UUID>();
 	private ArrayList<UUID> alreadyScattered = new ArrayList<UUID>();
 
-	private Location spectatorSpawnPoint = new Location(Bukkit.getWorld("uhc_world"), 0, 100, 0);
-
 	PotionEffect damageResistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 10);
-
-	// Spectator Handling
-	public Location getSpectatorSpawnPoint() {
-		return spectatorSpawnPoint;
-	}
-
-	public void setSpectatorSpawnPoint(String world, double x, double y, double z, float pitch, float yaw) {
-		spectatorSpawnPoint = new Location(Bukkit.getWorld(world), x, y, z, pitch, yaw);
-	}
 
 	public ArrayList<UUID> getSpectators() {
 		return spectators;
