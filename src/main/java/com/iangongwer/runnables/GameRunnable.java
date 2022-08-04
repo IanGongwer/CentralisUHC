@@ -143,11 +143,12 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 100x100!", "a"));
 				Bukkit.broadcastMessage("");
-			}
-			for (UUID playerUUID : gm.getPlayers()) {
-				if (Bukkit.getPlayer(playerUUID) == null) {
-					toRemove.add(playerUUID);
+				for (UUID playerUUID : gm.getPlayers()) {
+					if (Bukkit.getPlayer(playerUUID) == null) {
+						toRemove.add(playerUUID);
+					}
 				}
+				gm.getPlayers().removeAll(toRemove);
 			}
 			gm.getPlayers().removeAll(toRemove);
 			if (getFormattedTime().equalsIgnoreCase("44:00")) {
@@ -170,17 +171,18 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 25x25 in 1 minute", "a"));
 				Bukkit.broadcastMessage("");
 			}
-			for (UUID playerUUID : gm.getPlayers()) {
-				if (Bukkit.getPlayer(playerUUID) == null) {
-					toRemove.add(playerUUID);
-				}
-			}
 			gm.getPlayers().removeAll(toRemove);
 			if (getFormattedTime().equalsIgnoreCase("50:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 25x25!", "a"));
 				Bukkit.broadcastMessage("");
+				for (UUID playerUUID : gm.getPlayers()) {
+					if (Bukkit.getPlayer(playerUUID) == null) {
+						toRemove.add(playerUUID);
+					}
+				}
+				gm.getPlayers().removeAll(toRemove);
 			}
 		}
 	}
