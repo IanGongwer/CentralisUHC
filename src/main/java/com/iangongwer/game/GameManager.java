@@ -118,6 +118,8 @@ public class GameManager {
 		player.setMaxHealth(24.0);
 		player.setHealth(20.0);
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
+		player.getInventory().addItem(new ItemStack(Material.LEATHER, 1));
+		player.getInventory().addItem(new ItemStack(Material.SUGAR_CANE, 3));
 		ScoreboardUtil.createGameScoreboard(player);
 		HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
 				ScoreboardUtil.getScoreboard(player).getName());
