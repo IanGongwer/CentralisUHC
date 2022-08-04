@@ -12,10 +12,9 @@ public class Consume implements Listener {
 	@EventHandler
 	public void onGoldenAppleEat(PlayerItemConsumeEvent event) {
 		Player player = event.getPlayer();
-		if (event.getItem().getItemMeta().getDisplayName() != null
-				&& event.getItem().getItemMeta().getLore().get(0) != null) {
-			if (event.getItem().getItemMeta().getDisplayName().equals("Golden Head")
-					&& event.getItem().getItemMeta().getLore().get(0).contains("'s Head")) {
+		if (event.getItem().getItemMeta().getDisplayName() != null) {
+			if (event.getItem().getItemMeta().getDisplayName().equals("Golden Head")) {
+
 				PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 0);
 				PotionEffect strength = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0);
 				PotionEffect regeneration = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
@@ -23,7 +22,6 @@ public class Consume implements Listener {
 				player.addPotionEffect(speed);
 				player.addPotionEffect(strength);
 				player.addPotionEffect(regeneration);
-				player.setMaxHealth(24.0);
 			}
 		}
 	}

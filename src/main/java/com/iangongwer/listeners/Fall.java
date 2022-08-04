@@ -22,16 +22,9 @@ public class Fall implements Listener {
 			player.teleport(LobbyUtil.getLobbySpawnPoint());
 		}
 		if (event.getCause() == DamageCause.FALL) {
-			if (GameState.isLobby()) {
-				event.setCancelled(true);
-			}
-			if (GameState.isScattering()) {
-				event.setCancelled(true);
-			}
 			if (GameState.isInGame()) {
 				event.setCancelled(false);
-			}
-			if (GameState.isEnd()) {
+			} else {
 				event.setCancelled(true);
 			}
 		}

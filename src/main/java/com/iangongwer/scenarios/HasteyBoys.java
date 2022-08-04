@@ -20,6 +20,7 @@ public class HasteyBoys implements Listener {
 			ItemStack item = event.getRecipe().getResult();
 			CraftingInventory inventory = event.getInventory();
 			String name = item.getType().name();
+
 			if ((name.contains("SPADE")) || (name.contains("AXE")) || (name.contains("PICKAXE"))) {
 				addCustomEnchantments(item);
 				inventory.setResult(item);

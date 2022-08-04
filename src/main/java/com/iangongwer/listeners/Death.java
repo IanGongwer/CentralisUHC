@@ -1,6 +1,6 @@
 package com.iangongwer.listeners;
 
-import java.util.ArrayList;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -32,73 +32,86 @@ public class Death implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
+		UUID playerUUID = player.getUniqueId();
 		Player killer = event.getEntity().getKiller();
-		if (GameState.isLobby()) {
-			event.setDeathMessage("");
-			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
-			ItemMeta gapMeta = goldenApple.getItemMeta();
-			gapMeta.setDisplayName("Golden Head");
-			ArrayList<String> lore = new ArrayList<String>();
-			lore.add(player.getDisplayName() + "'s Head");
-			gapMeta.setLore(lore);
-			goldenApple.setItemMeta(gapMeta);
-			event.getEntity().getWorld().dropItemNaturally(player.getLocation(), goldenApple);
-			event.setKeepInventory(true);
-			player.spigot().respawn();
-		}
+
+		playerDeathInLobby(event, player);
+
 		if (!GameState.isLobby()) {
-			if (!Main.isRedisEnabled()) {
-				dbm.addDeath(player.getUniqueId());
-			} else {
-				cr.addDeath(player.getUniqueId());
-			}
+			addDeathOnPlayerDeath(player);
+			WorldUtil.spawnFireworks(player.getLocation(), 2);
+			u.makeSpectator(player);
+			giveGoldenHead(player);
+			gm.storeDeathInventories(playerUUID, event.getDrops());
+			gm.getDeathLocations().put(playerUUID, player.getLocation());
+
 			if (!gm.isPvPEnabled()) {
-				player.sendMessage(u.messageFormat("Use /latescatter for another chance.", "a"));
+				player.sendMessage(u.messageFormat("Use /latescatter for another chance at winning.", "a"));
 			}
+
 			if (killer instanceof Player) {
-				if (!Main.isRedisEnabled()) {
-					dbm.addKill(killer.getUniqueId());
-				} else {
-					cr.addKill(killer.getUniqueId());
-				}
-				event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
-						+ ChatColor.GREEN + player.getDisplayName());
-				gm.setPlayerKills(killer.getUniqueId(), gm.getPlayerKills(killer.getUniqueId()) + 1);
-				ScoreboardUtil.updateKills(killer);
+				addKillOnPlayerKill(event, player, killer);
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
 			}
-			ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
-			ItemMeta gapMeta = goldenApple.getItemMeta();
-			gapMeta.setDisplayName("Golden Head");
-			ArrayList<String> lore = new ArrayList<String>();
-			lore.add(player.getDisplayName() + "'s Head");
-			gapMeta.setLore(lore);
-			goldenApple.setItemMeta(gapMeta);
-			event.getEntity().getWorld().dropItemNaturally(player.getLocation(), goldenApple);
+
 			if (!gm.isScenarioActive("TimeBomb")) {
 				event.setKeepInventory(false);
 			} else {
 				event.setKeepInventory(true);
 			}
-			gm.storeDeathInventories(player.getUniqueId(), event.getDrops());
-			gm.getDeathLocations().put(player.getUniqueId(), player.getLocation());
 
 			if (tm.areTeamsEnabled()) {
-				tm.addDeceasedMember(player.getUniqueId());
+				tm.addDeceasedMember(playerUUID);
 			}
-			gm.removePlayer(player.getUniqueId());
-			u.makeSpectator(player);
+
 			if (tm.areTeamsEnabled()) {
-				tm.isFullTeamDead(player.getUniqueId());
+				tm.isFullTeamDead(playerUUID);
 			}
-			WorldUtil.spawnFireworks(player.getLocation(), 2);
+
 			if (killer == null) {
 				gm.isGameFinishedVillager();
 			} else {
 				gm.isGameFinished(killer.getUniqueId());
 			}
 		}
+	}
+
+	public void playerDeathInLobby(PlayerDeathEvent event, Player player) {
+		if (GameState.isLobby()) {
+			event.setDeathMessage("");
+			event.setKeepInventory(true);
+			giveGoldenHead(player);
+			player.spigot().respawn();
+		}
+	}
+
+	public void giveGoldenHead(Player player) {
+		ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
+		ItemMeta gapMeta = goldenApple.getItemMeta();
+		gapMeta.setDisplayName("Golden Head");
+		goldenApple.setItemMeta(gapMeta);
+		player.getWorld().dropItemNaturally(player.getLocation(), goldenApple);
+	}
+
+	public void addDeathOnPlayerDeath(Player player) {
+		if (!Main.isRedisEnabled()) {
+			dbm.addDeath(player.getUniqueId());
+		} else {
+			cr.addDeath(player.getUniqueId());
+		}
+	}
+
+	public void addKillOnPlayerKill(PlayerDeathEvent event, Player player, Player killer) {
+		if (!Main.isRedisEnabled()) {
+			dbm.addKill(killer.getUniqueId());
+		} else {
+			cr.addKill(killer.getUniqueId());
+		}
+		event.setDeathMessage(ChatColor.GREEN + killer.getDisplayName() + ChatColor.WHITE + " has killed "
+				+ ChatColor.GREEN + player.getDisplayName());
+		gm.setPlayerKills(killer.getUniqueId(), gm.getPlayerKills(killer.getUniqueId()) + 1);
+		ScoreboardUtil.updateKills(killer);
 	}
 
 }

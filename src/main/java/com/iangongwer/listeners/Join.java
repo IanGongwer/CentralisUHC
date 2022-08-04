@@ -1,5 +1,7 @@
 package com.iangongwer.listeners;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,7 +14,6 @@ import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
-import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
@@ -28,34 +29,47 @@ public class Join implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		event.setJoinMessage("");
-		Player joinedPlayer = event.getPlayer();
+		Player player = event.getPlayer();
+		UUID playerUUID = player.getUniqueId();
+
+		createPlayerOnJoin(playerUUID);
+		LobbyUtil.joinLobbyUtil(player);
+		inGamePlayerJoin(player, playerUUID);
+	}
+
+	private void createPlayerOnJoin(UUID playerUUID) {
 		if (!Main.isRedisEnabled()) {
-			dbm.createPlayer(joinedPlayer.getUniqueId());
+			dbm.createPlayer(playerUUID);
 		} else {
-			cr.createPlayer(joinedPlayer.getUniqueId());
+			cr.createPlayer(playerUUID);
 		}
-		if (GameState.isLobby()) {
-			gm.setPlayerKills(joinedPlayer.getUniqueId(), 0);
-			LobbyUtil.joinLobbyUtil(joinedPlayer);
-		}
+	}
+
+	public void inGamePlayerJoin(Player player, UUID playerUUID) {
 		if (GameState.isInGame()) {
-			joinedPlayer.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
-			if (gm.getPlayers().contains(joinedPlayer.getUniqueId())) {
-				HeartUtil.showHealth(joinedPlayer, ScoreboardUtil.getScoreboard(joinedPlayer).getScoreboard(),
-						ScoreboardUtil.getScoreboard(joinedPlayer).getName());
-				ScoreboardUtil.createGameScoreboard(joinedPlayer);
-				// QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
-				// WorldUtil.despawnVillager(joinedPlayer);
-				// QuitLogRunnable.dontkill.remove(joinedPlayer.getUniqueId());
-			} else if (u.isInStaffMode(joinedPlayer.getUniqueId())) {
-				ScoreboardUtil.createStaffSpecScoreboard(joinedPlayer);
+			player.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
+
+			if (gm.isPlayer(playerUUID)) {
+				HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+						ScoreboardUtil.getScoreboard(player).getName());
+				ScoreboardUtil.createGameScoreboard(player);
+
+				// QuitLogRunnable.dontkill.add(player.getUniqueId());
+				// WorldUtil.despawnVillager(player);
+				// QuitLogRunnable.dontkill.remove(player.getUniqueId());
+				// Quit Log System Not Working
+
+			} else if (u.isInStaffMode(playerUUID)) {
+				ScoreboardUtil.createStaffSpecScoreboard(player);
 				Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
-				joinedPlayer.teleport(loc);
-			} else if (!gm.getPlayers().contains(joinedPlayer.getUniqueId())
-					&& !u.isInStaffMode(joinedPlayer.getUniqueId())) {
-				u.makeSpectator(joinedPlayer);
-				if (GameRunnable.getSecondsPassed() <= 900) {
-					joinedPlayer.sendMessage("Please use /latescatter, if you would like to join in the game.");
+				player.teleport(loc);
+
+			} else if (!gm.isPlayer(playerUUID)
+					&& !u.isInStaffMode(playerUUID)) {
+				u.makeSpectator(player);
+
+				if (!gm.isPvPEnabled()) {
+					player.sendMessage("Please use /latescatter, if you would like to join in the game.");
 				}
 			}
 		}

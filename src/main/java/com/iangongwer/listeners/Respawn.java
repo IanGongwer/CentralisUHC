@@ -19,6 +19,7 @@ public class Respawn implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
+
 		if (GameState.isLobby()) {
 			event.setRespawnLocation(LobbyUtil.getLobbySpawnPoint());
 			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
@@ -26,14 +27,8 @@ public class Respawn implements Listener {
 				LobbyUtil.practiceInventory(player);
 			}
 		}
-		if (GameState.isScattering()) {
-			return;
-		}
 		if (GameState.isInGame() || GameState.isEnd()) {
 			event.setRespawnLocation(Bukkit.getPlayer(gm.getPlayers().get(0)).getLocation());
-			if (gm.isSpectator(player.getUniqueId())) {
-				u.makeSpectator(player);
-			}
 		}
 	}
 

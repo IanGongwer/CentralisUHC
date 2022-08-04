@@ -1,6 +1,7 @@
 package com.iangongwer.listeners;
 
 import java.text.DecimalFormat;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
@@ -26,38 +27,34 @@ public class PvP implements Listener {
 	public void onPlayerPvP(EntityDamageByEntityEvent event) {
 		if (event.getEntity().getType() == EntityType.PLAYER && event.getDamager().getType() == EntityType.PLAYER) {
 			Player player = (Player) event.getEntity();
+			UUID playerUUID = player.getUniqueId();
 			Player damager = (Player) event.getDamager();
+			UUID damagerUUID = damager.getUniqueId();
+
 			HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
 					ScoreboardUtil.getScoreboard(player).getName());
-			if (GameState.isLobby()) {
-				if (LobbyUtil.isPracticePlayer(player.getUniqueId())
-						&& LobbyUtil.isPracticePlayer(damager.getUniqueId())) {
-					event.setCancelled(false);
-				}
-				if (!LobbyUtil.isPracticePlayer(player.getUniqueId())
-						&& !LobbyUtil.isPracticePlayer(damager.getUniqueId())) {
-					event.setCancelled(true);
-				}
-				if (!LobbyUtil.isPracticePlayer(player.getUniqueId())
-						&& LobbyUtil.isPracticePlayer(damager.getUniqueId())) {
-					event.setCancelled(true);
-				}
 
-				if (LobbyUtil.isPracticePlayer(player.getUniqueId())
-						&& !LobbyUtil.isPracticePlayer(damager.getUniqueId())) {
+			if (GameState.isLobby()) {
+				if (LobbyUtil.isPracticePlayer(playerUUID)
+						&& LobbyUtil.isPracticePlayer(damagerUUID)) {
+					event.setCancelled(false);
+				} else {
 					event.setCancelled(true);
 				}
 			}
-			if (GameState.isScattering()) {
+
+			if (GameState.isScattering() || GameState.isEnd()) {
 				event.setCancelled(true);
 			}
 			if (GameState.isInGame()) {
-				if (gm.getSpectators().contains(damager.getUniqueId())
-						|| gm.getSpectators().contains(player.getUniqueId())) {
+				if (gm.getSpectators().contains(damagerUUID)
+						|| gm.getSpectators().contains(playerUUID) || u.isInStaffMode(damagerUUID)
+						|| u.isInStaffMode(playerUUID)) {
 					event.setCancelled(true);
 				}
-				if (!gm.getSpectators().contains(damager.getUniqueId())
-						&& !gm.getSpectators().contains(player.getUniqueId())) {
+				if (!gm.getSpectators().contains(damagerUUID)
+						&& !gm.getSpectators().contains(playerUUID) && !u.isInStaffMode(damagerUUID)
+						&& !u.isInStaffMode(playerUUID)) {
 					if (gm.isPvPEnabled()) {
 						event.setCancelled(false);
 					} else {
@@ -65,14 +62,12 @@ public class PvP implements Listener {
 					}
 				}
 			}
-			if (GameState.isEnd()) {
-				event.setCancelled(true);
-			}
 		}
 		if (GameState.isInGame()) {
 			if (event.getEntity() instanceof Player) {
 				if (event.getDamager().getType() == EntityType.ARROW) {
 					Arrow arrow = (Arrow) event.getDamager();
+
 					if (arrow.getShooter() instanceof Player) {
 						if (gm.isPvPEnabled()) {
 							event.setCancelled(false);
@@ -82,6 +77,7 @@ public class PvP implements Listener {
 					}
 				}
 			}
+
 			if (event.getEntity() instanceof Player) {
 				if (event.getDamager().getType() == EntityType.FISHING_HOOK) {
 					if (gm.isPvPEnabled()) {
@@ -92,6 +88,7 @@ public class PvP implements Listener {
 				}
 			}
 		}
+
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			if (event.getDamager().getType() == EntityType.ARROW) {
@@ -100,6 +97,7 @@ public class PvP implements Listener {
 					Player shooter = (Player) arrow.getShooter();
 					double playerHealth = player.getHealth() / 2;
 					DecimalFormat df = new DecimalFormat("#.#");
+
 					if (GameState.isLobby()) {
 						if (!LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 							event.setCancelled(true);

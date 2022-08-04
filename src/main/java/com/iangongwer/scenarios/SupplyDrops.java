@@ -17,30 +17,35 @@ public class SupplyDrops {
     public static void spawnSupplyDrop(int x, int y, int z) {
         Block supplyDrop = Bukkit.getWorld("uhc_world").getBlockAt(x, y, z);
         supplyDrop.setType(Material.CHEST);
-
         Chest chest = (Chest) supplyDrop.getState();
+
         ArrayList<Material> possibleItems = new ArrayList<Material>(
                 Arrays.asList(Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS,
                         Material.DIAMOND_BOOTS, Material.DIAMOND_SWORD, Material.GOLDEN_APPLE, Material.DIAMOND,
                         Material.GOLD_INGOT, Material.ARROW, Material.STRING, Material.ENCHANTMENT_TABLE));
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             int item = random.nextInt(11);
             if (possibleItems.get(item) == Material.ARROW) {
-                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 32));
+                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 16));
             }
+
             if (possibleItems.get(item) == Material.GOLDEN_APPLE) {
-                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 3));
+                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 1));
             }
+
             if (possibleItems.get(item) == Material.DIAMOND) {
                 chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 2));
             }
+
             if (possibleItems.get(item) == Material.STRING) {
                 chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 3));
             }
+
             if (possibleItems.get(item) == Material.GOLD_INGOT) {
-                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 9));
+                chest.getInventory().addItem(new ItemStack(possibleItems.get(item), 8));
             }
+
             if (possibleItems.get(item) != Material.ARROW && possibleItems.get(item) != Material.GOLDEN_APPLE
                     && possibleItems.get(item) != Material.DIAMOND && possibleItems.get(item) != Material.STRING
                     && possibleItems.get(item) != Material.GOLD_INGOT) {

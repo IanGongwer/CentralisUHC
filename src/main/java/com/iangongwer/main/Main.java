@@ -28,20 +28,19 @@ import com.iangongwer.crafts.StringCraft;
 import com.iangongwer.game.GameState;
 import com.iangongwer.listeners.Anvil;
 import com.iangongwer.listeners.Break;
-import com.iangongwer.listeners.Chat;
 import com.iangongwer.listeners.CommandBlock;
 import com.iangongwer.listeners.Connect;
 import com.iangongwer.listeners.Consume;
 import com.iangongwer.listeners.Death;
+import com.iangongwer.listeners.DisableGodAppleCraft;
 import com.iangongwer.listeners.EntitySpawning;
 import com.iangongwer.listeners.Fall;
 import com.iangongwer.listeners.FoodLevel;
-import com.iangongwer.listeners.GodAppleCraft;
 import com.iangongwer.listeners.Interact;
 import com.iangongwer.listeners.ItemDrop;
 import com.iangongwer.listeners.Join;
 import com.iangongwer.listeners.Place;
-import com.iangongwer.listeners.PlayerMuted;
+import com.iangongwer.listeners.PlayerAndChatMuted;
 import com.iangongwer.listeners.PvP;
 import com.iangongwer.listeners.Quit;
 import com.iangongwer.listeners.Respawn;
@@ -78,10 +77,9 @@ public class Main extends JavaPlugin {
 
 	public void registerListeners() {
 		getServer().getPluginManager().registerEvents(new Break(), this);
-		getServer().getPluginManager().registerEvents(new Chat(), this);
 		getServer().getPluginManager().registerEvents(new CommandBlock(), this);
 		getServer().getPluginManager().registerEvents(new Connect(), this);
-		getServer().getPluginManager().registerEvents(new PlayerMuted(), this);
+		getServer().getPluginManager().registerEvents(new PlayerAndChatMuted(), this);
 		getServer().getPluginManager().registerEvents(new Consume(), this);
 		getServer().getPluginManager().registerEvents(new Death(), this);
 		getServer().getPluginManager().registerEvents(new ItemDrop(), this);
@@ -97,7 +95,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Weather(), this);
 		getServer().getPluginManager().registerEvents(new VillagerDeath(), this);
 		getServer().getPluginManager().registerEvents(new Anvil(), this);
-		getServer().getPluginManager().registerEvents(new GodAppleCraft(), this);
+		getServer().getPluginManager().registerEvents(new DisableGodAppleCraft(), this);
 	}
 
 	public void registerScenarios() {

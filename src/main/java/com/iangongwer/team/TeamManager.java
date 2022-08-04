@@ -44,6 +44,7 @@ public class TeamManager {
 			Bukkit.getPlayer(member).sendMessage(Util.getInstance()
 					.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team.", "c"));
 		}
+
 		listOfTeams.remove(leader);
 		listOfTeamNumbers.remove(leader);
 		totalTeams--;

@@ -77,11 +77,7 @@ public class GameManager {
 	}
 
 	public boolean isSpectator(UUID playerUUID) {
-		if (spectators.contains(playerUUID)) {
-			return true;
-		} else {
-			return false;
-		}
+		return spectators.contains(playerUUID);
 	}
 
 	// Player Handling
@@ -95,6 +91,10 @@ public class GameManager {
 
 	public void removePlayer(UUID playerUUID) {
 		players.remove(playerUUID);
+	}
+
+	public boolean isPlayer(UUID playerUUID) {
+		return getPlayers().contains(playerUUID);
 	}
 
 	// Scattering
@@ -220,6 +220,12 @@ public class GameManager {
 	}
 
 	public void isGameFinished(UUID killer) {
+		ArrayList<UUID> toRemove = new ArrayList<UUID>();
+		for (UUID playerUUID : getPlayers()) {
+			if (Bukkit.getPlayer(playerUUID) == null) {
+				toRemove.add(playerUUID);
+			}
+		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
@@ -262,6 +268,12 @@ public class GameManager {
 	}
 
 	public void isGameFinishedVillager() {
+		ArrayList<UUID> toRemove = new ArrayList<UUID>();
+		for (UUID playerUUID : getPlayers()) {
+			if (Bukkit.getPlayer(playerUUID) == null) {
+				toRemove.add(playerUUID);
+			}
+		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);

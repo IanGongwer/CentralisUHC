@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 
 public class LobbyUtil {
 
@@ -64,20 +65,23 @@ public class LobbyUtil {
     }
 
     public static void joinLobbyUtil(Player player) {
-        player.getInventory().clear();
-        player.getInventory().setArmorContents(null);
-        player.setFoodLevel(20);
-        player.setMaxHealth(20);
-        player.setHealth(20);
-        player.sendMessage("");
-        player.sendMessage("Welcome to Centralis UHC. Use /prac to join the practice arena.");
-        player.sendMessage("");
-        player.teleport(getLobbySpawnPoint());
-        player.getActivePotionEffects().clear();
-        player.setExp(0);
-        player.setGameMode(GameMode.SURVIVAL);
-        gm.addPlayer(player.getUniqueId());
-        ScoreboardUtil.createLobbyScoreboard(player);
+        if (GameState.isLobby()) {
+            gm.setPlayerKills(player.getUniqueId(), 0);
+            player.getInventory().clear();
+            player.getInventory().setArmorContents(null);
+            player.setFoodLevel(20);
+            player.setMaxHealth(20);
+            player.setHealth(20);
+            player.sendMessage("");
+            player.sendMessage("Welcome to Centralis UHC. Use /prac to join the practice arena.");
+            player.sendMessage("");
+            player.teleport(getLobbySpawnPoint());
+            player.getActivePotionEffects().clear();
+            player.setExp(0);
+            player.setGameMode(GameMode.SURVIVAL);
+            gm.addPlayer(player.getUniqueId());
+            ScoreboardUtil.createLobbyScoreboard(player);
+        }
     }
 
     public static Location getPracticeSpawnPoint() {

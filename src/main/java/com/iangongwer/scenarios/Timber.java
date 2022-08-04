@@ -17,11 +17,20 @@ public class Timber implements Listener {
 	public void onBlockBreak(BlockBreakEvent e) {
 		if (gm.isScenarioActive("Timber")) {
 			Block block = e.getBlock();
-			block = block.getRelative(BlockFace.UP);
-			while (block.getType() == Material.LOG || block.getType() == Material.LOG_2) {
-				block.breakNaturally();
-				block = block.getRelative(BlockFace.UP);
-			}
+			getWoodBlocksAround(BlockFace.UP, block);
+			getWoodBlocksAround(BlockFace.DOWN, block);
+			getWoodBlocksAround(BlockFace.NORTH, block);
+			getWoodBlocksAround(BlockFace.SOUTH, block);
+			getWoodBlocksAround(BlockFace.EAST, block);
+			getWoodBlocksAround(BlockFace.WEST, block);
+		}
+	}
+
+	public void getWoodBlocksAround(BlockFace blockface, Block block) {
+		block = block.getRelative(blockface);
+		while (block.getType() == Material.LOG || block.getType() == Material.LOG_2) {
+			block.breakNaturally();
+			block = block.getRelative(blockface);
 		}
 	}
 

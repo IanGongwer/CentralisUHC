@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
 
-public class GodAppleCraft implements Listener {
+public class DisableGodAppleCraft implements Listener {
 
 	GameManager gm = GameManager.getInstance();
 

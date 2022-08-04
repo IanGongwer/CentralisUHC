@@ -40,6 +40,7 @@ public class TimeBomb implements Listener {
                 Block deathBlock = event.getEntity().getLocation().getBlock();
                 Block deathBlock2 = Bukkit.getWorld("uhc_world").getBlockAt(deathBlock.getX() + 1, deathBlock.getY(),
                         deathBlock.getZ());
+
                 deathBlock.setType(Material.CHEST);
                 deathBlock2.setType(Material.CHEST);
 

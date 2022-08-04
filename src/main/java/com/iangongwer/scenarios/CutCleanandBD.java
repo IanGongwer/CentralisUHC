@@ -38,78 +38,92 @@ public class CutCleanandBD implements Listener {
 		World blockWorld = block.getWorld();
 		Location blockLocation = block.getLocation();
 		Player player = event.getPlayer();
+
 		if (!gm.isScenarioActive("CutClean")) {
 			if (block.getType() == Material.COAL_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.COAL, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.COAL, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.IRON_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.IRON_ORE, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.IRON_ORE, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.LAPIS_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.INK_SACK, 6, (short) 4));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.INK_SACK, 6, (short) 4));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.GOLD_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.GOLD_ORE, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.GOLD_ORE, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.REDSTONE_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.REDSTONE, 6));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.REDSTONE, 6));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.DIAMOND_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.DIAMOND, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.DIAMOND, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
+
 				if (gm.isScenarioActive("BloodDiamonds")) {
 					player.setHealth(player.getHealth() - 1);
 				}
@@ -117,12 +131,14 @@ public class CutCleanandBD implements Listener {
 			if (block.getType() == Material.EMERALD_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.EMERALD, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.EMERALD, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
@@ -131,74 +147,87 @@ public class CutCleanandBD implements Listener {
 			if (block.getType() == Material.COAL_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.COAL, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.COAL, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.IRON_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.IRON_INGOT, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.IRON_INGOT, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.LAPIS_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.INK_SACK, 6, (short) 4));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.INK_SACK, 6, (short) 4));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.GOLD_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.GOLD_INGOT, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.GOLD_INGOT, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.REDSTONE_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.REDSTONE, 6));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.REDSTONE, 6));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
 			if (block.getType() == Material.DIAMOND_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.DIAMOND, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.DIAMOND, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
+
 				if (gm.isScenarioActive("BloodDiamonds")) {
 					player.setHealth(player.getHealth() - 1);
 				}
@@ -206,12 +235,14 @@ public class CutCleanandBD implements Listener {
 			if (block.getType() == Material.EMERALD_ORE) {
 				event.setCancelled(true);
 				block.setType(Material.AIR);
+
 				if (player.getInventory().firstEmpty() != -1) {
 					player.getInventory().addItem(new ItemStack(Material.EMERALD, 1));
 				} else {
 					player.getWorld().dropItemNaturally(event.getBlock().getLocation(),
 							new ItemStack(Material.EMERALD, 1));
 				}
+
 				ExperienceOrb orb = blockWorld.spawn(blockLocation, ExperienceOrb.class);
 				orb.setExperience(1);
 			}
@@ -221,13 +252,11 @@ public class CutCleanandBD implements Listener {
 
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
-		if (event.getEntity() instanceof Sheep) {
-			event.getDrops().add(new ItemStack(Material.STRING, 2));
-		}
 		if (gm.isScenarioActive("CutClean")) {
 			if (event.getEntity() instanceof Player) {
 				return;
 			}
+
 			if (event.getEntity() instanceof Cow) {
 				event.getDrops().clear();
 				event.getDrops().add(new ItemStack(Material.COOKED_BEEF, 3));

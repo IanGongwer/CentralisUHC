@@ -17,6 +17,7 @@ public class Bowless implements Listener {
 		if (gm.isScenarioActive("Bowless")) {
 			ItemStack item = event.getRecipe().getResult();
 			ItemStack bow = new ItemStack(Material.BOW);
+
 			if (item.equals(bow)) {
 				event.setCancelled(true);
 			}

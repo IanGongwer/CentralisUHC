@@ -56,6 +56,14 @@ public class Util {
 	}
 
 	public void makeSpectator(Player player) {
+		UUID playerUUID = player.getUniqueId();
+
+		if (gm.isPlayer(playerUUID)) {
+			gm.removePlayer(playerUUID);
+		} else if (Util.getInstance().isInStaffMode(playerUUID)) {
+			Util.getInstance().removeStaffMode(playerUUID);
+		}
+
 		player.setFoodLevel(20);
 		player.setHealth(20.0);
 		player.getInventory().clear();

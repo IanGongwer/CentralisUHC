@@ -3,7 +3,6 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\QuitLogRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\GameRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Join.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\SupplyDrops.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\PlayerMuted.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\CommandBlock.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\redis\ConnectionRedis.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\Timber.java
@@ -14,7 +13,6 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\WorldUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamChatCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\FoodLevel.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Chat.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\MuteChatCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\PracticeCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\main\Main.java
@@ -35,6 +33,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StatsCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\WhitelistCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Connect.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\CalculateCommand.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\DisableGodAppleCraft.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\crafts\NoviceSword.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\team\TeamManager.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Place.java
@@ -49,7 +48,6 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\Bowless.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Break.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamCoordsCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\DatabaseCommand.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\GodAppleCraft.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\RespawnCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\TimeBomb.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\CutCleanandBD.java
@@ -65,3 +63,4 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\mysql\ConnectionMYSQL.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\ScoreboardUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\Util.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Fall.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\PlayerAndChatMuted.java

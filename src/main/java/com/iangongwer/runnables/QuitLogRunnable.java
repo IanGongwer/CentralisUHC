@@ -25,7 +25,8 @@ public class QuitLogRunnable extends BukkitRunnable {
 		Map<UUID, Integer> quitLogList = gm.getQuitLogMap();
 		for (Entry<UUID, Integer> quitPlayerObject : gm.getQuitLogMap().entrySet()) {
 			if (quitPlayerObject.getValue() > 0) {
-				quitLogList.put(quitPlayerObject.getKey(), quitPlayerObject.getValue() - 1);
+				subtractQuitLogTime(quitLogList, quitPlayerObject);
+
 				for (LivingEntity entity : Bukkit.getWorld("uhc_world").getLivingEntities()) {
 					if (entity instanceof Villager && entity.getCustomName() != null) {
 						if (entity.getCustomName()
@@ -35,15 +36,24 @@ public class QuitLogRunnable extends BukkitRunnable {
 					}
 				}
 			}
-			if (quitPlayerObject.getValue() == 0) {
-				gm.removePlayer(quitPlayerObject.getKey());
-				gm.addSpectator(quitPlayerObject.getKey());
-				gm.setQuitLogTime(quitPlayerObject.getKey(), -1);
-				gm.removeQuitLoggedPlayer(quitPlayerObject.getKey());
-				
-				if(TeamManager.getInstance().areTeamsEnabled()) {
-					tm.addDeceasedMember(quitPlayerObject.getKey());
-				}
+
+			killQuitLogPlayerProcedure(quitPlayerObject);
+		}
+	}
+
+	private void subtractQuitLogTime(Map<UUID, Integer> quitLogList, Entry<UUID, Integer> quitPlayerObject) {
+		quitLogList.put(quitPlayerObject.getKey(), quitPlayerObject.getValue() - 1);
+	}
+
+	private void killQuitLogPlayerProcedure(Entry<UUID, Integer> quitPlayerObject) {
+		if (quitPlayerObject.getValue() == 0) {
+			gm.removePlayer(quitPlayerObject.getKey());
+			gm.addSpectator(quitPlayerObject.getKey());
+			gm.setQuitLogTime(quitPlayerObject.getKey(), -1);
+			gm.removeQuitLoggedPlayer(quitPlayerObject.getKey());
+
+			if (TeamManager.getInstance().areTeamsEnabled()) {
+				tm.addDeceasedMember(quitPlayerObject.getKey());
 			}
 		}
 	}

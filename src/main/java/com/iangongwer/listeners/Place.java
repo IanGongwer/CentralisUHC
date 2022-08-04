@@ -17,24 +17,15 @@ public class Place implements Listener {
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
 		Player player = event.getPlayer();
-		if (GameState.isLobby()) {
-			event.setCancelled(true);
-		}
-		if (GameState.isScattering()) {
-			event.setCancelled(true);
-		}
+
 		if (GameState.isInGame()) {
-			if (gm.isSpectator(player.getUniqueId()) || u.isInStaffMode(player.getUniqueId())) {
-				event.setCancelled(true);
-			} else {
+			if (gm.isPlayer(player.getUniqueId())) {
 				event.setCancelled(false);
+			} else {
+				event.setCancelled(true);
 			}
-		}
-		if (GameState.isEnd()) {
+		} else {
 			event.setCancelled(true);
-		}
-		if (player.isOp()) {
-			event.setCancelled(false);
 		}
 	}
 
