@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -209,11 +208,6 @@ public class GameManager {
 			if (GameManager.getInstance().isScenarioActive("Fireless")) {
 				Bukkit.getPlayer(playerUUID).addPotionEffect(fire_resistance);
 			}
-		}
-
-		for (UUID playerUUID : getPlayers()) {
-			Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-					Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
 		}
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] The game has started.", "a"));
