@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -58,8 +57,6 @@ public class LateScatterCommand implements CommandExecutor {
 							gm.removeSpectator(player.getUniqueId());
 							player.setGameMode(GameMode.SURVIVAL);
 
-							Bukkit.getWorld("uhc_world").playSound(player.getLocation(),
-									Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
 							Bukkit.broadcastMessage(
 									u.messageFormat("[UHC] " + player.getDisplayName() + " has been latescattered.",
 											"a"));
