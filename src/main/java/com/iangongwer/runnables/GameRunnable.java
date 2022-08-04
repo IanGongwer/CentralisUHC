@@ -31,6 +31,15 @@ public class GameRunnable extends BukkitRunnable {
 	@Override
 	public void run() {
 		if (GameState.isInGame()) {
+			for (UUID spectator : gm.getSpectators()) {
+				if (Bukkit.getPlayer(spectator).getLocation().getBlockX() > 50
+						|| Bukkit.getPlayer(spectator).getLocation().getBlockX() < -50
+						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() > 50
+						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() < -50) {
+					Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
+					Bukkit.getPlayer(spectator).teleport(loc);
+				}
+			}
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 				if (ScoreboardUtil.hasScoreboard(allPlayers)) {
 					ScoreboardUtil.updateTime(allPlayers);
