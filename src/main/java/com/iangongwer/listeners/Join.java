@@ -13,6 +13,7 @@ import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.GameRunnable;
+import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
@@ -28,7 +29,6 @@ public class Join implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		event.setJoinMessage("");
 		Player joinedPlayer = event.getPlayer();
-
 		if (!Main.isRedisEnabled()) {
 			dbm.createPlayer(joinedPlayer.getUniqueId());
 		} else {
@@ -41,6 +41,8 @@ public class Join implements Listener {
 		if (GameState.isInGame()) {
 			joinedPlayer.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 			if (gm.getPlayers().contains(joinedPlayer.getUniqueId())) {
+				HeartUtil.showHealth(joinedPlayer, ScoreboardUtil.getScoreboard(joinedPlayer).getScoreboard(),
+						ScoreboardUtil.getScoreboard(joinedPlayer).getName());
 				ScoreboardUtil.createGameScoreboard(joinedPlayer);
 				// QuitLogRunnable.dontkill.add(joinedPlayer.getUniqueId());
 				// WorldUtil.despawnVillager(joinedPlayer);

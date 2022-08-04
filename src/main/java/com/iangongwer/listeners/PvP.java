@@ -12,7 +12,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.LobbyUtil;
+import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
 
 public class PvP implements Listener {
@@ -25,6 +27,8 @@ public class PvP implements Listener {
 		if (event.getEntity().getType() == EntityType.PLAYER && event.getDamager().getType() == EntityType.PLAYER) {
 			Player player = (Player) event.getEntity();
 			Player damager = (Player) event.getDamager();
+			HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+					ScoreboardUtil.getScoreboard(player).getName());
 			if (GameState.isLobby()) {
 				if (LobbyUtil.isPracticePlayer(player.getUniqueId())
 						&& LobbyUtil.isPracticePlayer(damager.getUniqueId())) {

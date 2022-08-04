@@ -21,6 +21,7 @@ import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
 
@@ -118,6 +119,8 @@ public class GameManager {
 		player.setHealth(20.0);
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		ScoreboardUtil.createGameScoreboard(player);
+		HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+				ScoreboardUtil.getScoreboard(player).getName());
 	}
 
 	public void scatterPlayers(ArrayList<UUID> players) {
