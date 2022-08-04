@@ -170,6 +170,12 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 25x25 in 1 minute", "a"));
 				Bukkit.broadcastMessage("");
 			}
+			for (UUID playerUUID : gm.getPlayers()) {
+				if (Bukkit.getPlayer(playerUUID) == null) {
+					toRemove.add(playerUUID);
+				}
+			}
+			gm.getPlayers().removeAll(toRemove);
 			if (getFormattedTime().equalsIgnoreCase("50:00")) {
 				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
 				Bukkit.broadcastMessage("");
