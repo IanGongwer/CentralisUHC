@@ -32,12 +32,14 @@ public class GameRunnable extends BukkitRunnable {
 	public void run() {
 		if (GameState.isInGame()) {
 			for (UUID spectator : gm.getSpectators()) {
-				if (Bukkit.getPlayer(spectator).getLocation().getBlockX() > 50
-						|| Bukkit.getPlayer(spectator).getLocation().getBlockX() < -50
-						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() > 50
-						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() < -50) {
-					Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
-					Bukkit.getPlayer(spectator).teleport(loc);
+				if (Bukkit.getPlayer(spectator) != null) {
+					if (Bukkit.getPlayer(spectator).getLocation().getBlockX() > 50
+							|| Bukkit.getPlayer(spectator).getLocation().getBlockX() < -50
+							|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() > 50
+							|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() < -50) {
+						Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
+						Bukkit.getPlayer(spectator).teleport(loc);
+					}
 				}
 			}
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
@@ -60,8 +62,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Final heal is in 5 minutes!", "a"));
 				for (UUID playerUUID : gm.getPlayers()) {
-					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					if (Bukkit.getPlayer(playerUUID) != null) {
+						Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+								Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					}
 				}
 				Bukkit.broadcastMessage("");
 			}
@@ -76,8 +80,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] All players are now healed!", "a"));
 				for (UUID playerUUID : gm.getPlayers()) {
-					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					if (Bukkit.getPlayer(playerUUID) != null) {
+						Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+								Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					}
 				}
 				Bukkit.broadcastMessage("");
 				if (gm.isScenarioActive("SupplyDrops")) {
@@ -102,8 +108,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] PvP is now enabled!", "a"));
 				for (UUID playerUUID : gm.getPlayers()) {
-					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					if (Bukkit.getPlayer(playerUUID) != null) {
+						Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+								Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					}
 				}
 				Bukkit.broadcastMessage("");
 				for (UUID playerUUID : gm.getPlayers()) {
@@ -125,8 +133,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 500x500 in 1 minute", "a"));
 				for (UUID playerUUID : gm.getPlayers()) {
-					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					if (Bukkit.getPlayer(playerUUID) != null) {
+						Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+								Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					}
 				}
 				Bukkit.broadcastMessage("");
 			}
@@ -135,8 +145,10 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 500x500!", "a"));
 				for (UUID playerUUID : gm.getPlayers()) {
-					Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
-							Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					if (Bukkit.getPlayer(playerUUID) != null) {
+						Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
+								Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
+					}
 				}
 				Bukkit.broadcastMessage("");
 				if (gm.isScenarioActive("SupplyDrops")) {
