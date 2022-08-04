@@ -48,24 +48,6 @@ public class PvP implements Listener {
 				event.setCancelled(true);
 			}
 			if (GameState.isInGame()) {
-				if (event.getEntity() instanceof Player) {
-					if (event.getDamager().getType() == EntityType.ARROW) {
-						if (gm.isPvPEnabled()) {
-							event.setCancelled(false);
-						} else {
-							event.setCancelled(true);
-						}
-					}
-				}
-				if (event.getEntity() instanceof Player) {
-					if (event.getDamager().getType() == EntityType.FISHING_HOOK) {
-						if (gm.isPvPEnabled()) {
-							event.setCancelled(false);
-						} else {
-							event.setCancelled(true);
-						}
-					}
-				}
 				if (gm.getSpectators().contains(damager.getUniqueId())
 						|| gm.getSpectators().contains(player.getUniqueId())) {
 					event.setCancelled(true);
@@ -81,6 +63,29 @@ public class PvP implements Listener {
 			}
 			if (GameState.isEnd()) {
 				event.setCancelled(true);
+			}
+		}
+		if (GameState.isInGame()) {
+			if (event.getEntity() instanceof Player) {
+				if (event.getDamager().getType() == EntityType.ARROW) {
+					Arrow arrow = (Arrow) event.getDamager();
+					if (arrow.getShooter() instanceof Player) {
+						if (gm.isPvPEnabled()) {
+							event.setCancelled(false);
+						} else {
+							event.setCancelled(true);
+						}
+					}
+				}
+			}
+			if (event.getEntity() instanceof Player) {
+				if (event.getDamager().getType() == EntityType.FISHING_HOOK) {
+					if (gm.isPvPEnabled()) {
+						event.setCancelled(false);
+					} else {
+						event.setCancelled(true);
+					}
+				}
 			}
 		}
 		if (event.getEntity() instanceof Player) {
