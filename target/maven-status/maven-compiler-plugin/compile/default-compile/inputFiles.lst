@@ -12,7 +12,6 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\EntitySpawning.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\UnBanPlayerCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\WorldUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamChatCommand.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Sheep.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\TeamCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\FoodLevel.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Chat.java
@@ -22,6 +21,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\main\Main.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StartCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Death.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Quit.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\crafts\StringCraft.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\LateScatterCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\BanPlayerCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Weather.java
@@ -35,7 +35,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StatsCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\WhitelistCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Connect.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\CalculateCommand.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\crafts\NoviceItems.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\crafts\NoviceSword.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\team\TeamManager.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Place.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\team\Team.java

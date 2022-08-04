@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class NoviceItems {
+public class NoviceSword {
 
     public static void createNoviceSword() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);

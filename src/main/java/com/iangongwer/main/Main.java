@@ -22,7 +22,8 @@ import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
 import com.iangongwer.commands.UnBanPlayerCommand;
 import com.iangongwer.commands.WhitelistCommand;
-import com.iangongwer.crafts.NoviceItems;
+import com.iangongwer.crafts.NoviceSword;
+import com.iangongwer.crafts.StringCraft;
 import com.iangongwer.game.GameState;
 import com.iangongwer.listeners.Anvil;
 import com.iangongwer.listeners.Break;
@@ -43,7 +44,6 @@ import com.iangongwer.listeners.PlayerMuted;
 import com.iangongwer.listeners.PvP;
 import com.iangongwer.listeners.Quit;
 import com.iangongwer.listeners.Respawn;
-import com.iangongwer.listeners.Sheep;
 import com.iangongwer.listeners.VillagerDeath;
 import com.iangongwer.listeners.Weather;
 import com.iangongwer.mysql.ConnectionMYSQL;
@@ -94,7 +94,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Weather(), this);
 		getServer().getPluginManager().registerEvents(new VillagerDeath(), this);
 		getServer().getPluginManager().registerEvents(new Anvil(), this);
-		getServer().getPluginManager().registerEvents(new Sheep(), this);
 		getServer().getPluginManager().registerEvents(new GodAppleCraft(), this);
 	}
 
@@ -147,7 +146,8 @@ public class Main extends JavaPlugin {
 		registerScenarios();
 		registerCommands();
 
-		NoviceItems.createNoviceSword();
+		NoviceSword.createNoviceSword();
+		StringCraft.createStringCraft();
 
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");
