@@ -60,11 +60,17 @@ public class LateScatterCommand implements CommandExecutor {
 									u.messageFormat("[UHC] " + player.getDisplayName() + " has been latescattered.",
 											"a"));
 							player.sendMessage(u.messageFormat(
+									"",
+									"a"));
+							player.sendMessage(u.messageFormat(
 									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
 									"a"));
 							player.sendMessage(u.messageFormat("[UHC] You can kill sheep for string.", "a"));
 							player.sendMessage(u.messageFormat(
 									"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
+									"a"));
+							player.sendMessage(u.messageFormat(
+									"",
 									"a"));
 						} else {
 							player.sendMessage(u.messageFormat("You are already scattered.", "c"));
