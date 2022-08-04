@@ -125,6 +125,7 @@ public class GameManager {
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
 		player.setFoodLevel(20);
+		player.setMaxHealth(24.0);
 		player.setHealth(20.0);
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		ScoreboardUtil.createGameScoreboard(player);
@@ -215,7 +216,8 @@ public class GameManager {
 		Bukkit.broadcastMessage(ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString());
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("You can kill sheep for string.", "c"));
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-				"Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html", "c"));
+				"Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
+				"c"));
 		Bukkit.broadcastMessage("");
 
 		GameState.setState(GameState.InGame);
