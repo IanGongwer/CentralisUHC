@@ -223,11 +223,6 @@ public class GameManager {
 	}
 
 	public void isGameFinished(UUID killer) {
-		for (UUID playerUUID : getPlayers()) {
-			if (Bukkit.getPlayer(playerUUID) == null) {
-				getPlayers().remove(playerUUID);
-			}
-		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			for (UUID playerUUID : getPlayers()) {
 				if (Bukkit.getPlayer(playerUUID) == null) {
@@ -235,6 +230,15 @@ public class GameManager {
 					TeamManager.getInstance().isFullTeamDead(playerUUID);
 				}
 			}
+		}
+		ArrayList<UUID> toRemove = new ArrayList<UUID>();
+		for (UUID playerUUID : getPlayers()) {
+			if (Bukkit.getPlayer(playerUUID) == null) {
+				toRemove.add(playerUUID);
+			}
+		}
+		getPlayers().removeAll(toRemove);
+		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
 				Bukkit.broadcastMessage("");
@@ -276,11 +280,6 @@ public class GameManager {
 	}
 
 	public void isGameFinishedVillager() {
-		for (UUID playerUUID : getPlayers()) {
-			if (Bukkit.getPlayer(playerUUID) == null) {
-				getPlayers().remove(playerUUID);
-			}
-		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			for (UUID playerUUID : getPlayers()) {
 				if (Bukkit.getPlayer(playerUUID) == null) {
@@ -288,6 +287,15 @@ public class GameManager {
 					TeamManager.getInstance().isFullTeamDead(playerUUID);
 				}
 			}
+		}
+		ArrayList<UUID> toRemove = new ArrayList<UUID>();
+		for (UUID playerUUID : getPlayers()) {
+			if (Bukkit.getPlayer(playerUUID) == null) {
+				toRemove.add(playerUUID);
+			}
+		}
+		getPlayers().removeAll(toRemove);
+		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
 				Bukkit.broadcastMessage("");

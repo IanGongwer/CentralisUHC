@@ -21,7 +21,7 @@ public class Connect implements Listener {
 			event.allow();
 		}
 		if (u.getWhitelistStatus()) {
-			if (!player.isOp()) {
+			if (!player.isOp() && !player.hasPermission("uhc.staff")) {
 				if (!BanPlayerCommand.bannedPlayers.contains(player.getUniqueId())) {
 					event.disallow(Result.KICK_OTHER,
 							u.messageFormat("The game is currently whitelisted. Please wait to connect.", "c"));

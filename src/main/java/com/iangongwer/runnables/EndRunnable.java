@@ -1,6 +1,8 @@
 package com.iangongwer.runnables;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,10 +15,12 @@ import com.iangongwer.scenarios.TimeBomb;
 
 public class EndRunnable extends BukkitRunnable {
 
-	private int uptimeSeconds = 0;
+	private static int uptimeSeconds = 0;
 
 	GameManager gm = GameManager.getInstance();
 	TimeBomb tb = TimeBomb.getInstance();
+
+	static ArrayList<Map.Entry<Location, Integer>> listOfSets = new ArrayList<Map.Entry<Location, Integer>>();
 
 	@Override
 	public void run() {
@@ -24,8 +28,8 @@ public class EndRunnable extends BukkitRunnable {
 			if (gm.isScenarioActive("TimeBomb")) {
 				for (Map.Entry<Location, Integer> set : TimeBomb.timeBombTime.entrySet()) {
 					subtractTimeBombTime(set);
-					blowUpChest(set);
 				}
+				blowUpChest();
 			}
 			uptimeSeconds++;
 			shutdownProcedure();
@@ -33,7 +37,7 @@ public class EndRunnable extends BukkitRunnable {
 
 	}
 
-	private void shutdownProcedure() {
+	private static void shutdownProcedure() {
 		if (uptimeSeconds == 30) {
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 				allPlayers.kickPlayer("Thank you for playing. Discord: discord.centralis.cc");
@@ -42,16 +46,20 @@ public class EndRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void subtractTimeBombTime(Map.Entry<Location, Integer> set) {
+	private static void subtractTimeBombTime(Map.Entry<Location, Integer> set) {
 		if (set.getValue() >= 1) {
 			set.setValue(set.getValue() - 1);
+		} else if (set.getValue() == 0) {
+			listOfSets.add(set);
 		}
 	}
 
-	private void blowUpChest(Map.Entry<Location, Integer> set) {
-		if (set.getValue() == 0) {
-			Bukkit.getWorld("uhc_world").createExplosion(set.getKey(), 4F, true);
-			TimeBomb.removeTimeBombTime(set.getKey());
+	private static void blowUpChest() {
+		for (Entry<Location, Integer> set2 : listOfSets) {
+			if (TimeBomb.timeBombTime.containsKey(set2.getKey())) {
+				Bukkit.getWorld("uhc_world").createExplosion(set2.getKey(), 4F, true);
+				TimeBomb.removeTimeBombTime(set2.getKey());
+			}
 		}
 	}
 

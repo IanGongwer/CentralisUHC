@@ -1,6 +1,8 @@
 package com.iangongwer.runnables;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.UUID;
 
@@ -20,12 +22,13 @@ import com.iangongwer.utils.Util;
 
 public class GameRunnable extends BukkitRunnable {
 
-	Util u = Util.getInstance();
-	GameManager gm = GameManager.getInstance();
-	TimeBomb tb = TimeBomb.getInstance();
+	static Util u = Util.getInstance();
+	static GameManager gm = GameManager.getInstance();
+	static TimeBomb tb = TimeBomb.getInstance();
 
-	Random random = new Random();
+	static Random random = new Random();
 	private static int totalTime = 0;
+	static ArrayList<Map.Entry<Location, Integer>> listOfSets = new ArrayList<Map.Entry<Location, Integer>>();
 
 	@Override
 	public void run() {
@@ -35,8 +38,8 @@ public class GameRunnable extends BukkitRunnable {
 			if (gm.isScenarioActive("TimeBomb")) {
 				for (Map.Entry<Location, Integer> set : TimeBomb.timeBombTime.entrySet()) {
 					subtractTimeBombTime(set);
-					blowUpChest(set);
 				}
+				blowUpChest();
 			}
 
 			spectatorAreaProcedure();
@@ -66,21 +69,25 @@ public class GameRunnable extends BukkitRunnable {
 		return totalTime;
 	}
 
-	private void spectatorAreaProcedure() {
+	private static void spectatorAreaProcedure() {
 		for (UUID spectator : gm.getSpectators()) {
 			if (Bukkit.getPlayer(spectator) != null) {
 				if (Bukkit.getPlayer(spectator).getLocation().getBlockX() > 50
 						|| Bukkit.getPlayer(spectator).getLocation().getBlockX() < -50
 						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() > 50
 						|| Bukkit.getPlayer(spectator).getLocation().getBlockZ() < -50) {
-					Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);
-					Bukkit.getPlayer(spectator).teleport(loc);
+					for (UUID playerUUID : gm.getPlayers()) {
+						if (Bukkit.getPlayer(playerUUID) != null) {
+							Location loc = new Location(Bukkit.getPlayer(playerUUID).getWorld(), 0, 100, 0);
+							Bukkit.getPlayer(spectator).teleport(loc);
+						}
+					}
 				}
 			}
 		}
 	}
 
-	private void updatePlayerScoreboard() {
+	private static void updatePlayerScoreboard() {
 		for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 			if (ScoreboardUtil.hasScoreboard(allPlayers)) {
 				ScoreboardUtil.updateTime(allPlayers);
@@ -88,20 +95,24 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void subtractTimeBombTime(Map.Entry<Location, Integer> set) {
+	private static void subtractTimeBombTime(Map.Entry<Location, Integer> set) {
 		if (set.getValue() >= 1) {
 			set.setValue(set.getValue() - 1);
+		} else if (set.getValue() == 0) {
+			listOfSets.add(set);
 		}
 	}
 
-	private void blowUpChest(Map.Entry<Location, Integer> set) {
-		if (set.getValue() == 0) {
-			Bukkit.getWorld("uhc_world").createExplosion(set.getKey(), 4F, true);
-			TimeBomb.removeTimeBombTime(set.getKey());
+	private static void blowUpChest() {
+		for (Entry<Location, Integer> set2 : listOfSets) {
+			if (TimeBomb.timeBombTime.containsKey(set2.getKey())) {
+				Bukkit.getWorld("uhc_world").createExplosion(set2.getKey(), 4F, true);
+				TimeBomb.removeTimeBombTime(set2.getKey());
+			}
 		}
 	}
 
-	private void announcementBeforeFinalHealMessage() {
+	private static void announcementBeforeFinalHealMessage() {
 		if (getFormattedTime().equalsIgnoreCase("5:00")) {
 			Bukkit.broadcastMessage("");
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Final heal is in 5 minutes!", "a"));
@@ -115,7 +126,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void announcementFinalHealMessage() {
+	private static void announcementFinalHealMessage() {
 		if (getFormattedTime().equalsIgnoreCase("10:00")) {
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 				allPlayers.setHealth(20.0);
@@ -134,7 +145,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void announcementPvPEnabledMessage() {
+	private static void announcementPvPEnabledMessage() {
 		if (getFormattedTime().equalsIgnoreCase("15:00")) {
 			gm.setPvPEnabled(true);
 			Bukkit.broadcastMessage("");
@@ -150,7 +161,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void announcementDiscordMessage() {
+	private static void announcementDiscordMessage() {
 		if (getFormattedTime().equalsIgnoreCase("7:00") || getFormattedTime().equalsIgnoreCase("17:00")
 				|| getFormattedTime().equalsIgnoreCase("27:00") || getFormattedTime().equalsIgnoreCase("37:00")
 				|| getFormattedTime().equalsIgnoreCase("47:00")) {
@@ -159,7 +170,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void borderShrinkMessage() {
+	private static void borderShrinkMessage() {
 		if (getFormattedTime().equalsIgnoreCase("30:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 500 500 0 0");
 			Bukkit.broadcastMessage("");
@@ -202,7 +213,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void borderShrinkWarningMessage() {
+	private static void borderShrinkWarningMessage() {
 		if (getFormattedTime().equalsIgnoreCase("29:00")) {
 			Bukkit.broadcastMessage("");
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is shrinking to 500x500 in 1 minute", "a"));
@@ -235,7 +246,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void supplyDropCheck() {
+	private static void supplyDropCheck() {
 		if (getFormattedTime().equalsIgnoreCase("10:00") || getFormattedTime().equalsIgnoreCase("15:00")
 				|| getFormattedTime().equalsIgnoreCase("30:00")) {
 			if (gm.isScenarioActive("SupplyDrops")) {
@@ -249,7 +260,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private void playMessageSound() {
+	private static void playMessageSound() {
 		for (UUID playerUUID : gm.getPlayers()) {
 			if (Bukkit.getPlayer(playerUUID) != null) {
 				Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
