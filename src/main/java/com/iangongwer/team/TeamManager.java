@@ -22,6 +22,7 @@ public class TeamManager {
 	}
 
 	private boolean areTeamsEnabled = false;
+	private int maxTeamSize = 2;
 
 	private int totalTeams = 0;
 	public static Map<UUID, Team> listOfTeams = new HashMap<UUID, Team>();
@@ -42,7 +43,7 @@ public class TeamManager {
 	public void deleteTeam(UUID leader) {
 		for (UUID member : getTeam(leader).members) {
 			Bukkit.getPlayer(member).sendMessage(Util.getInstance()
-					.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team.", "c"));
+					.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team", "c"));
 		}
 
 		listOfTeams.remove(leader);
@@ -152,6 +153,18 @@ public class TeamManager {
 
 	public void setTeamsStatus(boolean status) {
 		areTeamsEnabled = status;
+	}
+
+	public void deleteAllTeams() {
+		for (UUID leader : listOfTeams.keySet()) {
+			listOfTeams.remove(leader);
+			listOfTeamNumbers.remove(leader);
+			totalTeams--;
+		}
+	}
+
+	public int getMaxTeamSize() {
+		return maxTeamSize;
 	}
 
 }

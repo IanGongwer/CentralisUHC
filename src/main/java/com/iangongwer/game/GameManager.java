@@ -230,6 +230,12 @@ public class GameManager {
 			}
 		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
+			for (UUID playerUUID : getPlayers()) {
+				if (Bukkit.getPlayer(playerUUID) == null) {
+					TeamManager.getInstance().addDeceasedMember(playerUUID);
+					TeamManager.getInstance().isFullTeamDead(playerUUID);
+				}
+			}
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
 				Bukkit.broadcastMessage("");
@@ -277,6 +283,12 @@ public class GameManager {
 			}
 		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
+			for (UUID playerUUID : getPlayers()) {
+				if (Bukkit.getPlayer(playerUUID) == null) {
+					TeamManager.getInstance().addDeceasedMember(playerUUID);
+					TeamManager.getInstance().isFullTeamDead(playerUUID);
+				}
+			}
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
 				Bukkit.broadcastMessage("");

@@ -31,6 +31,20 @@ public class NoviceSword {
         shapedrecipe.setIngredient('I', Material.IRON_SWORD);
         shapedrecipe.setIngredient('S', Material.STICK);
         Bukkit.getServer().addRecipe(shapedrecipe);
+
+        ShapedRecipe shapedrecipe2 = new ShapedRecipe(item);
+        shapedrecipe2.shape("R  ", "I  ", "S  ");
+        shapedrecipe2.setIngredient('R', Material.REDSTONE);
+        shapedrecipe2.setIngredient('I', Material.IRON_SWORD);
+        shapedrecipe2.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(shapedrecipe2);
+
+        ShapedRecipe shapedrecipe3 = new ShapedRecipe(item);
+        shapedrecipe3.shape("  R", "  I", "  S");
+        shapedrecipe3.setIngredient('R', Material.REDSTONE);
+        shapedrecipe3.setIngredient('I', Material.IRON_SWORD);
+        shapedrecipe3.setIngredient('S', Material.STICK);
+        Bukkit.getServer().addRecipe(shapedrecipe3);
     }
 
 }
