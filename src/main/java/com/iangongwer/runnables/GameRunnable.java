@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -165,6 +166,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 500x500!", "a"));
 			Bukkit.broadcastMessage("");
 			playMessageSound();
+			setBorderBlock(500);
 		}
 		if (getFormattedTime().equalsIgnoreCase("35:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 250 250 0 0");
@@ -172,6 +174,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 250x250!", "a"));
 			Bukkit.broadcastMessage("");
 			playMessageSound();
+			setBorderBlock(250);
 		}
 		if (getFormattedTime().equalsIgnoreCase("40:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 100 100 0 0");
@@ -179,6 +182,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 100x100!", "a"));
 			Bukkit.broadcastMessage("");
 			playMessageSound();
+			setBorderBlock(100);
 		}
 		if (getFormattedTime().equalsIgnoreCase("45:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 50 50 0 0");
@@ -186,6 +190,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 50x50!", "a"));
 			Bukkit.broadcastMessage("");
 			playMessageSound();
+			setBorderBlock(50);
 		}
 		if (getFormattedTime().equalsIgnoreCase("50:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
@@ -193,6 +198,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] Border is now 25x25!", "a"));
 			Bukkit.broadcastMessage("");
 			playMessageSound();
+			setBorderBlock(25);
 		}
 	}
 
@@ -249,6 +255,37 @@ public class GameRunnable extends BukkitRunnable {
 				Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),
 						Sound.FIREWORK_LAUNCH, 3.0F, 0.533F);
 			}
+		}
+	}
+
+	public static void setBorderBlock(int borderDiameter) {
+		int borderRadius = borderDiameter / 2;
+		for (int num = borderRadius; num >= -borderRadius; num--) {
+			// Works
+			Bukkit.getWorld("uhc_world")
+					.getBlockAt(num, Bukkit.getWorld("uhc_world").getHighestBlockYAt(num, borderRadius) - 1,
+							borderRadius)
+					.setType(Material.BEDROCK);
+		}
+		for (int num = borderRadius; num > -borderRadius; num--) {
+			Bukkit.getWorld("uhc_world")
+					.getBlockAt(borderRadius, Bukkit.getWorld("uhc_world").getHighestBlockYAt(borderRadius, num) - 1,
+							num)
+					.setType(Material.BEDROCK);
+			;
+		}
+		// Works
+		for (int num = borderRadius; num >= -borderRadius; num--) {
+			Bukkit.getWorld("uhc_world")
+					.getBlockAt(-num, Bukkit.getWorld("uhc_world").getHighestBlockYAt(-num, -borderRadius) - 1,
+							-borderRadius)
+					.setType(Material.BEDROCK);
+		}
+		for (int num = borderRadius; num > -borderRadius; num--) {
+			Bukkit.getWorld("uhc_world")
+					.getBlockAt(-borderRadius, Bukkit.getWorld("uhc_world").getHighestBlockYAt(-borderRadius, -num) - 1,
+							-num)
+					.setType(Material.BEDROCK);
 		}
 	}
 

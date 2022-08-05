@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
+import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.HeartUtil;
@@ -118,6 +119,7 @@ public class GameManager {
 		player.setMaxHealth(24.0);
 		player.setHealth(20.0);
 		player.setExp(0f);
+		player.setLevel(0);
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		player.getInventory().addItem(new ItemStack(Material.LEATHER, 1));
 		player.getInventory().addItem(new ItemStack(Material.SUGAR_CANE, 3));
@@ -159,6 +161,7 @@ public class GameManager {
 			}
 		}
 
+		GameRunnable.setBorderBlock(1500);
 		startGame();
 	}
 
