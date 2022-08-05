@@ -19,10 +19,6 @@ public class Timber implements Listener {
 			Block block = e.getBlock();
 			getWoodBlocksAround(BlockFace.UP, block);
 			getWoodBlocksAround(BlockFace.DOWN, block);
-			getWoodBlocksAround(BlockFace.NORTH, block);
-			getWoodBlocksAround(BlockFace.SOUTH, block);
-			getWoodBlocksAround(BlockFace.EAST, block);
-			getWoodBlocksAround(BlockFace.WEST, block);
 		}
 	}
 

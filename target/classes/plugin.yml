@@ -41,5 +41,11 @@ commands:
     permission: uhc.staff
   unbanplayer:
     permission: uhc.staff
+  discord:
+    aliases: [disc]
+  killtop:
+    aliases: [killstop, kt, leaderboard, lb]
+  recipes:
+    aliases: [craft, crafts, crafting, recipe]
     
 depend: [Netherboard]

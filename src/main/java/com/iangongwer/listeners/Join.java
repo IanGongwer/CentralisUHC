@@ -50,9 +50,9 @@ public class Join implements Listener {
 			player.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 
 			if (gm.isPlayer(playerUUID)) {
+				ScoreboardUtil.createGameScoreboard(player);
 				HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
 						ScoreboardUtil.getScoreboard(player).getName());
-				ScoreboardUtil.createGameScoreboard(player);
 
 				// QuitLogRunnable.dontkill.add(player.getUniqueId());
 				// WorldUtil.despawnVillager(player);

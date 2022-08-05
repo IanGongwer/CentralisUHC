@@ -2,8 +2,11 @@ package com.iangongwer.listeners;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +19,7 @@ import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
+import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
@@ -38,12 +42,33 @@ public class Death implements Listener {
 		playerDeathInLobby(event, player);
 
 		if (!GameState.isLobby()) {
+			gm.storeDeathInventories(playerUUID, event.getDrops());
+			gm.getDeathLocations().put(playerUUID, player.getLocation());
+
+			if (gm.isScenarioActive("TimeBomb")) {
+				event.setKeepInventory(true);
+				TimeBomb.insertTimeBombTime(event.getEntity().getLocation());
+				Block deathBlock = event.getEntity().getLocation().getBlock();
+				Block deathBlock2 = Bukkit.getWorld("uhc_world").getBlockAt(deathBlock.getX() + 1, deathBlock.getY(),
+						deathBlock.getZ());
+
+				deathBlock.setType(Material.CHEST);
+				deathBlock2.setType(Material.CHEST);
+
+				Chest chest1 = (Chest) deathBlock.getState();
+
+				chest1.getInventory().addItem(createGoldenHead(player));
+				for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
+					chest1.getInventory().addItem(item);
+				}
+			} else {
+				player.getWorld().dropItemNaturally(player.getLocation(), createGoldenHead(player));
+				event.setKeepInventory(false);
+			}
+
 			addDeathOnPlayerDeath(player);
 			WorldUtil.spawnFireworks(player.getLocation(), 2);
 			u.makeSpectator(player);
-			giveGoldenHead(player);
-			gm.storeDeathInventories(playerUUID, event.getDrops());
-			gm.getDeathLocations().put(playerUUID, player.getLocation());
 
 			if (!gm.isPvPEnabled()) {
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance at winning.", "a"));
@@ -53,12 +78,6 @@ public class Death implements Listener {
 				addKillOnPlayerKill(event, player, killer);
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
-			}
-
-			if (!gm.isScenarioActive("TimeBomb")) {
-				event.setKeepInventory(false);
-			} else {
-				event.setKeepInventory(true);
 			}
 
 			if (tm.areTeamsEnabled()) {
@@ -81,17 +100,17 @@ public class Death implements Listener {
 		if (GameState.isLobby()) {
 			event.setDeathMessage("");
 			event.setKeepInventory(true);
-			giveGoldenHead(player);
+			player.getWorld().dropItemNaturally(player.getLocation(), createGoldenHead(player));
 			player.spigot().respawn();
 		}
 	}
 
-	public void giveGoldenHead(Player player) {
+	public ItemStack createGoldenHead(Player player) {
 		ItemStack goldenApple = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta gapMeta = goldenApple.getItemMeta();
 		gapMeta.setDisplayName("Golden Head");
 		goldenApple.setItemMeta(gapMeta);
-		player.getWorld().dropItemNaturally(player.getLocation(), goldenApple);
+		return goldenApple;
 	}
 
 	public void addDeathOnPlayerDeath(Player player) {

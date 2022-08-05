@@ -21,6 +21,7 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Death.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Quit.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\crafts\StringCraft.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\LateScatterCommand.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\RecipesCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\BanPlayerCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Weather.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\RankUtil.java
@@ -29,6 +30,8 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\ChatUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StaffCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\EndRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\Horseless.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\DiscordCommand.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\KillTopCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\StatsCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\WhitelistCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Connect.java

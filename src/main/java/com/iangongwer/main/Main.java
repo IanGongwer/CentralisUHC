@@ -9,10 +9,13 @@ import com.iangongwer.commands.BanPlayerCommand;
 import com.iangongwer.commands.BroadcastCommand;
 import com.iangongwer.commands.CalculateCommand;
 import com.iangongwer.commands.DatabaseCommand;
+import com.iangongwer.commands.DiscordCommand;
+import com.iangongwer.commands.KillTopCommand;
 import com.iangongwer.commands.LateScatterCommand;
 import com.iangongwer.commands.MuteChatCommand;
 import com.iangongwer.commands.MuteCommand;
 import com.iangongwer.commands.PracticeCommand;
+import com.iangongwer.commands.RecipesCommand;
 import com.iangongwer.commands.RespawnCommand;
 import com.iangongwer.commands.ScenarioCommand;
 import com.iangongwer.commands.StaffCommand;
@@ -108,6 +111,9 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("recipes").setExecutor((CommandExecutor) new RecipesCommand());
+		getCommand("discord").setExecutor((CommandExecutor) new DiscordCommand());
+		getCommand("killtop").setExecutor((CommandExecutor) new KillTopCommand());
 		getCommand("banplayer").setExecutor((CommandExecutor) new BanPlayerCommand());
 		getCommand("team").setExecutor((CommandExecutor) new TeamCommand());
 		getCommand("respawn").setExecutor((CommandExecutor) new RespawnCommand());

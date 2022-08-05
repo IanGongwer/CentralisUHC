@@ -24,7 +24,7 @@ public class HeartUtil {
             getHealth.setDisplaySlot(DisplaySlot.BELOW_NAME);
             getHealth.setDisplayName(ChatColor.DARK_RED + "❤");
         }
-        if (!scoreboardNew.getScoreboard().getObjective(DisplaySlot.PLAYER_LIST).getName().equals("showhealth2")) {
+        if (scoreboardNew.getScoreboard().getObjective(DisplaySlot.PLAYER_LIST) == null) {
             Objective health2 = scoreboardNew.getScoreboard().registerNewObjective("showhealth2",
                     Criterias.HEALTH);
             health2.setDisplaySlot(DisplaySlot.PLAYER_LIST);
