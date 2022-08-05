@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class Interact implements Listener {
@@ -21,7 +22,11 @@ public class Interact implements Listener {
 		Player player = event.getPlayer();
 		UUID playerUUID = player.getUniqueId();
 		if (GameState.isLobby() || GameState.isScattering()) {
-			event.setCancelled(true);
+			if (LobbyUtil.isPracticePlayer(playerUUID)) {
+				event.setCancelled(false);
+			} else {
+				event.setCancelled(true);
+			}
 		}
 		if (GameState.isInGame()) {
 			if (gm.isPlayer(playerUUID)) {
