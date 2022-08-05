@@ -43,7 +43,9 @@ public class EndRunnable extends BukkitRunnable {
 	}
 
 	private void subtractTimeBombTime(Map.Entry<Location, Integer> set) {
-		set.setValue(set.getValue() - 1);
+		if (set.getValue() >= 1) {
+			set.setValue(set.getValue() - 1);
+		}
 	}
 
 	private void blowUpChest(Map.Entry<Location, Integer> set) {
