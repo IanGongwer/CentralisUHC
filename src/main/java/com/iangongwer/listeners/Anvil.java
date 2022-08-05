@@ -16,8 +16,10 @@ public class Anvil implements Listener {
 
             if (inventory instanceof AnvilInventory) {
                 if (inventory.getItem(2) != null) {
-                    if (inventory.getItem(2).getItemMeta().getDisplayName().equals("Golden Apple")) {
-                        event.setCancelled(true);
+                    if (inventory.getItem(2).getItemMeta().getDisplayName() != null) {
+                        if (inventory.getItem(2).getItemMeta().getDisplayName().equals("Golden Apple")) {
+                            event.setCancelled(true);
+                        }
                     }
                 }
                 if (inventory.getItem(0) != null && inventory.getItem(1) != null) {
