@@ -261,7 +261,6 @@ public class GameRunnable extends BukkitRunnable {
 	public static void setBorderBlock(int borderDiameter) {
 		int borderRadius = borderDiameter / 2;
 		for (int num = borderRadius; num >= -borderRadius; num--) {
-			// Works
 			Bukkit.getWorld("uhc_world")
 					.getBlockAt(num, Bukkit.getWorld("uhc_world").getHighestBlockYAt(num, borderRadius) - 1,
 							borderRadius)
@@ -274,7 +273,6 @@ public class GameRunnable extends BukkitRunnable {
 					.setType(Material.BEDROCK);
 			;
 		}
-		// Works
 		for (int num = borderRadius; num >= -borderRadius; num--) {
 			Bukkit.getWorld("uhc_world")
 					.getBlockAt(-num, Bukkit.getWorld("uhc_world").getHighestBlockYAt(-num, -borderRadius) - 1,
