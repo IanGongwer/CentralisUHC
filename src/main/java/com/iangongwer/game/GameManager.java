@@ -112,6 +112,11 @@ public class GameManager {
 	}
 
 	public void playerScatterUtil(Player player) {
+		if (GameManager.getInstance().isScenarioActive("Fireless")) {
+			PotionEffect fire_resistance = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 99999, 1);
+			player.addPotionEffect(fire_resistance);
+		}
+
 		player.addPotionEffect(damageResistance);
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
@@ -201,12 +206,6 @@ public class GameManager {
 
 	// Start and End Games
 	public void startGame() {
-		PotionEffect fire_resistance = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 99999, 1);
-		for (UUID playerUUID : players) {
-			if (GameManager.getInstance().isScenarioActive("Fireless")) {
-				Bukkit.getPlayer(playerUUID).addPotionEffect(fire_resistance);
-			}
-		}
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] The game has started.", "a"));
 		Bukkit.broadcastMessage("");
