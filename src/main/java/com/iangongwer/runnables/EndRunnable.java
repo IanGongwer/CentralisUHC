@@ -49,7 +49,7 @@ public class EndRunnable extends BukkitRunnable {
 	private void blowUpChest(Map.Entry<Location, Integer> set) {
 		if (set.getValue() == 0) {
 			Bukkit.getWorld("uhc_world").createExplosion(set.getKey(), 4F, true);
-			tb.removeTimeBombTime(set.getKey());
+			TimeBomb.removeTimeBombTime(set.getKey());
 		}
 	}
 

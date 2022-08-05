@@ -47,5 +47,7 @@ commands:
     aliases: [killstop, kt, leaderboard, lb]
   recipes:
     aliases: [craft, crafts, crafting, recipe]
+  heal:
+    permission: uhc.staff
     
 depend: [Netherboard]

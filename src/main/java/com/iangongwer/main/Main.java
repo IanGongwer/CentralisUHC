@@ -10,6 +10,7 @@ import com.iangongwer.commands.BroadcastCommand;
 import com.iangongwer.commands.CalculateCommand;
 import com.iangongwer.commands.DatabaseCommand;
 import com.iangongwer.commands.DiscordCommand;
+import com.iangongwer.commands.HealCommand;
 import com.iangongwer.commands.KillTopCommand;
 import com.iangongwer.commands.LateScatterCommand;
 import com.iangongwer.commands.MuteChatCommand;
@@ -111,6 +112,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("heal").setExecutor((CommandExecutor) new HealCommand());
 		getCommand("recipes").setExecutor((CommandExecutor) new RecipesCommand());
 		getCommand("discord").setExecutor((CommandExecutor) new DiscordCommand());
 		getCommand("killtop").setExecutor((CommandExecutor) new KillTopCommand());
