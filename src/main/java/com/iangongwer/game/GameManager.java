@@ -117,6 +117,7 @@ public class GameManager {
 		player.setFoodLevel(20);
 		player.setMaxHealth(24.0);
 		player.setHealth(20.0);
+		player.setExp(0f);
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		player.getInventory().addItem(new ItemStack(Material.LEATHER, 1));
 		player.getInventory().addItem(new ItemStack(Material.SUGAR_CANE, 3));
@@ -220,10 +221,9 @@ public class GameManager {
 	}
 
 	public void isGameFinished(UUID killer) {
-		ArrayList<UUID> toRemove = new ArrayList<UUID>();
 		for (UUID playerUUID : getPlayers()) {
 			if (Bukkit.getPlayer(playerUUID) == null) {
-				toRemove.add(playerUUID);
+				getPlayers().remove(playerUUID);
 			}
 		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
@@ -268,10 +268,9 @@ public class GameManager {
 	}
 
 	public void isGameFinishedVillager() {
-		ArrayList<UUID> toRemove = new ArrayList<UUID>();
 		for (UUID playerUUID : getPlayers()) {
 			if (Bukkit.getPlayer(playerUUID) == null) {
-				toRemove.add(playerUUID);
+				getPlayers().remove(playerUUID);
 			}
 		}
 		if (TeamManager.getInstance().areTeamsEnabled()) {
