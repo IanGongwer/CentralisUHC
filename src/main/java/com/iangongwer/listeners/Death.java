@@ -70,6 +70,7 @@ public class Death implements Listener {
 			}
 
 			if (!gm.isPvPEnabled()) {
+				gm.getAlreadyScatteredPlayers().remove(player.getUniqueId());
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance at winning.", "a"));
 			}
 

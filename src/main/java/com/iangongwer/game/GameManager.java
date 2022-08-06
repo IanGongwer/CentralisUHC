@@ -130,6 +130,7 @@ public class GameManager {
 		}
 
 		if (!GameState.isScattering()) {
+			player.setWalkSpeed(.2f);
 			ScoreboardUtil.createGameScoreboard(player);
 		}
 
