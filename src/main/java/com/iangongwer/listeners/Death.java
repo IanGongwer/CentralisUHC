@@ -44,10 +44,10 @@ public class Death implements Listener {
 		if (!GameState.isLobby()) {
 			gm.storeDeathInventories(playerUUID, event.getDrops());
 			gm.getDeathLocations().put(playerUUID, player.getLocation());
+			event.setKeepInventory(true);
 
 			// Spawn TimeBomb chest with items and start TimeBomb countdown
 			if (gm.isScenarioActive("TimeBomb")) {
-				event.setKeepInventory(true);
 				TimeBomb.insertTimeBombTime(event.getEntity().getLocation());
 				Block deathBlock = event.getEntity().getLocation().getBlock();
 				Block deathBlock2 = Bukkit.getWorld("uhc_world").getBlockAt(deathBlock.getX() + 1, deathBlock.getY(),
@@ -64,7 +64,9 @@ public class Death implements Listener {
 				}
 			} else {
 				player.getWorld().dropItemNaturally(player.getLocation(), createGoldenHead(player));
-				event.setKeepInventory(false);
+				for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
+					player.getWorld().dropItemNaturally(player.getLocation(), item);
+				}
 			}
 
 			if (!gm.isPvPEnabled()) {
