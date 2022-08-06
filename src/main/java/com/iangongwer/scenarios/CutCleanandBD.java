@@ -275,6 +275,7 @@ public class CutCleanandBD implements Listener {
 				}
 			} else if (event.getEntity() instanceof Sheep) {
 				event.getDrops().clear();
+				event.getDrops().add(new ItemStack(Material.WOOL, 1));
 				event.getDrops().add(new ItemStack(Material.COOKED_MUTTON, 3));
 			} else if (event.getEntity() instanceof Horse) {
 				event.getDrops().clear();

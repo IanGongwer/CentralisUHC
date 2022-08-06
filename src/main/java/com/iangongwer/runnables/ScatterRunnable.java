@@ -117,10 +117,9 @@ public class ScatterRunnable extends BukkitRunnable {
 						Bukkit.getPlayer(playerUUID).removePotionEffect(PotionEffectType.BLINDNESS);
 						Bukkit.getPlayer(playerUUID).removePotionEffect(PotionEffectType.JUMP);
 						ScoreboardUtil.createGameScoreboard(Bukkit.getPlayer(playerUUID));
-
-						GameManager.doneScattering = false;
-						gm.startGame();
 					}
+					GameManager.doneScattering = false;
+					gm.startGame();
 				}
 			}
 		}
