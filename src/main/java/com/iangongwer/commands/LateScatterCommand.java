@@ -63,6 +63,9 @@ public class LateScatterCommand implements CommandExecutor {
 							player.sendMessage(u.messageFormat(
 									"",
 									"a"));
+							player.sendMessage(Util.getInstance().messageFormat(
+									"[UHC] You can relog till PvP enables (15 mins). If you relog after PvP enables, you will become a spectator ",
+									"a"));
 							player.sendMessage(u.messageFormat(
 									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
 									"a"));

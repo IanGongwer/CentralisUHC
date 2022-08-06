@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.team.TeamManager;
 
 public class Util {
 
@@ -60,6 +61,10 @@ public class Util {
 
 		if (gm.isPlayer(playerUUID)) {
 			gm.removePlayer(playerUUID);
+			if (TeamManager.getInstance().areTeamsEnabled()) {
+				TeamManager.getInstance().addDeceasedMember(playerUUID);
+				TeamManager.getInstance().isFullTeamDead(playerUUID);
+			}
 		} else if (Util.getInstance().isInStaffMode(playerUUID)) {
 			Util.getInstance().removeStaffMode(playerUUID);
 		}

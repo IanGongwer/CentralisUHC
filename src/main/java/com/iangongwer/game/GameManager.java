@@ -208,11 +208,14 @@ public class GameManager {
 	public void startGame() {
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] The game has started.", "a"));
+		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
+				"[UHC] You can relog till PvP enables (15 mins). If you relog after PvP enables, you will become a spectator ",
+				"a"));
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance()
 				.messageFormat("[UHC] " + ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString(), "a"));
 		Bukkit.broadcastMessage(
-				Util.getInstance().messageFormat("[UHC] Gather 3 wool and craft it to make string.", "a"));
+				Util.getInstance().messageFormat("[UHC] Gather 3 wool and craft it to make string", "a"));
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 				"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
 				"a"));
@@ -223,21 +226,6 @@ public class GameManager {
 	}
 
 	public void isGameFinished(UUID killer) {
-		if (TeamManager.getInstance().areTeamsEnabled()) {
-			for (UUID playerUUID : getPlayers()) {
-				if (Bukkit.getPlayer(playerUUID) == null) {
-					TeamManager.getInstance().addDeceasedMember(playerUUID);
-					TeamManager.getInstance().isFullTeamDead(playerUUID);
-				}
-			}
-		}
-		ArrayList<UUID> toRemove = new ArrayList<UUID>();
-		for (UUID playerUUID : getPlayers()) {
-			if (Bukkit.getPlayer(playerUUID) == null) {
-				toRemove.add(playerUUID);
-			}
-		}
-		getPlayers().removeAll(toRemove);
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
@@ -280,21 +268,6 @@ public class GameManager {
 	}
 
 	public void isGameFinishedVillager() {
-		if (TeamManager.getInstance().areTeamsEnabled()) {
-			for (UUID playerUUID : getPlayers()) {
-				if (Bukkit.getPlayer(playerUUID) == null) {
-					TeamManager.getInstance().addDeceasedMember(playerUUID);
-					TeamManager.getInstance().isFullTeamDead(playerUUID);
-				}
-			}
-		}
-		ArrayList<UUID> toRemove = new ArrayList<UUID>();
-		for (UUID playerUUID : getPlayers()) {
-			if (Bukkit.getPlayer(playerUUID) == null) {
-				toRemove.add(playerUUID);
-			}
-		}
-		getPlayers().removeAll(toRemove);
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);

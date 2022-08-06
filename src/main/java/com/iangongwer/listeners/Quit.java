@@ -24,12 +24,7 @@ public class Quit implements Listener {
 		UUID playerUUID = event.getPlayer().getUniqueId();
 
 		if (GameState.isLobby()) {
-			if (tm.hasTeam(playerUUID)) {
-				if (tm.getTeamLeader(playerUUID) == playerUUID) {
-					tm.deleteTeam(playerUUID);
-				}
-			}
-
+			deleteTeamIfLeaderQuits(playerUUID);
 			gm.removePlayer(playerUUID);
 
 			if (LobbyUtil.isPracticePlayer(playerUUID)) {
@@ -40,22 +35,20 @@ public class Quit implements Listener {
 		if (GameState.isScattering()) {
 			gm.removePlayer(playerUUID);
 			gm.removeScatteredPlayer(playerUUID);
-
-			if (tm.hasTeam(playerUUID)) {
-				if (tm.getTeamLeader(playerUUID) == playerUUID) {
-					tm.deleteTeam(playerUUID);
-				}
-			}
+			deleteTeamIfLeaderQuits(playerUUID);
 		}
 
 		if (GameState.isInGame()) {
 			if (gm.isSpectator(playerUUID)) {
 				gm.removeSpectator(playerUUID);
 			} else if (gm.isPlayer(playerUUID)) {
-				// gm.setQuitLogTime(playerUUID, 150);
-				// gm.addQuitLoggedPlayer(playerUUID);
-				// gm.storeQuitLoggedInventories(playerUUID);
-				// WorldUtil.spawnVillager(Bukkit.getPlayer(playerUUID));
+				if (gm.isPvPEnabled()) {
+					gm.removePlayer(playerUUID);
+					if (TeamManager.getInstance().areTeamsEnabled()) {
+						TeamManager.getInstance().addDeceasedMember(playerUUID);
+						TeamManager.getInstance().isFullTeamDead(playerUUID);
+					}
+				}
 			}
 
 		}
@@ -63,8 +56,18 @@ public class Quit implements Listener {
 		if (GameState.isEnd()) {
 			if (gm.isSpectator(playerUUID)) {
 				gm.removeSpectator(playerUUID);
+			} else if (u.isInStaffMode(playerUUID)) {
+				u.removeStaffMode(playerUUID);
 			} else if (gm.isPlayer(playerUUID)) {
 				gm.removePlayer(playerUUID);
+			}
+		}
+	}
+
+	public void deleteTeamIfLeaderQuits(UUID playerUUID) {
+		if (tm.hasTeam(playerUUID)) {
+			if (tm.getTeamLeader(playerUUID) == playerUUID) {
+				tm.deleteTeam(playerUUID);
 			}
 		}
 	}

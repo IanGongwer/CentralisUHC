@@ -45,6 +45,7 @@ public class Death implements Listener {
 			gm.storeDeathInventories(playerUUID, event.getDrops());
 			gm.getDeathLocations().put(playerUUID, player.getLocation());
 
+			// Spawn TimeBomb chest with items and start TimeBomb countdown
 			if (gm.isScenarioActive("TimeBomb")) {
 				event.setKeepInventory(true);
 				TimeBomb.insertTimeBombTime(event.getEntity().getLocation());
@@ -74,24 +75,12 @@ public class Death implements Listener {
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance at winning.", "a"));
 			}
 
-			if (killer instanceof Player) {
+			if (killer instanceof Player && killer != null) {
 				addKillOnPlayerKill(event, player, killer);
+				gm.isGameFinished(killer.getUniqueId());
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
-			}
-
-			if (tm.areTeamsEnabled()) {
-				tm.addDeceasedMember(playerUUID);
-			}
-
-			if (tm.areTeamsEnabled()) {
-				tm.isFullTeamDead(playerUUID);
-			}
-
-			if (killer == null) {
 				gm.isGameFinishedVillager();
-			} else {
-				gm.isGameFinished(killer.getUniqueId());
 			}
 		}
 	}
