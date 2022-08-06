@@ -69,6 +69,9 @@ public class LateScatterCommand implements CommandExecutor {
 							player.sendMessage(
 									u.messageFormat("[UHC] To view crafting recipes: http://centralis.cc/recipes.html",
 											"a"));
+							player.sendMessage(
+									u.messageFormat("[UHC] Enchanting requires lapis (1.8 enchanting)",
+											"a"));
 							player.sendMessage(u.messageFormat(
 									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
 									"a"));

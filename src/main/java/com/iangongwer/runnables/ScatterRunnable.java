@@ -80,10 +80,6 @@ public class ScatterRunnable extends BukkitRunnable {
 							Util.getInstance().messageFormat(
 									"[UHC] Trapping is allowed until the 50x50 border. Enchanting requires lapis (1.8 enchanting)",
 									"a"));
-					Bukkit.broadcastMessage(
-							Util.getInstance().messageFormat(
-									"[UHC] If you're on 1.7, place your item and then shift-click on the lapis, to enchant properly",
-									"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 							"",
 							"a"));
