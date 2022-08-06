@@ -48,6 +48,7 @@ public class Quit implements Listener {
 						TeamManager.getInstance().addDeceasedMember(playerUUID);
 						TeamManager.getInstance().isFullTeamDead(playerUUID);
 					}
+					gm.isGameFinished();
 				}
 			}
 

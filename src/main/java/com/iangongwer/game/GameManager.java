@@ -236,49 +236,7 @@ public class GameManager {
 		ChatUtil.setChatMute(false);
 	}
 
-	public void isGameFinished(UUID killer) {
-		if (TeamManager.getInstance().areTeamsEnabled()) {
-			if (TeamManager.getInstance().getTotalTeams() == 1) {
-				GameState.setState(GameState.End);
-				Bukkit.broadcastMessage("");
-				Bukkit.broadcastMessage(
-						Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));
-				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Discord: discord.centralis.cc", "a"));
-				ArrayList<String> members = new ArrayList<String>();
-				for (UUID playerUUID : TeamManager.getInstance().getTeamMembers(killer)) {
-					members.add(Bukkit.getPlayer(playerUUID).getDisplayName());
-
-					if (!Main.isRedisEnabled()) {
-						dbm.addWin(playerUUID);
-					} else {
-						cr.addWin(playerUUID);
-					}
-
-				}
-				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
-				Bukkit.broadcastMessage("");
-			}
-		} else {
-			if (getPlayers().size() == 1) {
-				GameState.setState(GameState.End);
-				Bukkit.broadcastMessage("");
-				Bukkit.broadcastMessage(
-						Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));
-				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Discord: discord.centralis.cc", "a"));
-				Bukkit.broadcastMessage(
-						Util.getInstance().messageFormat("Winner: " + Bukkit.getPlayer(killer).getDisplayName(), "a"));
-				Bukkit.broadcastMessage("");
-
-				if (!Main.isRedisEnabled()) {
-					dbm.addWin(Bukkit.getPlayer(killer).getUniqueId());
-				} else {
-					cr.addWin(Bukkit.getPlayer(killer).getUniqueId());
-				}
-			}
-		}
-	}
-
-	public void isGameFinishedVillager() {
+	public void isGameFinished() {
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);

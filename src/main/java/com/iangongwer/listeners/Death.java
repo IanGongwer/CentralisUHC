@@ -67,21 +67,19 @@ public class Death implements Listener {
 				event.setKeepInventory(false);
 			}
 
-			addDeathOnPlayerDeath(player);
-			WorldUtil.spawnFireworks(player.getLocation(), 2);
-			u.makeSpectator(player);
-
 			if (!gm.isPvPEnabled()) {
 				player.sendMessage(u.messageFormat("Use /latescatter for another chance at winning.", "a"));
 			}
 
 			if (killer instanceof Player && killer != null) {
 				addKillOnPlayerKill(event, player, killer);
-				gm.isGameFinished(killer.getUniqueId());
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
-				gm.isGameFinishedVillager();
 			}
+			addDeathOnPlayerDeath(player);
+			WorldUtil.spawnFireworks(player.getLocation(), 2);
+			u.makeSpectator(player);
+			gm.isGameFinished();
 		}
 	}
 

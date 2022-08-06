@@ -66,13 +66,11 @@ public class LateScatterCommand implements CommandExecutor {
 							player.sendMessage(Util.getInstance().messageFormat(
 									"[UHC] You can relog till PvP enables (15 mins). If you relog after PvP enables, you will become a spectator",
 									"a"));
+							player.sendMessage(
+									u.messageFormat("[UHC] To view crafting recipes: http://centralis.cc/recipes.html",
+											"a"));
 							player.sendMessage(u.messageFormat(
 									"[UHC] " + ChatColor.YELLOW + "Scenarios: " + gm.getActiveScenarios().toString(),
-									"a"));
-							player.sendMessage(
-									u.messageFormat("[UHC] Gather 3 wool and craft it to make string.", "a"));
-							player.sendMessage(u.messageFormat(
-									"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
 									"a"));
 							player.sendMessage(u.messageFormat(
 									"",

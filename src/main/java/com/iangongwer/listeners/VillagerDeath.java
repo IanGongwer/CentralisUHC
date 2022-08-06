@@ -50,7 +50,7 @@ public class VillagerDeath implements Listener {
 					tm.isFullTeamDead(playerUUID);
 				}
 
-				gm.isGameFinishedVillager();
+				gm.isGameFinished();
 			}
 		}
 	}
