@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.utils.ChatUtil;
 import com.iangongwer.utils.Util;
 
 public class StartCommand implements CommandExecutor {
@@ -20,6 +21,7 @@ public class StartCommand implements CommandExecutor {
 			if (GameState.isLobby()) {
 				if (gm.getPredeterminedLocations().size() != 0) {
 					player.sendMessage(u.messageFormat("You have started the scattering process.", "a"));
+					ChatUtil.setChatMute(true);
 					gm.scatterPlayers(gm.getPlayers());
 				} else {
 					player.sendMessage(u.messageFormat("You have not used /calculate yet.", "c"));

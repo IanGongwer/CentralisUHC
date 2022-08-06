@@ -90,7 +90,7 @@ public class GameRunnable extends BukkitRunnable {
 	private static void updatePlayerScoreboard() {
 		for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 			if (ScoreboardUtil.hasScoreboard(allPlayers)) {
-				ScoreboardUtil.updateTime(allPlayers);
+				ScoreboardUtil.updateGameTime(allPlayers);
 			}
 		}
 	}
@@ -260,7 +260,7 @@ public class GameRunnable extends BukkitRunnable {
 		}
 	}
 
-	private static void playMessageSound() {
+	public static void playMessageSound() {
 		for (UUID playerUUID : gm.getPlayers()) {
 			if (Bukkit.getPlayer(playerUUID) != null) {
 				Bukkit.getWorld("uhc_world").playSound(Bukkit.getPlayer(playerUUID).getLocation(),

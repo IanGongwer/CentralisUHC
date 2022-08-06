@@ -22,6 +22,7 @@ import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.ChatUtil;
 import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
@@ -45,6 +46,8 @@ public class GameManager {
 
 	private boolean isPvPEnabled = false;
 
+	public static boolean doneScattering = false;
+
 	private Map<UUID, Location> predeterminedLocations = new HashMap<UUID, Location>();
 
 	public static Map<UUID, ArrayList<ItemStack>> deathInventories = new HashMap<UUID, ArrayList<ItemStack>>();
@@ -64,6 +67,9 @@ public class GameManager {
 	private ArrayList<UUID> alreadyScattered = new ArrayList<UUID>();
 
 	PotionEffect damageResistance = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 400, 10);
+	PotionEffect fire_resistance = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 99999, 1);
+	PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 1000, 1);
+	PotionEffect jumpBoost = new PotionEffect(PotionEffectType.JUMP, 1000, 128);
 
 	public ArrayList<UUID> getSpectators() {
 		return spectators;
@@ -113,13 +119,21 @@ public class GameManager {
 
 	public void playerScatterUtil(Player player) {
 		if (GameManager.getInstance().isScenarioActive("Fireless")) {
-			PotionEffect fire_resistance = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 99999, 1);
 			player.addPotionEffect(fire_resistance);
 		}
 
+		if (GameState.isScattering()) {
+			player.setWalkSpeed(0f);
+			player.addPotionEffect(blindness);
+			player.addPotionEffect(jumpBoost);
+			ScoreboardUtil.createScatterScoreboard(player);
+		}
+
+		if (!GameState.isScattering()) {
+			ScoreboardUtil.createGameScoreboard(player);
+		}
+
 		player.addPotionEffect(damageResistance);
-		player.getInventory().clear();
-		player.getInventory().setArmorContents(null);
 		player.setFoodLevel(20);
 		player.setMaxHealth(24.0);
 		player.setHealth(20.0);
@@ -128,7 +142,6 @@ public class GameManager {
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		player.getInventory().addItem(new ItemStack(Material.LEATHER, 1));
 		player.getInventory().addItem(new ItemStack(Material.SUGAR_CANE, 3));
-		ScoreboardUtil.createGameScoreboard(player);
 		HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
 				ScoreboardUtil.getScoreboard(player).getName());
 	}
@@ -167,7 +180,7 @@ public class GameManager {
 		}
 
 		GameRunnable.setBorderBlock(1500);
-		startGame();
+		doneScattering = true;
 	}
 
 	public Location makeScatterLocation() {
@@ -206,23 +219,21 @@ public class GameManager {
 
 	// Start and End Games
 	public void startGame() {
+		GameState.setState(GameState.InGame);
+		Util.getInstance().setWhitelistStatus(false);
+
+		for (UUID playerUUID : getPlayers()) {
+			ScoreboardUtil.createGameScoreboard(Bukkit.getPlayer(playerUUID));
+		}
+
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance().messageFormat("[UHC] The game has started.", "a"));
-		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-				"[UHC] You can relog till PvP enables (15 mins). If you relog after PvP enables, you will become a spectator ",
-				"a"));
 		Bukkit.broadcastMessage("");
 		Bukkit.broadcastMessage(Util.getInstance()
 				.messageFormat("[UHC] " + ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString(), "a"));
-		Bukkit.broadcastMessage(
-				Util.getInstance().messageFormat("[UHC] Gather 3 wool and craft it to make string", "a"));
-		Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-				"[UHC] Create a novice sword and string from wool this game using this recipe: http://centralis.cc/recipes.html",
-				"a"));
 		Bukkit.broadcastMessage("");
 
-		GameState.setState(GameState.InGame);
-		Util.getInstance().setWhitelistStatus(false);
+		ChatUtil.setChatMute(false);
 	}
 
 	public void isGameFinished(UUID killer) {
