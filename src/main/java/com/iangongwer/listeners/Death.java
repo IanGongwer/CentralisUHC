@@ -59,13 +59,13 @@ public class Death implements Listener {
 				Chest chest1 = (Chest) deathBlock.getState();
 
 				chest1.getInventory().addItem(createGoldenHead(player));
-				for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
+				for (ItemStack item : gm.getDeathInventory(playerUUID)) {
 					chest1.getInventory().addItem(item);
 				}
 			} else {
-				player.getWorld().dropItemNaturally(player.getLocation(), createGoldenHead(player));
-				for (ItemStack item : gm.getDeathInventory(event.getEntity().getUniqueId())) {
-					player.getWorld().dropItemNaturally(player.getLocation(), item);
+				killer.getWorld().dropItemNaturally(killer.getLocation(), createGoldenHead(player));
+				for (ItemStack item : gm.getDeathInventory(playerUUID)) {
+					killer.getWorld().dropItemNaturally(player.getLocation(), item);
 				}
 			}
 
@@ -79,6 +79,7 @@ public class Death implements Listener {
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
 			}
+
 			addDeathOnPlayerDeath(player);
 			WorldUtil.spawnFireworks(player.getLocation(), 2);
 			u.makeSpectator(player);

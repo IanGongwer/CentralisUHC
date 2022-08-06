@@ -1,10 +1,14 @@
 package com.iangongwer.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
@@ -44,6 +48,12 @@ public class Quit implements Listener {
 			} else if (gm.isPlayer(playerUUID)) {
 				if (gm.isPvPEnabled()) {
 					gm.removePlayer(playerUUID);
+					List<ItemStack> playerQuitInventory = new ArrayList<ItemStack>();
+					for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getContents()) {
+						playerQuitInventory.add(item);
+					}
+					gm.storeDeathInventories(playerUUID,
+							playerQuitInventory);
 					if (TeamManager.getInstance().areTeamsEnabled()) {
 						TeamManager.getInstance().addDeceasedMember(playerUUID);
 						TeamManager.getInstance().isFullTeamDead(playerUUID);
