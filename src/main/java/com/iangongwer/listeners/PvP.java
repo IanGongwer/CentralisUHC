@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.runnables.PvPLogRunnable;
 import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
@@ -22,6 +23,7 @@ public class PvP implements Listener {
 
 	Util u = Util.getInstance();
 	GameManager gm = GameManager.getInstance();
+	PvPLogRunnable pr = new PvPLogRunnable();
 
 	@EventHandler
 	public void onPlayerPvP(EntityDamageByEntityEvent event) {
@@ -59,6 +61,14 @@ public class PvP implements Listener {
 						&& !u.isInStaffMode(playerUUID)) {
 					if (gm.isPvPEnabled()) {
 						event.setCancelled(false);
+						if (!gm.isPvPLogged(playerUUID)) {
+							player.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+						}
+						if (!gm.isPvPLogged(damagerUUID)) {
+							damager.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+						}
+						gm.setPvPLogTime(playerUUID, 5);
+						gm.setPvPLogTime(damagerUUID, 5);
 					} else {
 						event.setCancelled(true);
 					}

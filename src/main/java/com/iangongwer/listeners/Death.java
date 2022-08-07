@@ -63,9 +63,9 @@ public class Death implements Listener {
 					chest1.getInventory().addItem(item);
 				}
 			} else {
-				player.getWorld().dropItemNaturally(player.getLocation(), createGoldenHead(player));
+				player.getWorld().dropItemNaturally(gm.getDeathLocations().get(playerUUID), createGoldenHead(player));
 				for (ItemStack item : gm.getDeathInventory(playerUUID)) {
-					player.getWorld().dropItemNaturally(player.getLocation(), item);
+					player.getWorld().dropItemNaturally(gm.getDeathLocations().get(playerUUID), item);
 				}
 			}
 
@@ -81,7 +81,7 @@ public class Death implements Listener {
 			}
 
 			addDeathOnPlayerDeath(player);
-			WorldUtil.spawnFireworks(player.getLocation(), 2);
+			WorldUtil.spawnFireworks(gm.getDeathLocations().get(playerUUID), 2);
 			u.makeSpectator(player);
 			gm.isGameFinished();
 		}

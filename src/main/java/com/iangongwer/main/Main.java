@@ -50,13 +50,12 @@ import com.iangongwer.listeners.PlayerAndChatMuted;
 import com.iangongwer.listeners.PvP;
 import com.iangongwer.listeners.Quit;
 import com.iangongwer.listeners.Respawn;
-import com.iangongwer.listeners.VillagerDeath;
 import com.iangongwer.listeners.Weather;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.EndRunnable;
 import com.iangongwer.runnables.GameRunnable;
-import com.iangongwer.runnables.QuitLogRunnable;
+import com.iangongwer.runnables.PvPLogRunnable;
 import com.iangongwer.runnables.ScatterRunnable;
 import com.iangongwer.scenarios.Bowless;
 import com.iangongwer.scenarios.CutCleanandBD;
@@ -77,7 +76,7 @@ public class Main extends JavaPlugin {
 
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
-		getServer().getScheduler().scheduleSyncRepeatingTask(this, new QuitLogRunnable(), 0L, 40L);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new PvPLogRunnable(), 0L, 40L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScatterRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new EndRunnable(), 0L, 20L);
@@ -102,7 +101,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Quit(), this);
 		getServer().getPluginManager().registerEvents(new Respawn(), this);
 		getServer().getPluginManager().registerEvents(new Weather(), this);
-		getServer().getPluginManager().registerEvents(new VillagerDeath(), this);
 		getServer().getPluginManager().registerEvents(new Anvil(), this);
 		getServer().getPluginManager().registerEvents(new DisableGodAppleCraft(), this);
 	}

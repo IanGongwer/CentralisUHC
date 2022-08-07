@@ -329,7 +329,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"DROP TABLE sorted_leaderboard; SET @rank=0; CREATE TABLE sorted_leaderboard AS (SELECT @rank:=@rank+1 AS rank, player_name, player_uuid, player_kills, player_deaths, game_wins FROM player_statistics ORDER BY game_wins DESC, player_kills DESC)");
+					"DROP TABLE sorted_leaderboard; SET @rank=0; CREATE TABLE sorted_leaderboard AS (SELECT @rank:=@rank+1 AS rank, player_name, player_uuid, player_kills, player_deaths, game_wins FROM player_statistics ORDER BY game_wins DESC, player_kills DESC, player_deaths ASC)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

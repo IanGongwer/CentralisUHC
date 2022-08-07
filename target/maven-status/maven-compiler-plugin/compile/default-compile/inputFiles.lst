@@ -1,6 +1,5 @@
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\ScenarioCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\DiamondAlert.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\QuitLogRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\GameRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Join.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\SupplyDrops.java
@@ -45,10 +44,10 @@ d:\Code\centralisuhc\src\main\java\com\iangongwer\team\TeamManager.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Place.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\team\Team.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\game\GameManager.java
+d:\Code\centralisuhc\src\main\java\com\iangongwer\runnables\PvPLogRunnable.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\commands\MuteCommand.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\holograms\LobbyHolograms.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\PvP.java
-d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\VillagerDeath.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\utils\LobbyUtil.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\scenarios\Bowless.java
 d:\Code\centralisuhc\src\main\java\com\iangongwer\listeners\Break.java

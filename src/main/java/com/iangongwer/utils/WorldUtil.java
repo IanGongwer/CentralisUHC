@@ -38,8 +38,8 @@ public class WorldUtil {
                 if (entity.getCustomName()
                         .equalsIgnoreCase(player.getName())) {
                     entity.damage(20);
-                    gm.setQuitLogTime(player.getUniqueId(), -1);
-                    gm.removeQuitLoggedPlayer(player.getUniqueId());
+                    gm.setPvPLogTime(player.getUniqueId(), -1);
+                    gm.removePvPLoggedPlayer(player.getUniqueId());
                 }
             }
         }

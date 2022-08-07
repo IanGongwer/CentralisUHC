@@ -54,9 +54,8 @@ public class GameManager {
 	private Map<UUID, Location> deathLocations = new HashMap<UUID, Location>();
 	public static ArrayList<UUID> playersNotJoinedBack = new ArrayList<UUID>();
 
-	public static Map<UUID, Integer> quitLogTime = new HashMap<UUID, Integer>();
+	public static Map<UUID, Integer> pvpLogTime = new HashMap<UUID, Integer>();
 	public static Map<UUID, ArrayList<ItemStack>> quitLoggedInventories = new HashMap<UUID, ArrayList<ItemStack>>();
-	private ArrayList<UUID> quitLoggedPlayers = new ArrayList<UUID>();
 
 	public static Map<UUID, Integer> playerKills = new HashMap<UUID, Integer>();
 
@@ -278,36 +277,24 @@ public class GameManager {
 	}
 
 	// Quit Log Time
-	public int getQuitLogTime(UUID playerUUID) {
-		return quitLogTime.get(playerUUID);
+	public int getPvPLogTime(UUID playerUUID) {
+		return pvpLogTime.get(playerUUID);
 	}
 
-	public void setQuitLogTime(UUID playerUUID, int time) {
-		quitLogTime.put(playerUUID, time);
+	public void setPvPLogTime(UUID playerUUID, int time) {
+		pvpLogTime.put(playerUUID, time);
 	}
 
-	public Map<UUID, Integer> getQuitLogMap() {
-		return quitLogTime;
+	public void removePvPLoggedPlayer(UUID playerUUID) {
+		pvpLogTime.remove(playerUUID);
 	}
 
-	public boolean isQuitLogged(UUID playerUUID) {
-		if (quitLogTime.containsKey(playerUUID)) {
-			return true;
-		} else {
-			return false;
-		}
+	public Map<UUID, Integer> getPvPLogMap() {
+		return pvpLogTime;
 	}
 
-	public void addQuitLoggedPlayer(UUID playerUUID) {
-		quitLoggedPlayers.add(playerUUID);
-	}
-
-	public void removeQuitLoggedPlayer(UUID playerUUID) {
-		quitLoggedPlayers.remove(playerUUID);
-	}
-
-	public ArrayList<UUID> getQuitLoggedPlayers() {
-		return quitLoggedPlayers;
+	public boolean isPvPLogged(UUID playerUUID) {
+		return pvpLogTime.containsKey(playerUUID);
 	}
 
 	public void storeQuitLoggedInventories(UUID playerUUID) {
