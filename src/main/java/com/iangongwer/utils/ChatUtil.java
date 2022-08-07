@@ -32,7 +32,7 @@ public class ChatUtil {
 
     public static String chatMessage(String message, Player player) {
         if (TeamManager.getInstance().getTeam(player.getUniqueId()) != null) {
-            return RankUtil.getGroupPrefix(player) + ChatColor.GOLD + "["
+            return RankUtil.getGroupPrefix(player) + ChatColor.GREEN + "["
                     + Bukkit.getPlayer(TeamManager.getInstance().getTeamLeader(player.getUniqueId())).getDisplayName()
                             .toUpperCase()
                     + "] " + ChatColor.WHITE + player.getDisplayName() + ": " + message;

@@ -40,6 +40,7 @@ public class ConnectionMYSQL {
 					yml.getString("Configuration.Username"),
 					yml.getString("Configuration.Password"));
 			connectedSuccessfully = true;
+			createSortedLeaderboardTable();
 		} catch (SQLException e) {
 			Main.setRedisEnabled(true);
 			connectedSuccessfully = false;
@@ -322,6 +323,34 @@ public class ConnectionMYSQL {
 		}
 		return false;
 
+	}
+
+	public void createSortedLeaderboardTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"DROP TABLE sorted_leaderboard; SET @rank=0; CREATE TABLE sorted_leaderboard AS (SELECT @rank:=@rank+1 AS rank, player_name, player_uuid, player_kills, player_deaths, game_wins FROM player_statistics ORDER BY game_wins DESC, player_kills DESC)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int getPlayerRank(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection()
+					.prepareStatement("SELECT rank FROM sorted_leaderboard WHERE player_uuid = ?");
+			ps.setString(1, playerUUID.toString());
+			ResultSet results = ps.executeQuery();
+			int rank;
+			if (results.next()) {
+				rank = results.getInt("rank");
+				return rank;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	public boolean isConnectedSuccessfully() {

@@ -37,6 +37,7 @@ import com.iangongwer.listeners.CommandBlock;
 import com.iangongwer.listeners.Connect;
 import com.iangongwer.listeners.Consume;
 import com.iangongwer.listeners.Death;
+import com.iangongwer.listeners.DiamondAlert;
 import com.iangongwer.listeners.DisableGodAppleCraft;
 import com.iangongwer.listeners.EntitySpawning;
 import com.iangongwer.listeners.Fall;
@@ -83,6 +84,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerListeners() {
+		getServer().getPluginManager().registerEvents(new DiamondAlert(), this);
 		getServer().getPluginManager().registerEvents(new Break(), this);
 		getServer().getPluginManager().registerEvents(new CommandBlock(), this);
 		getServer().getPluginManager().registerEvents(new Connect(), this);
