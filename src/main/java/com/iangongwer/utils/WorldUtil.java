@@ -53,7 +53,7 @@ public class WorldUtil {
             worldcreate.environment(World.Environment.NORMAL);
             worldcreate.type(WorldType.NORMAL);
             worldcreate.createWorld();
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set 750 750 0 0");
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " set 1000 1000 0 0");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb " + worldName + " fill");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb fill confirm");
             clearZeroZero();

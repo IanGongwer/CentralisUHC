@@ -180,7 +180,7 @@ public class GameManager {
 			}
 		}
 
-		GameRunnable.setBorderBlock(1500);
+		GameRunnable.setBorderBlock(2000);
 		doneScattering = true;
 	}
 

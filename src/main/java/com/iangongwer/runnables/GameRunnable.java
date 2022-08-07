@@ -210,6 +210,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage("");
 			playMessageSound();
 			setBorderBlock(25);
+			teleportPlayersUp();
 		}
 	}
 
@@ -295,6 +296,18 @@ public class GameRunnable extends BukkitRunnable {
 					.getBlockAt(-borderRadius, Bukkit.getWorld("uhc_world").getHighestBlockYAt(-borderRadius, -num) - 1,
 							-num)
 					.setType(Material.BEDROCK);
+		}
+	}
+
+	private static void teleportPlayersUp() {
+		for (UUID playerUUID : gm.getPlayers()) {
+			Location newLocation = new Location(Bukkit.getPlayer(playerUUID).getWorld(),
+					Bukkit.getPlayer(playerUUID).getLocation().getBlockX(),
+					Bukkit.getPlayer(playerUUID).getWorld().getHighestBlockYAt(
+							Bukkit.getPlayer(playerUUID).getLocation().getBlockX(),
+							Bukkit.getPlayer(playerUUID).getLocation().getBlockZ()) + 3,
+					Bukkit.getPlayer(playerUUID).getLocation().getBlockZ());
+			Bukkit.getPlayer(playerUUID).teleport(newLocation);
 		}
 	}
 
