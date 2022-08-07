@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
 
 public class RespawnCommand implements CommandExecutor {
@@ -26,6 +27,7 @@ public class RespawnCommand implements CommandExecutor {
 						for (ItemStack item : gm.getDeathInventory(respawnPlayer.getUniqueId())) {
 							respawnPlayer.getInventory().addItem(item);
 						}
+						TeamManager.getInstance().getDeceasedMembers(player.getUniqueId()).remove(player.getUniqueId());
 						gm.addPlayer(respawnPlayer.getUniqueId());
 						gm.removeSpectator(respawnPlayer.getUniqueId());
 						respawnPlayer.setGameMode(GameMode.SURVIVAL);

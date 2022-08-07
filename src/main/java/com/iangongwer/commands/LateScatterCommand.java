@@ -1,5 +1,7 @@
 package com.iangongwer.commands;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -30,10 +32,14 @@ public class LateScatterCommand implements CommandExecutor {
 								.getAlreadyScatteredPlayers().contains(player.getUniqueId())) {
 							if (tm.areTeamsEnabled()) {
 								if (tm.hasTeam(player.getUniqueId())) {
-									Location memberLocation = Bukkit
-											.getPlayer(tm.getTeamMembers(player.getUniqueId()).get(0)).getLocation();
-									memberLocation.setY(memberLocation.getY() + 1);
-									player.teleport(memberLocation);
+									for (UUID teamMember : tm.getTeamMembers(player.getUniqueId())) {
+										if (!teamMember.equals(player.getUniqueId())) {
+											Location memberLocation = Bukkit
+													.getPlayer(teamMember).getLocation();
+											memberLocation.setY(memberLocation.getY() + 1);
+											player.teleport(memberLocation);
+										}
+									}
 								}
 
 								if (!tm.hasTeam(player.getUniqueId())) {
