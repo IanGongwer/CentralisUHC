@@ -250,30 +250,30 @@ public class GameRunnable extends BukkitRunnable {
 	private static void supplyDropCheck() {
 		if (gm.isScenarioActive("SupplyDrops")) {
 			if (getFormattedTime().equalsIgnoreCase("10:00") || getFormattedTime().equalsIgnoreCase("15:00")) {
-				int x = -2000 + random.nextInt(2000);
-				int z = -2000 + random.nextInt(2000);
+				int x = -1001 + random.nextInt(1001);
+				int z = -1001 + random.nextInt(1001);
 				int y = 90;
 				SupplyDrops.spawnSupplyDrop(x, y, z);
 				Bukkit.broadcastMessage(u.messageFormat(
 						"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
 			} else if (getFormattedTime().equalsIgnoreCase("30:00")) {
-				int x = -501 + random.nextInt(501);
-				int z = -501 + random.nextInt(501);
-				int y = 90;
-				SupplyDrops.spawnSupplyDrop(x, y, z);
-				Bukkit.broadcastMessage(u.messageFormat(
-						"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
-			} else if (getFormattedTime().equalsIgnoreCase("35:00")) {
 				int x = -251 + random.nextInt(251);
 				int z = -251 + random.nextInt(251);
 				int y = 90;
 				SupplyDrops.spawnSupplyDrop(x, y, z);
 				Bukkit.broadcastMessage(u.messageFormat(
 						"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
+			} else if (getFormattedTime().equalsIgnoreCase("35:00")) {
+				int x = -126 + random.nextInt(126);
+				int z = -126 + random.nextInt(126);
+				int y = 90;
+				SupplyDrops.spawnSupplyDrop(x, y, z);
+				Bukkit.broadcastMessage(u.messageFormat(
+						"[Supply Drop] There is a supply drop at X: " + x + " Y: " + y + " Z: " + z, "a"));
 
 			} else if (getFormattedTime().equalsIgnoreCase("40:00")) {
-				int x = -101 + random.nextInt(101);
-				int z = -101 + random.nextInt(101);
+				int x = -51 + random.nextInt(51);
+				int z = -51 + random.nextInt(51);
 				int y = 90;
 				SupplyDrops.spawnSupplyDrop(x, y, z);
 				Bukkit.broadcastMessage(u.messageFormat(
