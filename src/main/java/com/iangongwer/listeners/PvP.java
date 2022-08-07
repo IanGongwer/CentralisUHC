@@ -31,8 +31,10 @@ public class PvP implements Listener {
 			Player damager = (Player) event.getDamager();
 			UUID damagerUUID = damager.getUniqueId();
 
-			HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
-					ScoreboardUtil.getScoreboard(player).getName());
+			if (player != null) {
+				HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+						ScoreboardUtil.getScoreboard(player).getName());
+			}
 
 			if (GameState.isLobby()) {
 				if (LobbyUtil.isPracticePlayer(playerUUID)

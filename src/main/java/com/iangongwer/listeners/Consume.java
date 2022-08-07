@@ -16,11 +16,9 @@ public class Consume implements Listener {
 			if (event.getItem().getItemMeta().getDisplayName().equals("Golden Head")) {
 
 				PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 100, 0);
-				PotionEffect strength = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0);
 				PotionEffect regeneration = new PotionEffect(PotionEffectType.REGENERATION, 100, 1);
 
 				player.addPotionEffect(speed);
-				player.addPotionEffect(strength);
 				player.addPotionEffect(regeneration);
 			}
 		}
