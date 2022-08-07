@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
-import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
 
@@ -25,7 +24,7 @@ public class LateScatterCommand implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("latescatter") && sender instanceof Player) {
 			Player player = (Player) sender;
 			if (GameState.isInGame()) {
-				if (GameRunnable.getSecondsPassed() <= 900) {
+				if (!gm.isPvPEnabled()) {
 					if (!u.isInStaffMode(player.getUniqueId())) {
 						if (!gm.getPlayers().contains(player.getUniqueId()) && !GameManager.getInstance()
 								.getAlreadyScatteredPlayers().contains(player.getUniqueId())) {

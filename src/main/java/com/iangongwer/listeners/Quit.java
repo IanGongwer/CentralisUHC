@@ -47,6 +47,7 @@ public class Quit implements Listener {
 				gm.removeSpectator(playerUUID);
 			} else if (gm.isPlayer(playerUUID)) {
 				if (gm.isPvPEnabled()) {
+					gm.getAlreadyScatteredPlayers().remove(playerUUID);
 					gm.removePlayer(playerUUID);
 					List<ItemStack> playerQuitInventory = new ArrayList<ItemStack>();
 					for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getContents()) {
@@ -54,6 +55,7 @@ public class Quit implements Listener {
 					}
 					gm.storeDeathInventories(playerUUID,
 							playerQuitInventory);
+					gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
 					if (TeamManager.getInstance().areTeamsEnabled()) {
 						TeamManager.getInstance().addDeceasedMember(playerUUID);
 						TeamManager.getInstance().isFullTeamDead(playerUUID);

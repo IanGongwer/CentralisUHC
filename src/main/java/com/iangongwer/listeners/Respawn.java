@@ -1,5 +1,7 @@
 package com.iangongwer.listeners;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,7 +30,11 @@ public class Respawn implements Listener {
 			}
 		}
 		if (GameState.isInGame() || GameState.isEnd()) {
-			event.setRespawnLocation(Bukkit.getPlayer(gm.getPlayers().get(0)).getLocation());
+			for (UUID playerUUID : gm.getPlayers()) {
+				if (Bukkit.getPlayer(playerUUID) != null) {
+					event.setRespawnLocation(Bukkit.getPlayer(playerUUID).getLocation());
+				}
+			}
 		}
 	}
 
