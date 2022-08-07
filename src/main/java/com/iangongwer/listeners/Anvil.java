@@ -24,11 +24,15 @@ public class Anvil implements Listener {
                 }
                 if (inventory.getItem(0) != null && inventory.getItem(1) != null) {
                     if (inventory.getItem(0).getItemMeta().getDisplayName() != null) {
-                        if (inventory.getItem(0).getItemMeta().getDisplayName().equals("Novice's Metal Sword")) {
+                        if (inventory.getItem(0).getItemMeta().getDisplayName().equals("Novice's Metal Sword")
+                                || inventory.getItem(0).getItemMeta().getDisplayName()
+                                        .equals("Legend's Crystalized Sword")) {
                             event.setCancelled(true);
                         }
                     } else if (inventory.getItem(1).getItemMeta().getDisplayName() != null) {
-                        if (inventory.getItem(1).getItemMeta().getDisplayName().equals("Novice's Metal Sword")) {
+                        if (inventory.getItem(1).getItemMeta().getDisplayName().equals("Novice's Metal Sword")
+                                || inventory.getItem(1).getItemMeta().getDisplayName()
+                                        .equals("Legend's Crystalized Sword")) {
                             event.setCancelled(true);
                         }
                     }

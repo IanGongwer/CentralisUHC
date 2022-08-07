@@ -28,6 +28,7 @@ import com.iangongwer.commands.TeamCoordsCommand;
 import com.iangongwer.commands.UnBanPlayerCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.crafts.GoldCraft;
+import com.iangongwer.crafts.LegendSword;
 import com.iangongwer.crafts.NoviceSword;
 import com.iangongwer.crafts.StringCraft;
 import com.iangongwer.game.GameState;
@@ -161,6 +162,7 @@ public class Main extends JavaPlugin {
 		NoviceSword.createNoviceSword();
 		StringCraft.createStringCraft();
 		GoldCraft.createGoldCraft();
+		LegendSword.createLegendSword();
 
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");
