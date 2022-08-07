@@ -62,7 +62,18 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(48), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createBannedTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"CREATE TABLE IF NOT EXISTS player_banned (player_name VARCHAR(48), player_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,7 +207,8 @@ public class ConnectionMYSQL {
 
 	public void removePlayer(UUID playerUUID) {
 		try {
-			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_statistics WHERE UUID?");
+			PreparedStatement ps = getConnection()
+					.prepareStatement("DELETE FROM player_statistics WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -247,7 +259,8 @@ public class ConnectionMYSQL {
 	public UUID getMostWinsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
-					.prepareStatement("SELECT player_name, game_wins FROM player_statistics ORDER BY game_wins DESC LIMIT 1");
+					.prepareStatement(
+							"SELECT player_name, game_wins FROM player_statistics ORDER BY game_wins DESC LIMIT 1");
 			ResultSet results = ps.executeQuery();
 			String playerName;
 			if (results.next()) {
@@ -261,6 +274,54 @@ public class ConnectionMYSQL {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void addBannedPlayer(UUID playerUUID) {
+		try {
+			if (!bannedPlayerExists(playerUUID)) {
+				PreparedStatement ps2 = getConnection().prepareStatement(
+						"INSERT IGNORE INTO player_banned (player_name, player_uuid) VALUES(?, ?)");
+				if (Bukkit.getPlayer(playerUUID) != null) {
+					ps2.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
+					ps2.setString(2, playerUUID.toString());
+				} else {
+					UUID playerOfflineUUID = Bukkit.getOfflinePlayer(playerUUID).getUniqueId();
+					ps2.setString(1, Bukkit.getOfflinePlayer(playerOfflineUUID).getName());
+					ps2.setString(2, playerOfflineUUID.toString());
+				}
+				ps2.executeUpdate();
+				return;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeBannedPlayer(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement("DELETE FROM player_banned WHERE player_uuid = ?");
+			ps.setString(1, playerUUID.toString());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean bannedPlayerExists(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection()
+					.prepareStatement("SELECT * FROM player_banned WHERE player_uuid = ?");
+			ps.setString(1, playerUUID.toString());
+			ResultSet results = ps.executeQuery();
+			if (results.next()) {
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+
 	}
 
 	public boolean isConnectedSuccessfully() {

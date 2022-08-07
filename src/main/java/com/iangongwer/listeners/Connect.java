@@ -6,13 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 
-import com.iangongwer.commands.BanPlayerCommand;
 import com.iangongwer.game.GameState;
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.utils.Util;
 
 public class Connect implements Listener {
 
 	Util u = Util.getInstance();
+	ConnectionMYSQL cm = ConnectionMYSQL.getInstance();
 
 	@EventHandler
 	public void onPlayerConnect(PlayerLoginEvent event) {
@@ -22,7 +23,7 @@ public class Connect implements Listener {
 		}
 		if (u.getWhitelistStatus()) {
 			if (!player.isOp() && !player.hasPermission("uhc.staff")) {
-				if (!BanPlayerCommand.bannedPlayers.contains(player.getUniqueId())) {
+				if (!cm.bannedPlayerExists(player.getUniqueId())) {
 					if (GameState.isScattering()) {
 						event.disallow(Result.KICK_OTHER,
 								u.messageFormat("The game is currently in scattering mode. Please wait to connect",
@@ -37,7 +38,7 @@ public class Connect implements Listener {
 			}
 		}
 		if (!u.getWhitelistStatus()) {
-			if (!BanPlayerCommand.bannedPlayers.contains(player.getUniqueId())) {
+			if (!cm.bannedPlayerExists(player.getUniqueId())) {
 				if (GameState.isLobby()) {
 					event.allow();
 				}
