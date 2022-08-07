@@ -17,6 +17,7 @@ import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
 import com.iangongwer.scenarios.SupplyDrops;
 import com.iangongwer.scenarios.TimeBomb;
+import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
 
@@ -147,6 +148,18 @@ public class GameRunnable extends BukkitRunnable {
 
 	private static void announcementPvPEnabledMessage() {
 		if (getFormattedTime().equalsIgnoreCase("15:00")) {
+			ArrayList<UUID> playersToRemove = new ArrayList<UUID>();
+			for (UUID playerUUID : gm.getPlayers()) {
+				if (Bukkit.getPlayer(playerUUID) == null && GameManager.playersNotJoinedBack.contains(playerUUID)) {
+					playersToRemove.add(playerUUID);
+					if (TeamManager.getInstance().areTeamsEnabled()) {
+						TeamManager.getInstance().addDeceasedMember(playerUUID);
+						TeamManager.getInstance().isFullTeamDead(playerUUID);
+					}
+				}
+			}
+			gm.getPlayers().removeAll(playersToRemove);
+
 			gm.setPvPEnabled(true);
 			Bukkit.broadcastMessage("");
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] PvP is now enabled!", "a"));

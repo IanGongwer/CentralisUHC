@@ -46,21 +46,34 @@ public class Quit implements Listener {
 			if (gm.isSpectator(playerUUID)) {
 				gm.removeSpectator(playerUUID);
 			} else if (gm.isPlayer(playerUUID)) {
+				gm.getAlreadyScatteredPlayers().remove(playerUUID);
+				List<ItemStack> playerQuitInventory1 = new ArrayList<ItemStack>();
+				for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getContents()) {
+					playerQuitInventory1.add(item);
+				}
+				gm.storeDeathInventories(playerUUID,
+						playerQuitInventory1);
+				gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
 				if (gm.isPvPEnabled()) {
 					gm.getAlreadyScatteredPlayers().remove(playerUUID);
 					gm.removePlayer(playerUUID);
-					List<ItemStack> playerQuitInventory = new ArrayList<ItemStack>();
+
+					List<ItemStack> playerQuitInventory2 = new ArrayList<ItemStack>();
 					for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getContents()) {
-						playerQuitInventory.add(item);
+						playerQuitInventory2.add(item);
 					}
 					gm.storeDeathInventories(playerUUID,
-							playerQuitInventory);
+							playerQuitInventory2);
 					gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
+
 					if (TeamManager.getInstance().areTeamsEnabled()) {
 						TeamManager.getInstance().addDeceasedMember(playerUUID);
 						TeamManager.getInstance().isFullTeamDead(playerUUID);
 					}
+
 					gm.isGameFinished();
+				} else {
+					GameManager.playersNotJoinedBack.add(playerUUID);
 				}
 			}
 

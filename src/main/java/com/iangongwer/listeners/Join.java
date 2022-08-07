@@ -50,15 +50,21 @@ public class Join implements Listener {
 			player.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
 
 			if (gm.isPlayer(playerUUID)) {
-				ScoreboardUtil.createGameScoreboard(player);
-				HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
-						ScoreboardUtil.getScoreboard(player).getName());
+				if (!gm.isPvPEnabled()) {
+					if (GameManager.playersNotJoinedBack.contains(playerUUID)) {
+						GameManager.playersNotJoinedBack.remove(playerUUID);
+						GameManager.deathInventories.remove(playerUUID);
+						gm.getDeathLocations().remove(playerUUID);
+					}
+					ScoreboardUtil.createGameScoreboard(player);
+					HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+							ScoreboardUtil.getScoreboard(player).getName());
 
-				// QuitLogRunnable.dontkill.add(player.getUniqueId());
-				// WorldUtil.despawnVillager(player);
-				// QuitLogRunnable.dontkill.remove(player.getUniqueId());
-				// Quit Log System Not Working
-
+					// QuitLogRunnable.dontkill.add(player.getUniqueId());
+					// WorldUtil.despawnVillager(player);
+					// QuitLogRunnable.dontkill.remove(player.getUniqueId());
+					// Quit Log System Not Working
+				}
 			} else if (u.isInStaffMode(playerUUID)) {
 				ScoreboardUtil.createStaffSpecScoreboard(player);
 				Location loc = new Location(Bukkit.getPlayer(gm.getPlayers().get(0)).getWorld(), 0, 100, 0);

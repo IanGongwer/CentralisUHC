@@ -65,7 +65,7 @@ public class ScatterRunnable extends BukkitRunnable {
 							"a"));
 					Bukkit.broadcastMessage(
 							Util.getInstance().messageFormat(
-									"[UHC] God Apples are disabled. Golden Heads give you 2 hearts, speed, & strength",
+									"[UHC] God Apples are disabled. Golden Heads give you 2 extra hearts & Speed 1",
 									"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 							"",

@@ -52,6 +52,7 @@ public class GameManager {
 
 	public static Map<UUID, ArrayList<ItemStack>> deathInventories = new HashMap<UUID, ArrayList<ItemStack>>();
 	private Map<UUID, Location> deathLocations = new HashMap<UUID, Location>();
+	public static ArrayList<UUID> playersNotJoinedBack = new ArrayList<UUID>();
 
 	public static Map<UUID, Integer> quitLogTime = new HashMap<UUID, Integer>();
 	public static Map<UUID, ArrayList<ItemStack>> quitLoggedInventories = new HashMap<UUID, ArrayList<ItemStack>>();
@@ -258,22 +259,20 @@ public class GameManager {
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
 				Bukkit.broadcastMessage("");
 			}
-		} else {
-			if (getPlayers().size() == 1) {
-				GameState.setState(GameState.End);
-				Bukkit.broadcastMessage("");
-				Bukkit.broadcastMessage(
-						Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));
-				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Discord: discord.centralis.cc", "a"));
-				Bukkit.broadcastMessage(Util.getInstance()
-						.messageFormat("Winner: " + Bukkit.getPlayer(getPlayers().get(0)).getDisplayName(), "a"));
-				Bukkit.broadcastMessage("");
+		} else if (getPlayers().size() == 1) {
+			GameState.setState(GameState.End);
+			Bukkit.broadcastMessage("");
+			Bukkit.broadcastMessage(
+					Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));
+			Bukkit.broadcastMessage(Util.getInstance().messageFormat("Discord: discord.centralis.cc", "a"));
+			Bukkit.broadcastMessage(Util.getInstance()
+					.messageFormat("Winner: " + Bukkit.getPlayer(getPlayers().get(0)).getDisplayName(), "a"));
+			Bukkit.broadcastMessage("");
 
-				if (!Main.isRedisEnabled()) {
-					dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
-				} else {
-					cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
-				}
+			if (!Main.isRedisEnabled()) {
+				dbm.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
+			} else {
+				cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
 			}
 		}
 	}
