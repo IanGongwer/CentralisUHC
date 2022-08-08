@@ -1,31 +1,47 @@
-package com.iangongwer.commands;
+package com.iangongwer.runnables;
 
+import java.util.Calendar;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import com.iangongwer.commands.ScheduleCommand;
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.ChatUtil;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
-public class CalculateCommand implements CommandExecutor {
+public class AutomaticRunnable extends BukkitRunnable {
 
 	Util u = Util.getInstance();
 	GameManager gm = GameManager.getInstance();
 	TeamManager tm = TeamManager.getInstance();
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("calculate") && sender instanceof Player) {
-			Player playerSender = (Player) sender;
-			if (GameState.isLobby()) {
+	static TimeZone timeZone = TimeZone.getTimeZone("UTC");
+
+	@Override
+	public void run() {
+		if (GameState.isLobby()) {
+			Calendar cal = Calendar.getInstance(timeZone);
+			cal.set(Calendar.SECOND, 0);
+			Calendar cal2 = (Calendar) ScheduleCommand.cal.clone();
+			cal2.add(Calendar.MINUTE, -15);
+			Calendar cal3 = (Calendar) ScheduleCommand.cal.clone();
+			cal3.add(Calendar.SECOND, 5);
+			if (cal.getTime().toString().equals(cal2.getTime().toString())) {
+				if (Util.getInstance().getWhitelistStatus()) {
+					Util.getInstance().setWhitelistStatus(false);
+					Bukkit.broadcastMessage(Util.getInstance().messageFormat("The whitelist is now off", "a"));
+				}
+			}
+			if (cal.getTime().toString().equals(ScheduleCommand.cal.getTime().toString())) {
 				u.setWhitelistStatus(true);
 				while (LobbyUtil.getPracticePlayers().size() != 0) {
 					for (int i = 0; i < LobbyUtil.getPracticePlayers().size(); i++) {
@@ -47,22 +63,20 @@ public class CalculateCommand implements CommandExecutor {
 						Location scatterLocation = gm.checkLocationEligibilityNoTeleport(gm.makeScatterLocation());
 						gm.getPredeterminedLocations().put(leader, scatterLocation);
 					}
-					if (gm.getPredeterminedLocations().size() == TeamManager.getInstance().getTotalTeams()) {
-						playerSender.sendMessage(u.messageFormat("All locations calculated.", "a"));
-					}
 				} else {
 					gm.getPredeterminedLocations().clear();
 					for (UUID player : gm.getPlayers()) {
 						Location scatterLocation = gm.checkLocationEligibilityNoTeleport(gm.makeScatterLocation());
 						gm.getPredeterminedLocations().put(player, scatterLocation);
 					}
-					if (gm.getPredeterminedLocations().size() == gm.getPlayers().size()) {
-						playerSender.sendMessage(u.messageFormat("All locations calculated.", "a"));
-					}
+				}
+
+				if (gm.getPredeterminedLocations().size() != 0) {
+					ChatUtil.setChatMute(true);
+					gm.scatterPlayers(gm.getPlayers());
 				}
 			}
 		}
-		return true;
 	}
 
 }

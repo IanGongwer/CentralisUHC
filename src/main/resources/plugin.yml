@@ -49,5 +49,7 @@ commands:
     aliases: [craft, crafts, crafting, recipe]
   heal:
     permission: uhc.staff
+  schedule:
+    permission: uhc.staff
     
 depend: [Netherboard]

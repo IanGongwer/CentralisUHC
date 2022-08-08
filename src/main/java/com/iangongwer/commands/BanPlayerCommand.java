@@ -21,7 +21,7 @@ public class BanPlayerCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("banplayer") && sender instanceof Player) {
 			Player player = (Player) sender;
-			if (args.length == 0) {
+			if (args.length != 1) {
 				player.sendMessage(Util.getInstance().messageFormat("Usage: /banplayer (player)", "c"));
 			}
 			if (args.length == 1) {

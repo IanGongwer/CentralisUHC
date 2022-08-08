@@ -19,6 +19,7 @@ import com.iangongwer.commands.PracticeCommand;
 import com.iangongwer.commands.RecipesCommand;
 import com.iangongwer.commands.RespawnCommand;
 import com.iangongwer.commands.ScenarioCommand;
+import com.iangongwer.commands.ScheduleCommand;
 import com.iangongwer.commands.StaffCommand;
 import com.iangongwer.commands.StartCommand;
 import com.iangongwer.commands.StatsCommand;
@@ -54,6 +55,7 @@ import com.iangongwer.listeners.Respawn;
 import com.iangongwer.listeners.Weather;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
+import com.iangongwer.runnables.AutomaticRunnable;
 import com.iangongwer.runnables.EndRunnable;
 import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.runnables.PvPLogRunnable;
@@ -81,6 +83,7 @@ public class Main extends JavaPlugin {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScatterRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new EndRunnable(), 0L, 20L);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new AutomaticRunnable(), 0L, 20L);
 	}
 
 	public void registerListeners() {
@@ -116,6 +119,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("schedule").setExecutor((CommandExecutor) new ScheduleCommand());
 		getCommand("heal").setExecutor((CommandExecutor) new HealCommand());
 		getCommand("recipes").setExecutor((CommandExecutor) new RecipesCommand());
 		getCommand("discord").setExecutor((CommandExecutor) new DiscordCommand());

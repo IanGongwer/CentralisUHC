@@ -24,11 +24,11 @@ public class WhitelistCommand implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("toggle")) {
 					if (u.getWhitelistStatus()) {
 						u.setWhitelistStatus(false);
-						player.sendMessage(u.messageFormat("The whitelist is now off.", "a"));
+						player.sendMessage(u.messageFormat("The whitelist is now off", "a"));
 						return true;
 					} else {
 						u.setWhitelistStatus(true);
-						player.sendMessage(u.messageFormat("The whitelist is now on.", "a"));
+						player.sendMessage(u.messageFormat("The whitelist is now on", "a"));
 						return true;
 					}
 				}
