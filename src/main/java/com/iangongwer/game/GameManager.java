@@ -258,6 +258,7 @@ public class GameManager {
 				}
 				Bukkit.broadcastMessage(Util.getInstance().messageFormat("Winners: " + members, "a"));
 				Bukkit.broadcastMessage("");
+				ConnectionMYSQL.getInstance().createSortedLeaderboardTable();
 			}
 		} else if (getPlayers().size() == 1) {
 			GameState.setState(GameState.End);
@@ -274,6 +275,7 @@ public class GameManager {
 			} else {
 				cr.addWin(Bukkit.getPlayer(getPlayers().get(0)).getUniqueId());
 			}
+			ConnectionMYSQL.getInstance().createSortedLeaderboardTable();
 		}
 	}
 
