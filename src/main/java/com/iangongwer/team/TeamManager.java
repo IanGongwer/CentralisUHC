@@ -42,8 +42,10 @@ public class TeamManager {
 
 	public void deleteTeam(UUID leader) {
 		for (UUID member : getTeam(leader).members) {
-			Bukkit.getPlayer(member).sendMessage(Util.getInstance()
-					.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team", "c"));
+			if (Bukkit.getPlayer(member) != null) {
+				Bukkit.getPlayer(member).sendMessage(Util.getInstance()
+						.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team", "c"));
+			}
 		}
 
 		listOfTeams.remove(leader);

@@ -157,8 +157,10 @@ public class GameManager {
 				UUID leader = set.getKey();
 
 				addScatteredPlayer(leader);
-				Bukkit.getPlayer(leader).teleport(getPredeterminedLocations().get(leader));
-				playerScatterUtil(Bukkit.getPlayer(leader));
+				if (Bukkit.getPlayer(leader) != null) {
+					Bukkit.getPlayer(leader).teleport(getPredeterminedLocations().get(leader));
+					playerScatterUtil(Bukkit.getPlayer(leader));
+				}
 			}
 
 			for (UUID player : players) {
