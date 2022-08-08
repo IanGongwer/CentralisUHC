@@ -1,6 +1,7 @@
 package com.iangongwer.commands;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -11,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameState;
+import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
 
@@ -26,12 +28,13 @@ public class TeamCommand implements CommandExecutor {
 				if (GameState.isLobby()) {
 					if (!player.hasPermission("uhc.staff")) {
 						if (tm.areTeamsEnabled()) {
-							player.sendMessage(u.messageFormat("Usage: /team create/disband/leave/info", "c"));
+							player.sendMessage(u.messageFormat("Usage: /team create/disband/leave/info/list", "c"));
 							player.sendMessage(u.messageFormat("Usage: /team invite/join/kick (player)", "c"));
 						}
 					} else {
 						player.sendMessage(u.messageFormat("Usage: /team create/disband/leave/info", "c"));
 						player.sendMessage(u.messageFormat("Usage: /team invite/join/kick (player)", "c"));
+						player.sendMessage(u.messageFormat("Usage: /team size (team size)", "c"));
 						player.sendMessage(u.messageFormat("Usage: /team enable/disable", "c"));
 					}
 				} else {
@@ -41,6 +44,11 @@ public class TeamCommand implements CommandExecutor {
 				}
 			}
 			if (args.length == 1) {
+				if (player.hasPermission("uhc.staff")) {
+					if (args[0].equalsIgnoreCase("size")) {
+						player.sendMessage(u.messageFormat("Usage: /team size (team size)", "c"));
+					}
+				}
 				if (player.hasPermission("uhc.staff")) {
 					if (args[0].equalsIgnoreCase("enable")) {
 						if (GameState.isLobby()) {
@@ -64,6 +72,24 @@ public class TeamCommand implements CommandExecutor {
 								tm.deleteAllTeams();
 							} else {
 								player.sendMessage(u.messageFormat("Teams are already disabled", "c"));
+							}
+						} else {
+							player.sendMessage(
+									u.messageFormat("You cannot use team creation/modification commands while in-game",
+											"c"));
+						}
+					}
+				}
+			}
+			if (args.length == 2) {
+				if (player.hasPermission("uhc.staff")) {
+					if (args[0].equalsIgnoreCase("size")) {
+						if (GameState.isLobby()) {
+							if (tm.areTeamsEnabled()) {
+								player.sendMessage(u.messageFormat("The max team size is now: " + args[1], "a"));
+								tm.setMaxTeamSize(Integer.valueOf(args[1]));
+							} else {
+								player.sendMessage(u.messageFormat("Teams are currently disabled", "c"));
 							}
 						} else {
 							player.sendMessage(
@@ -149,6 +175,27 @@ public class TeamCommand implements CommandExecutor {
 							} else {
 								player.sendMessage(u.messageFormat(
 										"You are not in a team. Use /team create to generate your team", "c"));
+							}
+						}
+						if (args[0].equalsIgnoreCase("list")) {
+							player.sendMessage(u.messageFormat("--- Teams List ---", "a"));
+							if (TeamManager.getInstance().getTotalTeams() == 0) {
+								player.sendMessage(u.messageFormat("Currently no teams", "a"));
+							}
+							for (Map.Entry<UUID, Team> team : TeamManager.listOfTeams.entrySet()) {
+								UUID leaderUUID = team.getKey();
+								player.sendMessage(u.messageFormat(
+										"",
+										"a"));
+								player.sendMessage(u.messageFormat(
+										"Team " + Bukkit.getPlayer(leaderUUID)
+												.getDisplayName(),
+										"a"));
+								player.sendMessage(
+										u.messageFormat("Current Size: " + tm.getTeamSize(leaderUUID), "a"));
+								player.sendMessage(u.messageFormat(
+										"",
+										"a"));
 							}
 						}
 					}

@@ -165,6 +165,10 @@ public class TeamManager {
 		}
 	}
 
+	public void setMaxTeamSize(int teamSize) {
+		maxTeamSize = teamSize;
+	}
+
 	public int getMaxTeamSize() {
 		return maxTeamSize;
 	}

@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
 import com.iangongwer.runnables.PvPLogRunnable;
+import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.HeartUtil;
 import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.ScoreboardUtil;
@@ -56,9 +57,14 @@ public class PvP implements Listener {
 						|| u.isInStaffMode(playerUUID)) {
 					event.setCancelled(true);
 				}
+
+				if (TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
+					event.setCancelled(true);
+				}
 				if (!gm.getSpectators().contains(damagerUUID)
 						&& !gm.getSpectators().contains(playerUUID) && !u.isInStaffMode(damagerUUID)
-						&& !u.isInStaffMode(playerUUID)) {
+						&& !u.isInStaffMode(playerUUID)
+						&& !TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
 					if (gm.isPvPEnabled()) {
 						event.setCancelled(false);
 						if (!gm.isPvPLogged(playerUUID)) {
