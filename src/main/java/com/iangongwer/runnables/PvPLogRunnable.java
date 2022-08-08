@@ -33,8 +33,10 @@ public class PvPLogRunnable extends BukkitRunnable {
 
 	public void removePvPLoggedPlayer(Entry<UUID, Integer> pvpPlayerObject) {
 		if (pvpPlayerObject.getValue() == 0) {
-			Bukkit.getPlayer(pvpPlayerObject.getKey())
-					.sendMessage(Util.getInstance().messageFormat("You are not PvP logged anymore", "a"));
+			if (Bukkit.getPlayer(pvpPlayerObject.getKey()) != null) {
+				Bukkit.getPlayer(pvpPlayerObject.getKey())
+						.sendMessage(Util.getInstance().messageFormat("You are not PvP logged anymore", "a"));
+			}
 			gm.getPvPLogMap().keySet().removeAll(Collections.singleton(pvpPlayerObject.getKey()));
 		}
 	}

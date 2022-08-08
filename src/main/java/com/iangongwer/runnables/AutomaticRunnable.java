@@ -34,14 +34,14 @@ public class AutomaticRunnable extends BukkitRunnable {
 			Calendar cal2 = (Calendar) ScheduleCommand.cal.clone();
 			cal2.add(Calendar.MINUTE, -15);
 			Calendar cal3 = (Calendar) ScheduleCommand.cal.clone();
-			cal3.add(Calendar.SECOND, 5);
+			cal3.add(Calendar.MINUTE, 3);
 			if (cal.getTime().toString().equals(cal2.getTime().toString())) {
 				if (Util.getInstance().getWhitelistStatus()) {
 					Util.getInstance().setWhitelistStatus(false);
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat("The whitelist is now off", "a"));
 				}
 			}
-			if (cal.getTime().toString().equals(ScheduleCommand.cal.getTime().toString())) {
+			if (cal.getTime().toString().equals(cal3.getTime().toString())) {
 				u.setWhitelistStatus(true);
 				while (LobbyUtil.getPracticePlayers().size() != 0) {
 					for (int i = 0; i < LobbyUtil.getPracticePlayers().size(); i++) {
