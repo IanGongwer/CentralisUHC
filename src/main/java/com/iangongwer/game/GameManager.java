@@ -44,7 +44,7 @@ public class GameManager {
 
 	Random random = new Random();
 
-	private boolean isPvPEnabled = false;
+	private boolean isPvPEnabled = true;
 
 	public static boolean doneScattering = false;
 
@@ -140,6 +140,7 @@ public class GameManager {
 		player.setHealth(20.0);
 		player.setExp(0f);
 		player.setLevel(0);
+		player.getInventory().clear();
 		player.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 32));
 		player.getInventory().addItem(new ItemStack(Material.LEATHER, 1));
 		player.getInventory().addItem(new ItemStack(Material.SUGAR_CANE, 3));
@@ -283,10 +284,6 @@ public class GameManager {
 
 	public void setPvPLogTime(UUID playerUUID, int time) {
 		pvpLogTime.put(playerUUID, time);
-	}
-
-	public void removePvPLoggedPlayer(UUID playerUUID) {
-		pvpLogTime.remove(playerUUID);
 	}
 
 	public Map<UUID, Integer> getPvPLogMap() {

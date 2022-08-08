@@ -7,16 +7,12 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 import com.iangongwer.game.GameManager;
@@ -24,26 +20,6 @@ import com.iangongwer.game.GameManager;
 public class WorldUtil {
 
     static GameManager gm = GameManager.getInstance();
-
-    public static void spawnVillager(Player player) {
-        Villager quitLoggedVillager = (Villager) player.getWorld().spawnEntity(player.getLocation(),
-                EntityType.VILLAGER);
-        quitLoggedVillager.setCustomName(player.getDisplayName());
-        quitLoggedVillager.setCustomNameVisible(true);
-    }
-
-    public static void despawnVillager(OfflinePlayer player) {
-        for (LivingEntity entity : Bukkit.getWorld("uhc_world").getLivingEntities()) {
-            if (entity instanceof Villager && entity.getCustomName() != null) {
-                if (entity.getCustomName()
-                        .equalsIgnoreCase(player.getName())) {
-                    entity.damage(20);
-                    gm.setPvPLogTime(player.getUniqueId(), -1);
-                    gm.removePvPLoggedPlayer(player.getUniqueId());
-                }
-            }
-        }
-    }
 
     public static void createWorld(String worldName) {
         if (Bukkit.getWorld(worldName) == null) {

@@ -1,5 +1,6 @@
 package com.iangongwer.runnables;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -18,16 +19,15 @@ public class PvPLogRunnable extends BukkitRunnable {
 
 	@Override
 	public void run() {
-		Map<UUID, Integer> pvpLogList = gm.getPvPLogMap();
-		for (Entry<UUID, Integer> pvpPlayerObject : gm.getPvPLogMap().entrySet()) {
-			subtractPvPLogTime(pvpLogList, pvpPlayerObject);
-			removePvPLoggedPlayer(pvpPlayerObject);
+		for (Map.Entry<UUID, Integer> pvpLogList : gm.getPvPLogMap().entrySet()) {
+			subtractPvPLogTime(pvpLogList);
+			removePvPLoggedPlayer(pvpLogList);
 		}
 	}
 
-	public void subtractPvPLogTime(Map<UUID, Integer> pvpLogList, Entry<UUID, Integer> pvpPlayerObject) {
-		if (pvpPlayerObject.getValue() > 0) {
-			gm.setPvPLogTime(pvpPlayerObject.getKey(), pvpPlayerObject.getValue() - 1);
+	public void subtractPvPLogTime(Entry<UUID, Integer> pvpLogList) {
+		if (pvpLogList.getValue() > 0) {
+			gm.setPvPLogTime(pvpLogList.getKey(), pvpLogList.getValue() - 1);
 		}
 	}
 
@@ -35,15 +35,14 @@ public class PvPLogRunnable extends BukkitRunnable {
 		if (pvpPlayerObject.getValue() == 0) {
 			Bukkit.getPlayer(pvpPlayerObject.getKey())
 					.sendMessage(Util.getInstance().messageFormat("You are not PvP logged anymore", "a"));
-			gm.setPvPLogTime(pvpPlayerObject.getKey(), -1);
-			gm.removePvPLoggedPlayer(pvpPlayerObject.getKey());
+			gm.getPvPLogMap().keySet().removeAll(Collections.singleton(pvpPlayerObject.getKey()));
 		}
 	}
 
 	public void killPvPLogPlayerProcedure(UUID playerUUID) {
 		gm.removePlayer(playerUUID);
 		gm.setPvPLogTime(playerUUID, -1);
-		gm.removePvPLoggedPlayer(playerUUID);
+		gm.getPvPLogMap().keySet().removeAll(Collections.singleton(playerUUID));
 
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			tm.addDeceasedMember(playerUUID);
