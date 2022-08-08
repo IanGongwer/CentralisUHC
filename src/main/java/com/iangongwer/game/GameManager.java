@@ -357,11 +357,6 @@ public class GameManager {
 				inventoryMakeup.add(item);
 			}
 		}
-		for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getArmorContents()) {
-			if (item != null && item.getType() != Material.AIR) {
-				inventoryMakeup.add(item);
-			}
-		}
 		deathInventories.put(playerUUID, inventoryMakeup);
 	}
 
