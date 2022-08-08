@@ -26,12 +26,12 @@ public class ScheduleCommand implements CommandExecutor {
 			if (args.length != 5) {
 				player.sendMessage(
 						Util.getInstance().messageFormat(
-								"Usage: /schedule (yyyy) (# of month - 1) (# of day in month) (hour of day in military) (minute of hour)",
+								"Usage: /schedule (yyyy) (# of month) (# of day in month) (hour of day in military) (minute of hour)",
 								"c"));
 			}
 			if (args.length == 5) {
 				if (GameState.isLobby()) {
-					cal.set(Integer.valueOf(args[0]), Integer.valueOf(args[1]), Integer.valueOf(args[2]),
+					cal.set(Integer.valueOf(args[0]), Integer.valueOf(args[1]) + 1, Integer.valueOf(args[2]),
 							Integer.valueOf(args[3]),
 							Integer.valueOf(args[4]));
 					cal.set(Calendar.SECOND, 0);
