@@ -186,8 +186,8 @@ public class GameManager {
 	}
 
 	public Location makeScatterLocation() {
-		int randomX = -751 + random.nextInt(751);
-		int randomZ = -751 + random.nextInt(751);
+		int randomX = -1001 + random.nextInt(1001);
+		int randomZ = -1001 + random.nextInt(1001);
 		int yCoord = Bukkit.getWorld("uhc_world").getHighestBlockYAt(randomX, randomZ) + 100;
 
 		if (yCoord < 60) {
