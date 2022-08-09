@@ -26,7 +26,7 @@ public class ScheduleCommand implements CommandExecutor {
 			if (args.length != 5) {
 				player.sendMessage(
 						Util.getInstance().messageFormat(
-								"Usage: /schedule (yyyy) (# of month) (# of day in month - 1) (hour of day in military) (minute of hour)",
+								"Usage: /schedule (yyyy) (# of month - 1) (# of day in month) (hour of day in military) (minute of hour)",
 								"c"));
 			}
 			if (args.length == 5) {
