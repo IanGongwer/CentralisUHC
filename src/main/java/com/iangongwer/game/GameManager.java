@@ -19,7 +19,6 @@ import org.bukkit.potion.PotionEffectType;
 import com.iangongwer.main.Main;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
-import com.iangongwer.runnables.GameRunnable;
 import com.iangongwer.team.Team;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.ChatUtil;
@@ -182,17 +181,15 @@ public class GameManager {
 				playerScatterUtil(Bukkit.getPlayer(player));
 			}
 		}
-
-		GameRunnable.setBorderBlock(2000);
 		doneScattering = true;
 	}
 
 	public Location makeScatterLocation() {
 		int randomX = -1001 + random.nextInt(1001);
 		int randomZ = -1001 + random.nextInt(1001);
-		int yCoord = Bukkit.getWorld("uhc_world").getHighestBlockYAt(randomX, randomZ) + 100;
+		int yCoord = Bukkit.getWorld("uhc_world").getHighestBlockYAt(randomX, randomZ);
 
-		if (yCoord < 60) {
+		if (yCoord < 65) {
 			makeScatterLocation();
 		}
 
@@ -205,7 +202,9 @@ public class GameManager {
 				&& potentialScatterLocation.getBlock().getType() != Material.WATER
 				&& potentialScatterLocation.getBlock().getType() != Material.STATIONARY_LAVA
 				&& potentialScatterLocation.getBlock().getType() != Material.STATIONARY_WATER
-				&& potentialScatterLocation.getBlock().getType() != Material.STONE) {
+				&& potentialScatterLocation.getBlock().getType() != Material.STONE
+				&& potentialScatterLocation.getBlock().getType() != Material.AIR) {
+			potentialScatterLocation.setY(potentialScatterLocation.getY() + 100);
 			return potentialScatterLocation;
 		} else {
 			return checkLocationEligibilityNoTeleport(makeScatterLocation());

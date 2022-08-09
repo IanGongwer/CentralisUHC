@@ -26,7 +26,7 @@ public class PvPLogRunnable extends BukkitRunnable {
 	}
 
 	public void subtractPvPLogTime(Entry<UUID, Integer> pvpLogList) {
-		if (pvpLogList.getValue() > 0) {
+		if (pvpLogList.getValue() >= 1) {
 			gm.setPvPLogTime(pvpLogList.getKey(), pvpLogList.getValue() - 1);
 		}
 	}

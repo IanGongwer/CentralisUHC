@@ -106,16 +106,7 @@ public class Quit implements Listener {
 							playerQuitInventory1);
 					gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
 					if (gm.isPvPEnabled()) {
-						gm.getAlreadyScatteredPlayers().remove(playerUUID);
 						gm.removePlayer(playerUUID);
-
-						List<ItemStack> playerQuitInventory2 = new ArrayList<ItemStack>();
-						for (ItemStack item : Bukkit.getPlayer(playerUUID).getInventory().getContents()) {
-							playerQuitInventory2.add(item);
-						}
-						gm.storeDeathInventories(playerUUID,
-								playerQuitInventory2);
-						gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
 
 						if (TeamManager.getInstance().areTeamsEnabled()) {
 							TeamManager.getInstance().addDeceasedMember(playerUUID);

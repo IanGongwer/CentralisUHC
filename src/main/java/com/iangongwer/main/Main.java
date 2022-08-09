@@ -1,7 +1,6 @@
 package com.iangongwer.main;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +10,7 @@ import com.iangongwer.commands.CalculateCommand;
 import com.iangongwer.commands.DatabaseCommand;
 import com.iangongwer.commands.DiscordCommand;
 import com.iangongwer.commands.HealCommand;
+import com.iangongwer.commands.HelpopCommand;
 import com.iangongwer.commands.KillTopCommand;
 import com.iangongwer.commands.LateScatterCommand;
 import com.iangongwer.commands.MuteChatCommand;
@@ -75,8 +75,6 @@ public class Main extends JavaPlugin {
 
 	private static boolean redisEnabled = false;
 
-	public static World uhcWorld;
-
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new PvPLogRunnable(), 0L, 40L);
@@ -119,6 +117,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("helpop").setExecutor((CommandExecutor) new HelpopCommand());
 		getCommand("schedule").setExecutor((CommandExecutor) new ScheduleCommand());
 		getCommand("heal").setExecutor((CommandExecutor) new HealCommand());
 		getCommand("recipes").setExecutor((CommandExecutor) new RecipesCommand());
@@ -178,7 +177,7 @@ public class Main extends JavaPlugin {
 			Bukkit.getWorld("uhc_world").setGameRuleValue("doDaylightCycle", "false");
 			Bukkit.getWorld("uhc_world").setTime(6000);
 		}
-		uhcWorld = Bukkit.getWorlds().get(1);
+		GameRunnable.setBorderBlock(2000);
 	}
 
 	public void onDisable() {

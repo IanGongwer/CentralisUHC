@@ -34,10 +34,12 @@ public class LateScatterCommand implements CommandExecutor {
 								if (tm.hasTeam(player.getUniqueId())) {
 									for (UUID teamMember : tm.getTeamMembers(player.getUniqueId())) {
 										if (!teamMember.equals(player.getUniqueId())) {
-											Location memberLocation = Bukkit
-													.getPlayer(teamMember).getLocation();
-											memberLocation.setY(memberLocation.getY() + 1);
-											player.teleport(memberLocation);
+											if (Bukkit.getPlayer(teamMember) != null) {
+												Location memberLocation = Bukkit
+														.getPlayer(teamMember).getLocation();
+												memberLocation.setY(memberLocation.getY() + 1);
+												player.teleport(memberLocation);
+											}
 										}
 									}
 								}

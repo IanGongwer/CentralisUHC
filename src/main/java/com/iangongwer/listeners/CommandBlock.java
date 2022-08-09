@@ -12,7 +12,7 @@ public class CommandBlock implements Listener {
 			if (event.getMessage().startsWith("/me") || event.getMessage().startsWith("/ver")
 					|| event.getMessage().startsWith("/pl") || event.getMessage().startsWith("/worldedit")
 					|| event.getMessage().startsWith("/we") || event.getMessage().startsWith("/minecraft:")
-					|| event.getMessage().startsWith("/bukkit:") || event.getMessage().startsWith("/help")
+					|| event.getMessage().startsWith("/bukkit:")
 					|| event.getMessage().startsWith("/tc") || event.getMessage().startsWith("/wb")
 					|| event.getMessage().startsWith("/calc") || event.getMessage().startsWith("/searchitem")
 					|| event.getMessage().startsWith("/sel") || event.getMessage().startsWith("/toggleplace")
