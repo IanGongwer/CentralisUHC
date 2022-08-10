@@ -235,8 +235,6 @@ public class GameManager {
 		Bukkit.broadcastMessage(Util.getInstance()
 				.messageFormat("[UHC] " + ChatColor.YELLOW + "Scenarios: " + getActiveScenarios().toString(), "a"));
 		Bukkit.broadcastMessage("");
-
-		ChatUtil.setChatMute(false);
 	}
 
 	public void isGameFinished() {

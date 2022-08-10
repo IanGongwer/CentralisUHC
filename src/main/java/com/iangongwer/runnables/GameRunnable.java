@@ -18,6 +18,7 @@ import com.iangongwer.game.GameState;
 import com.iangongwer.scenarios.SupplyDrops;
 import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.team.TeamManager;
+import com.iangongwer.utils.ChatUtil;
 import com.iangongwer.utils.ScoreboardUtil;
 import com.iangongwer.utils.Util;
 
@@ -160,9 +161,11 @@ public class GameRunnable extends BukkitRunnable {
 			}
 			gm.getPlayers().removeAll(playersToRemove);
 
+			ChatUtil.setChatMute(false);
 			gm.setPvPEnabled(true);
 			Bukkit.broadcastMessage("");
 			Bukkit.broadcastMessage(u.messageFormat("[UHC] PvP is now enabled!", "a"));
+			Bukkit.broadcastMessage(u.messageFormat("[UHC] Chat is now unmuted!", "a"));
 			Bukkit.broadcastMessage("");
 
 			for (UUID playerUUID : gm.getPlayers()) {
