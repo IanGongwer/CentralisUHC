@@ -34,7 +34,9 @@ public class AutomaticRunnable extends BukkitRunnable {
 			Calendar cal2 = (Calendar) ScheduleCommand.cal.clone();
 			cal2.add(Calendar.MINUTE, -15);
 			Calendar cal3 = (Calendar) ScheduleCommand.cal.clone();
-			cal3.add(Calendar.MINUTE, 3);
+			cal3.add(Calendar.MINUTE, 2);
+			Calendar cal4 = (Calendar) ScheduleCommand.cal.clone();
+			cal4.add(Calendar.MINUTE, 3);
 			if (cal.getTime().toString().equals(cal2.getTime().toString())) {
 				if (Util.getInstance().getWhitelistStatus()) {
 					Util.getInstance().setWhitelistStatus(false);
@@ -70,7 +72,8 @@ public class AutomaticRunnable extends BukkitRunnable {
 						gm.getPredeterminedLocations().put(player, scatterLocation);
 					}
 				}
-
+			}
+			if (cal.getTime().toString().equals(cal4.getTime().toString())) {
 				if (gm.getPredeterminedLocations().size() != 0) {
 					ChatUtil.setChatMute(true);
 					gm.scatterPlayers(gm.getPlayers());

@@ -96,7 +96,7 @@ public class Util {
 		gm.removePlayer(playerUUID);
 		gm.removeSpectator(playerUUID);
 		Player player = Bukkit.getPlayer(playerUUID);
-		player.sendMessage(messageFormat("You are now in staff mode.", "a"));
+		player.sendMessage(messageFormat("You are now in staff mode", "a"));
 		player.setGameMode(GameMode.SPECTATOR);
 		ScoreboardUtil.createStaffSpecScoreboard(Bukkit.getPlayer(playerUUID));
 	}
@@ -112,6 +112,6 @@ public class Util {
 			gm.addPlayer(playerUUID);
 			player.setGameMode(GameMode.SURVIVAL);
 		}
-		player.sendMessage(messageFormat("You are now not in staff mode.", "c"));
+		player.sendMessage(messageFormat("You are now not in staff mode", "c"));
 	}
 }

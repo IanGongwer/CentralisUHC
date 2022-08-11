@@ -19,8 +19,7 @@ public class StaffCommand implements CommandExecutor {
 			Player player = (Player) sender;
 			if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 				player.sendMessage(u.messageFormat("You are currently in practice. Use /prac to leave", "c"));
-			}
-			if (!LobbyUtil.isPracticePlayer(player.getUniqueId())) {
+			} else {
 				if (!u.isInStaffMode(player.getUniqueId())) {
 					u.addStaffMode(player.getUniqueId());
 				} else {

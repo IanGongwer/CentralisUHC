@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameState;
 import com.iangongwer.mysql.ConnectionMYSQL;
+import com.iangongwer.utils.LobbyUtil;
 import com.iangongwer.utils.Util;
 
 public class ScheduleCommand implements CommandExecutor {
@@ -31,13 +32,18 @@ public class ScheduleCommand implements CommandExecutor {
 			}
 			if (args.length == 5) {
 				if (GameState.isLobby()) {
-					cal.set(Integer.valueOf(args[0]), Integer.valueOf(args[1]), Integer.valueOf(args[2]),
-							Integer.valueOf(args[3]),
-							Integer.valueOf(args[4]));
-					cal.set(Calendar.SECOND, 0);
-					player.sendMessage(
-							Util.getInstance().messageFormat("The game start time is now set to: " + cal.getTime(),
-									"a"));
+					if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
+						player.sendMessage(u.messageFormat("You are currently in practice. Use /prac to leave", "c"));
+					} else {
+						u.addStaffMode(player.getUniqueId());
+						cal.set(Integer.valueOf(args[0]), Integer.valueOf(args[1]), Integer.valueOf(args[2]),
+								Integer.valueOf(args[3]),
+								Integer.valueOf(args[4]));
+						cal.set(Calendar.SECOND, 0);
+						player.sendMessage(
+								Util.getInstance().messageFormat("The game start time is now set to: " + cal.getTime(),
+										"a"));
+					}
 				} else {
 					player.sendMessage(
 							Util.getInstance().messageFormat("You cannot schedule a game right now", "c"));

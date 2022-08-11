@@ -58,6 +58,7 @@ import com.iangongwer.redis.ConnectionRedis;
 import com.iangongwer.runnables.AutomaticRunnable;
 import com.iangongwer.runnables.EndRunnable;
 import com.iangongwer.runnables.GameRunnable;
+import com.iangongwer.runnables.LobbyRunnable;
 import com.iangongwer.runnables.PvPLogRunnable;
 import com.iangongwer.runnables.ScatterRunnable;
 import com.iangongwer.scenarios.Bowless;
@@ -82,6 +83,7 @@ public class Main extends JavaPlugin {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new EndRunnable(), 0L, 20L);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new AutomaticRunnable(), 0L, 20L);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new LobbyRunnable(), 0L, 20L);
 	}
 
 	public void registerListeners() {
