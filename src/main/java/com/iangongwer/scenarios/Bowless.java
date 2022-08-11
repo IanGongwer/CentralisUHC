@@ -1,8 +1,10 @@
 package com.iangongwer.scenarios;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,6 +22,17 @@ public class Bowless implements Listener {
 
 			if (item.equals(bow)) {
 				event.setCancelled(true);
+			}
+		}
+	}
+
+	@EventHandler
+	public void onSkeletonDeath(EntityDeathEvent event) {
+		if (gm.isScenarioActive("Bowless")) {
+			if (event.getEntity() instanceof Skeleton) {
+				event.getDrops().clear();
+				event.getDrops().add(new ItemStack(Material.BONE, 1));
+				event.getDrops().add(new ItemStack(Material.ARROW, 1));
 			}
 		}
 	}
