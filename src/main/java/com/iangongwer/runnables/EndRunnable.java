@@ -42,7 +42,7 @@ public class EndRunnable extends BukkitRunnable {
 			for (Player allPlayers : Bukkit.getOnlinePlayers()) {
 				allPlayers.kickPlayer("Thank you for playing. Discord: discord.centralis.cc");
 			}
-			Bukkit.getServer().reload();
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "restart");
 		}
 	}
 
