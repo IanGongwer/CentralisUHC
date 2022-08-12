@@ -52,6 +52,7 @@ import com.iangongwer.listeners.PlayerAndChatMuted;
 import com.iangongwer.listeners.PvP;
 import com.iangongwer.listeners.Quit;
 import com.iangongwer.listeners.Respawn;
+import com.iangongwer.listeners.SpectatorInventory;
 import com.iangongwer.listeners.Weather;
 import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.redis.ConnectionRedis;
@@ -69,12 +70,14 @@ import com.iangongwer.scenarios.Timber;
 import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.utils.WorldUtil;
 import com.iangongwer.utils.YMLFile;
+import com.samjakob.spigui.SpiGUI;
 
 public class Main extends JavaPlugin {
 
 	private static Main instance;
 
 	private static boolean redisEnabled = false;
+	public static SpiGUI spiGUI;
 
 	@SuppressWarnings("deprecation")
 	public void registerRunnables() {
@@ -105,6 +108,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Quit(), this);
 		getServer().getPluginManager().registerEvents(new Respawn(), this);
 		getServer().getPluginManager().registerEvents(new Weather(), this);
+		getServer().getPluginManager().registerEvents(new SpectatorInventory(), this);
 		getServer().getPluginManager().registerEvents(new Anvil(), this);
 		getServer().getPluginManager().registerEvents(new DisableGodAppleCraft(), this);
 	}
@@ -147,6 +151,7 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 		instance = this;
+		spiGUI = new SpiGUI(this);
 		new YMLFile();
 
 		try {
