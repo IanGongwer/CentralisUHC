@@ -35,7 +35,9 @@ public class ScheduleCommand implements CommandExecutor {
 					if (LobbyUtil.isPracticePlayer(player.getUniqueId())) {
 						player.sendMessage(u.messageFormat("You are currently in practice. Use /prac to leave", "c"));
 					} else {
-						u.addStaffMode(player.getUniqueId());
+						if (!u.isInStaffMode(player.getUniqueId())) {
+							u.addStaffMode(player.getUniqueId());
+						}
 						cal.set(Integer.valueOf(args[0]), Integer.valueOf(args[1]), Integer.valueOf(args[2]),
 								Integer.valueOf(args[3]),
 								Integer.valueOf(args[4]));
