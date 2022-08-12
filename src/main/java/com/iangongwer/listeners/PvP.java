@@ -58,25 +58,47 @@ public class PvP implements Listener {
 					event.setCancelled(true);
 				}
 
-				if (TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
-					event.setCancelled(true);
-				}
-				if (!gm.getSpectators().contains(damagerUUID)
-						&& !gm.getSpectators().contains(playerUUID) && !u.isInStaffMode(damagerUUID)
-						&& !u.isInStaffMode(playerUUID)
-						&& !TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
-					if (gm.isPvPEnabled()) {
-						event.setCancelled(false);
-						if (!gm.isPvPLogged(playerUUID)) {
-							player.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
-						}
-						if (!gm.isPvPLogged(damagerUUID)) {
-							damager.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
-						}
-						gm.setPvPLogTime(playerUUID, 5);
-						gm.setPvPLogTime(damagerUUID, 5);
-					} else {
+				if (TeamManager.getInstance().areTeamsEnabled()) {
+					if (TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
 						event.setCancelled(true);
+					}
+				}
+				if (!TeamManager.getInstance().areTeamsEnabled()) {
+					if (!gm.getSpectators().contains(damagerUUID)
+							&& !gm.getSpectators().contains(playerUUID) && !u.isInStaffMode(damagerUUID)
+							&& !u.isInStaffMode(playerUUID)) {
+						if (gm.isPvPEnabled()) {
+							event.setCancelled(false);
+							if (!gm.isPvPLogged(playerUUID)) {
+								player.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+							}
+							if (!gm.isPvPLogged(damagerUUID)) {
+								damager.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+							}
+							gm.setPvPLogTime(playerUUID, 5);
+							gm.setPvPLogTime(damagerUUID, 5);
+						} else {
+							event.setCancelled(true);
+						}
+					}
+				} else {
+					if (!gm.getSpectators().contains(damagerUUID)
+							&& !gm.getSpectators().contains(playerUUID) && !u.isInStaffMode(damagerUUID)
+							&& !u.isInStaffMode(playerUUID)
+							&& !TeamManager.getInstance().getTeamMembers(damagerUUID).contains(playerUUID)) {
+						if (gm.isPvPEnabled()) {
+							event.setCancelled(false);
+							if (!gm.isPvPLogged(playerUUID)) {
+								player.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+							}
+							if (!gm.isPvPLogged(damagerUUID)) {
+								damager.sendMessage(u.messageFormat("You are now PvP logged for 5 seconds", "c"));
+							}
+							gm.setPvPLogTime(playerUUID, 5);
+							gm.setPvPLogTime(damagerUUID, 5);
+						} else {
+							event.setCancelled(true);
+						}
 					}
 				}
 			}
