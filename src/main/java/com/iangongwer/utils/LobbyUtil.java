@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
@@ -76,7 +77,9 @@ public class LobbyUtil {
             player.sendMessage("Welcome to Centralis UHC. Use /prac to join the practice arena.");
             player.sendMessage("");
             player.teleport(getLobbySpawnPoint());
-            player.getActivePotionEffects().clear();
+            for (PotionEffect potioneffect : player.getActivePotionEffects()) {
+                player.removePotionEffect(potioneffect.getType());
+            }
             player.setExp(0);
             player.setGameMode(GameMode.SURVIVAL);
             gm.addPlayer(player.getUniqueId());
