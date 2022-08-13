@@ -42,7 +42,7 @@ public class GameManager {
 
 	Random random = new Random();
 
-	private boolean isPvPEnabled = true;
+	private boolean isPvPEnabled = false;
 
 	public static boolean doneScattering = false;
 
