@@ -19,12 +19,12 @@ public class PlayerAndChatMuted implements Listener {
 
         if (ChatUtil.isMuted(player.getUniqueId())) {
             if (!ChatUtil.isChatMuted()) {
-                player.sendMessage(u.messageFormat("You are currently muted.", "c"));
+                player.sendMessage(u.messageFormat("You are currently muted", "c"));
                 event.setCancelled(true);
                 return;
             }
         } else if (ChatUtil.isChatMuted() && !player.isOp() && !player.hasPermission("uhc.staff")) {
-            player.sendMessage(u.messageFormat("The chat is currently muted.", "c"));
+            player.sendMessage(u.messageFormat("The chat is currently muted", "c"));
             event.setCancelled(true);
             return;
         } else if (event.getMessage().contains("%")) {

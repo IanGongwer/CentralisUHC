@@ -53,6 +53,7 @@ public class GameManager {
 	public static ArrayList<UUID> playersNotJoinedBack = new ArrayList<UUID>();
 
 	public static Map<UUID, Integer> pvpLogTime = new HashMap<UUID, Integer>();
+	public static Map<UUID, Integer> quitLogTime = new HashMap<UUID, Integer>();
 	public static Map<UUID, ArrayList<ItemStack>> quitLoggedInventories = new HashMap<UUID, ArrayList<ItemStack>>();
 
 	public static Map<UUID, Integer> playerKills = new HashMap<UUID, Integer>();

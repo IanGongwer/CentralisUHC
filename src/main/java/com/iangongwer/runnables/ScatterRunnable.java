@@ -27,7 +27,7 @@ public class ScatterRunnable extends BukkitRunnable {
 							"",
 							"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-							"[UHC] You can relog till PvP enables (15 mins). If you relog after PvP enables, you will become a spectator",
+							"[UHC] You can leave the game for up-to two minutes, after that you will become a spectator, if you do not join again",
 							"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 							"",

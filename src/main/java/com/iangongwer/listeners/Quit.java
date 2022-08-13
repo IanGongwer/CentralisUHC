@@ -106,13 +106,7 @@ public class Quit implements Listener {
 							playerQuitInventory1);
 					gm.getDeathLocations().put(playerUUID, Bukkit.getPlayer(playerUUID).getLocation());
 					if (gm.isPvPEnabled()) {
-						gm.removePlayer(playerUUID);
-
-						if (TeamManager.getInstance().areTeamsEnabled()) {
-							TeamManager.getInstance().addDeceasedMember(playerUUID);
-							TeamManager.getInstance().isFullTeamDead(playerUUID);
-						}
-
+						GameManager.quitLogTime.put(playerUUID, 120);
 					} else {
 						GameManager.playersNotJoinedBack.add(playerUUID);
 					}

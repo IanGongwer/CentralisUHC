@@ -47,23 +47,30 @@ public class Join implements Listener {
 
 	public void inGamePlayerJoin(Player player, UUID playerUUID) {
 		if (GameState.isInGame()) {
-			player.sendMessage("Welcome to Centralis UHC. The game is currently in progress.");
+			player.sendMessage(Util.getInstance().messageFormat(
+					"[UHC] Welcome to Centralis UHC. The game is currently in progress",
+					"a"));
 
 			if (gm.isPlayer(playerUUID)) {
+				ScoreboardUtil.createGameScoreboard(player);
+				HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
+						ScoreboardUtil.getScoreboard(player).getName());
 				if (!gm.isPvPEnabled()) {
 					if (GameManager.playersNotJoinedBack.contains(playerUUID)) {
 						GameManager.playersNotJoinedBack.remove(playerUUID);
 						GameManager.deathInventories.remove(playerUUID);
 						gm.getDeathLocations().remove(playerUUID);
 					}
-					ScoreboardUtil.createGameScoreboard(player);
-					HeartUtil.showHealth(player, ScoreboardUtil.getScoreboard(player).getScoreboard(),
-							ScoreboardUtil.getScoreboard(player).getName());
 
 					// QuitLogRunnable.dontkill.add(player.getUniqueId());
 					// WorldUtil.despawnVillager(player);
 					// QuitLogRunnable.dontkill.remove(player.getUniqueId());
 					// Quit Log System Not Working
+				} else {
+					GameManager.quitLogTime.remove(playerUUID);
+					player.sendMessage(Util.getInstance().messageFormat(
+							"[UHC] You are now not quit-logged",
+							"a"));
 				}
 			} else if (u.isInStaffMode(playerUUID)) {
 				ScoreboardUtil.createStaffSpecScoreboard(player);
@@ -75,7 +82,9 @@ public class Join implements Listener {
 				u.makeSpectator(player);
 
 				if (!gm.isPvPEnabled()) {
-					player.sendMessage("Please use /latescatter, if you would like to join in the game.");
+					player.sendMessage(Util.getInstance().messageFormat(
+							"[UHC] Please use /latescatter, if you would like to join in the game",
+							"a"));
 				}
 			}
 		}
