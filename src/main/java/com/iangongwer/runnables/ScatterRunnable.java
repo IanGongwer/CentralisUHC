@@ -104,7 +104,7 @@ public class ScatterRunnable extends BukkitRunnable {
 							"a"));
 					Bukkit.broadcastMessage(
 							Util.getInstance().messageFormat(
-									"[UHC] Type in chat if you have any other questions",
+									"[UHC] Use /helpop if you have any questions",
 									"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 							"",
