@@ -32,8 +32,5 @@ Future features to add:
 # Automatic Un-Whitelist & Game Start/Scatter
 ![image](https://user-images.githubusercontent.com/63007329/186735879-90b620a4-845d-4624-a000-cec4389b9509.png)
 
-# Use of Some Commands
-![image](https://user-images.githubusercontent.com/63007329/147863468-3cef451b-85a7-4b04-b042-85562e9cd460.png)
-
 # End Game Screenshot (Screenshot from Discord Server)
 ![image](https://user-images.githubusercontent.com/63007329/147863506-97e9270f-1cf5-4660-b5e2-a82ed3cb8b18.png)
