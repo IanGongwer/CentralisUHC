@@ -22,7 +22,9 @@ Future features to add:
 ![image](https://user-images.githubusercontent.com/63007329/147863432-7572da5a-0120-4487-852f-37bfc976e263.png)
 
 # In-Chat Commands
-![image](https://user-images.githubusercontent.com/63007329/147863445-177c17f4-5943-483b-be50-9f3a10078d1d.png)
+![image](https://user-images.githubusercontent.com/63007329/186735548-62d2431b-0bfd-4921-a692-d2103c2a4804.png)
+![image](https://user-images.githubusercontent.com/63007329/186735619-125fd915-437e-4580-b045-1610abab7435.png)
+![image](https://user-images.githubusercontent.com/63007329/186735649-96126d45-fc01-4199-8577-11b6d5be6b5a.png)
 
 # In-Game
 ![image](https://user-images.githubusercontent.com/63007329/147863458-6506472c-6dc9-4066-923f-e6523b4f3b37.png)
