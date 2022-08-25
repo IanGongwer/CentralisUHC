@@ -7,10 +7,15 @@ The whole codebase was play tested through around 60 complete games of UHC. Ther
 
 If you would like to use this plugin in your server, please download the centralisuhc-1.0-SNAPSHOT-shaded.jar file from the target folder in this repository and import it into your spigot plugins folder.
 
-Future features to add:
-
-- Scenarios regarding teams
-- More advanced Scenarios (TimeBomb, Moles, etc.)
+Current Scenarios:
+- Bowless
+- CutClean
+- BloodDiamonds
+- HasteyBoys
+- Timber
+- TimeBomb
+- Fireless
+- SupplyDrops
 
 # Welcome Screen
 ![image](https://user-images.githubusercontent.com/63007329/147863412-bece200a-a100-4628-8ef3-af7919da3b6f.png)
