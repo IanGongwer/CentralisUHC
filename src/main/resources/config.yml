@@ -4,3 +4,6 @@ Configuration:
   Database: UHC
   Username: tutorial
   Password: tutorial
+Redis:
+  Host: localhost
+  Password: locahost

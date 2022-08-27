@@ -27,7 +27,7 @@ public class ScatterRunnable extends BukkitRunnable {
 							"",
 							"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
-							"[UHC] You can leave the game for up-to two minutes, after that you will become a spectator, if you do not join again",
+							"[UHC] You can leave the game for up-to five minutes, after that you will become a spectator, if you do not join again",
 							"a"));
 					Bukkit.broadcastMessage(Util.getInstance().messageFormat(
 							"",

@@ -5,9 +5,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.bukkit.configuration.file.FileConfiguration;
+
 import com.iangongwer.main.Main;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -23,7 +24,7 @@ public class ConnectionRedis {
         return single_instance;
     }
 
-    Dotenv env = Dotenv.load();
+    FileConfiguration yml = Main.getInstance().getConfig();
 
     public static JedisPool pool;
 
@@ -33,12 +34,12 @@ public class ConnectionRedis {
 
     public void connectToRedis() {
         Main.setRedisEnabled(true);
-        pool = new JedisPool(env.get("REDIS_IP"), 11192);
+        pool = new JedisPool(yml.getString("Redis.Host"), 11192);
         Jedis j = null;
         try {
             j = pool.getResource();
             // If you want to use a password, use
-            j.auth(env.get("REDIS_PASSWORD"));
+            j.auth(yml.getString("Redis.Password"));
             connectedSuccessfully = true;
         } catch (Exception e) {
             connectedSuccessfully = false;
