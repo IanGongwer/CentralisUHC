@@ -18,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.runnables.PvPLogRunnable;
 import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.team.TeamManager;
@@ -96,6 +97,8 @@ public class Quit implements Listener {
 					pr.killPvPLogPlayerProcedure(playerUUID);
 					Bukkit.broadcastMessage(ChatColor.GREEN + Bukkit.getPlayer(playerUUID).getDisplayName()
 							+ ChatColor.WHITE + " has been killed");
+
+					ConnectionMYSQL.getInstance().setPlayersLeft();
 				} else {
 					gm.getAlreadyScatteredPlayers().remove(playerUUID);
 					List<ItemStack> playerQuitInventory1 = new ArrayList<ItemStack>();

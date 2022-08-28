@@ -83,6 +83,7 @@ public class Death implements Listener {
 			addDeathOnPlayerDeath(player);
 			WorldUtil.spawnFireworks(gm.getDeathLocations().get(playerUUID), 2);
 			u.makeSpectator(player);
+			dbm.setPlayersLeft();
 			gm.isGameFinished();
 		}
 	}

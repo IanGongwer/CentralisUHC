@@ -176,6 +176,10 @@ public class Main extends JavaPlugin {
 		GoldCraft.createGoldCraft();
 		LegendSword.createLegendSword();
 
+		ConnectionMYSQL.getInstance().setBorderSize(0);
+		ConnectionMYSQL.getInstance().setPlayersLeft();
+		ConnectionMYSQL.getInstance().setGameTime(0);
+
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");
 		Bukkit.getWorld("world").setTime(6000);

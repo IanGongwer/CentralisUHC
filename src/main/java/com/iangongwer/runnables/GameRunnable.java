@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.scenarios.SupplyDrops;
 import com.iangongwer.scenarios.TimeBomb;
 import com.iangongwer.team.TeamManager;
@@ -36,6 +37,7 @@ public class GameRunnable extends BukkitRunnable {
 	public void run() {
 		if (GameState.isInGame()) {
 			totalTime++;
+			ConnectionMYSQL.getInstance().setGameTime(getSecondsPassed());
 
 			if (gm.isScenarioActive("TimeBomb")) {
 				for (Map.Entry<Location, Integer> set : TimeBomb.timeBombTime.entrySet()) {
@@ -194,6 +196,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage("");
 			playMessageSound();
 			setBorderBlock(500);
+			ConnectionMYSQL.getInstance().setBorderSize(500);
 		}
 		if (getFormattedTime().equalsIgnoreCase("35:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 125 125 0 0");
@@ -202,6 +205,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage("");
 			playMessageSound();
 			setBorderBlock(250);
+			ConnectionMYSQL.getInstance().setBorderSize(250);
 		}
 		if (getFormattedTime().equalsIgnoreCase("40:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 50 50 0 0");
@@ -210,6 +214,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage("");
 			playMessageSound();
 			setBorderBlock(100);
+			ConnectionMYSQL.getInstance().setBorderSize(100);
 		}
 		if (getFormattedTime().equalsIgnoreCase("45:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 25 25 0 0");
@@ -218,6 +223,7 @@ public class GameRunnable extends BukkitRunnable {
 			Bukkit.broadcastMessage("");
 			playMessageSound();
 			setBorderBlock(50);
+			ConnectionMYSQL.getInstance().setBorderSize(50);
 		}
 		if (getFormattedTime().equalsIgnoreCase("50:00")) {
 			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "wb uhc_world set 12 12 0 0");
@@ -227,6 +233,7 @@ public class GameRunnable extends BukkitRunnable {
 			playMessageSound();
 			setBorderBlock(25);
 			teleportPlayersUp();
+			ConnectionMYSQL.getInstance().setBorderSize(25);
 		}
 	}
 

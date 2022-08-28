@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import com.iangongwer.game.GameManager;
 import com.iangongwer.main.Main;
 
 public class ConnectionMYSQL {
@@ -75,6 +76,17 @@ public class ConnectionMYSQL {
 		try {
 			ps = getConnection().prepareStatement(
 					"CREATE TABLE IF NOT EXISTS player_banned (player_name VARCHAR(48), player_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createGameInfoTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"CREATE TABLE IF NOT EXISTS game_information (players_left int(11), border_size int(11), game_time int(11)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -353,6 +365,42 @@ public class ConnectionMYSQL {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public void setPlayersLeft() {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"UPDATE game_information SET players_left=?");
+			ps2.setString(1, String.valueOf(GameManager.getInstance().getPlayers().size()));
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setBorderSize(int borderSize) {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"UPDATE game_information SET border_size=?");
+			ps2.setString(1, String.valueOf(borderSize));
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setGameTime(int gameTime) {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"UPDATE game_information SET game_time=?");
+			ps2.setString(1, String.valueOf(gameTime));
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isConnectedSuccessfully() {

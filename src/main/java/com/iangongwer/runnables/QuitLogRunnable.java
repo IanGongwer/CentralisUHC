@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
 
@@ -49,6 +50,7 @@ public class QuitLogRunnable extends BukkitRunnable {
 				tm.addDeceasedMember(playerUUID);
 				tm.isFullTeamDead(playerUUID);
 			}
+			ConnectionMYSQL.getInstance().setPlayersLeft();
 			gm.isGameFinished();
 		}
 	}

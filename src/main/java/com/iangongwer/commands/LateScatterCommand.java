@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import com.iangongwer.game.GameManager;
 import com.iangongwer.game.GameState;
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.team.TeamManager;
 import com.iangongwer.utils.Util;
 
@@ -63,6 +64,7 @@ public class LateScatterCommand implements CommandExecutor {
 							gm.addPlayer(player.getUniqueId());
 							gm.removeSpectator(player.getUniqueId());
 							player.setGameMode(GameMode.SURVIVAL);
+							ConnectionMYSQL.getInstance().setPlayersLeft();
 
 							Bukkit.broadcastMessage(
 									u.messageFormat("[UHC] " + player.getDisplayName() + " has been latescattered.",

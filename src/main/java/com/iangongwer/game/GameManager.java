@@ -224,6 +224,8 @@ public class GameManager {
 	public void startGame() {
 		GameState.setState(GameState.InGame);
 		Util.getInstance().setWhitelistStatus(false);
+		ConnectionMYSQL.getInstance().setBorderSize(2000);
+		ConnectionMYSQL.getInstance().setPlayersLeft();
 
 		for (UUID playerUUID : getPlayers()) {
 			ScoreboardUtil.createGameScoreboard(Bukkit.getPlayer(playerUUID));
