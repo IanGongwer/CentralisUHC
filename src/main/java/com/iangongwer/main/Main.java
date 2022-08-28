@@ -26,6 +26,7 @@ import com.iangongwer.commands.StatsCommand;
 import com.iangongwer.commands.TeamChatCommand;
 import com.iangongwer.commands.TeamCommand;
 import com.iangongwer.commands.TeamCoordsCommand;
+import com.iangongwer.commands.UHCCommand;
 import com.iangongwer.commands.UnBanPlayerCommand;
 import com.iangongwer.commands.WhitelistCommand;
 import com.iangongwer.crafts.GoldCraft;
@@ -125,6 +126,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerCommands() {
+		getCommand("uhc").setExecutor((CommandExecutor) new UHCCommand());
 		getCommand("helpop").setExecutor((CommandExecutor) new HelpopCommand());
 		getCommand("schedule").setExecutor((CommandExecutor) new ScheduleCommand());
 		getCommand("heal").setExecutor((CommandExecutor) new HealCommand());

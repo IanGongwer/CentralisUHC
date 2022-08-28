@@ -53,5 +53,7 @@ commands:
     permission: uhc.staff
   helpop:
     aliases: [help, ask, assist, assistance]
+  uhc:
+    aliases: [config, conf, rules]
     
 depend: [Netherboard]
