@@ -181,6 +181,8 @@ public class Main extends JavaPlugin {
 		ConnectionMYSQL.getInstance().setBorderSize(0);
 		ConnectionMYSQL.getInstance().setPlayersLeft();
 		ConnectionMYSQL.getInstance().setGameTime(0);
+		ConnectionMYSQL.getInstance().setGameState(GameState.Lobby);
+		ConnectionMYSQL.getInstance().removeKillFeedData();
 
 		GameState.setState(GameState.Lobby);
 		Bukkit.getWorld("world").setGameRuleValue("doDaylightCycle", "false");

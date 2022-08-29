@@ -149,6 +149,7 @@ public class GameManager {
 
 	public void scatterPlayers(ArrayList<UUID> players) {
 		GameState.setState(GameState.Scattering);
+		ConnectionMYSQL.getInstance().setGameState(GameState.Scattering);
 		TeamManager.getInstance();
 
 		if (TeamManager.getInstance().areTeamsEnabled()) {
@@ -223,6 +224,7 @@ public class GameManager {
 	// Start and End Games
 	public void startGame() {
 		GameState.setState(GameState.InGame);
+		ConnectionMYSQL.getInstance().setGameState(GameState.InGame);
 		Util.getInstance().setWhitelistStatus(false);
 		ConnectionMYSQL.getInstance().setBorderSize(2000);
 		ConnectionMYSQL.getInstance().setPlayersLeft();
@@ -243,6 +245,7 @@ public class GameManager {
 		if (TeamManager.getInstance().areTeamsEnabled()) {
 			if (TeamManager.getInstance().getTotalTeams() == 1) {
 				GameState.setState(GameState.End);
+				ConnectionMYSQL.getInstance().setGameState(GameState.End);
 				Bukkit.broadcastMessage("");
 				Bukkit.broadcastMessage(
 						Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));
@@ -263,6 +266,7 @@ public class GameManager {
 			}
 		} else if (getPlayers().size() == 1) {
 			GameState.setState(GameState.End);
+			ConnectionMYSQL.getInstance().setGameState(GameState.End);
 			Bukkit.broadcastMessage("");
 			Bukkit.broadcastMessage(
 					Util.getInstance().messageFormat("The game has finished. Thank you for playing!", "a"));

@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import com.iangongwer.game.GameManager;
+import com.iangongwer.game.GameState;
 import com.iangongwer.main.Main;
 
 public class ConnectionMYSQL {
@@ -87,6 +88,28 @@ public class ConnectionMYSQL {
 		try {
 			ps = getConnection().prepareStatement(
 					"CREATE TABLE IF NOT EXISTS game_information (players_left int(11), border_size int(11), game_time int(11)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createKillFeedTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"CREATE TABLE IF NOT EXISTS kill_feed (player_name VARCHAR(48), player_uuid VARCHAR(128), killer_name VARCHAR(48), killer_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeKillFeedData() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"TRUNCATE TABLE kill_feed");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -396,6 +419,38 @@ public class ConnectionMYSQL {
 			PreparedStatement ps2 = getConnection().prepareStatement(
 					"UPDATE game_information SET game_time=?");
 			ps2.setString(1, String.valueOf(gameTime));
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setGameState(GameState gameState) {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"UPDATE game_information SET game_state=?");
+			ps2.setString(1, String.valueOf(gameState.toString()));
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addLiveKill(UUID playerUUID, UUID killerUUID) {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"INSERT IGNORE INTO kill_feed (player_name, player_uuid, killer_name, killer_uuid) VALUES(?, ?, ?, ?)");
+			ps2.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
+			ps2.setString(2, playerUUID.toString());
+			if (Bukkit.getPlayer(killerUUID) != null) {
+				ps2.setString(3, Bukkit.getPlayer(killerUUID).getDisplayName());
+				ps2.setString(4, killerUUID.toString());
+			} else {
+				ps2.setString(3, null);
+				ps2.setString(4, null);
+			}
 			ps2.executeUpdate();
 			return;
 		} catch (SQLException e) {

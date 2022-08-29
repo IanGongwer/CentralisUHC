@@ -76,8 +76,10 @@ public class Death implements Listener {
 
 			if (killer instanceof Player && killer != null) {
 				addKillOnPlayerKill(event, player, killer);
+				dbm.addLiveKill(playerUUID, killer.getUniqueId());
 			} else {
 				event.setDeathMessage(ChatColor.GREEN + player.getDisplayName() + ChatColor.WHITE + " has been killed");
+				dbm.addLiveKill(playerUUID, null);
 			}
 
 			addDeathOnPlayerDeath(player);
