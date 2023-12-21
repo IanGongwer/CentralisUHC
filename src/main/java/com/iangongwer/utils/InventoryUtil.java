@@ -4,8 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.iangongwer.main.Main;
-import com.samjakob.spigui.SGMenu;
 import com.samjakob.spigui.buttons.SGButton;
+import com.samjakob.spigui.menu.SGMenu;
 
 public class InventoryUtil {
 

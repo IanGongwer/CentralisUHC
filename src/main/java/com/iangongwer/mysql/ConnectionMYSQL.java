@@ -65,7 +65,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), player_team VARCHAR(128), PRIMARY KEY (player_uuid)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -152,6 +152,29 @@ public class ConnectionMYSQL {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
 					"UPDATE player_statistics SET player_kills = player_kills + 1 WHERE player_uuid = ?");
+			ps.setString(1, playerUUID.toString());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addTeam(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"UPDATE player_statistics SET player_team = ? WHERE player_uuid = ?");
+			ps.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
+			ps.setString(2, playerUUID.toString());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeTeam(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"UPDATE player_statistics SET player_team = NULL WHERE player_uuid = ?");
 			ps.setString(1, playerUUID.toString());
 			ps.executeUpdate();
 		} catch (SQLException e) {

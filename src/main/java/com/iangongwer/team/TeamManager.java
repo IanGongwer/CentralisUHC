@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
+import com.iangongwer.mysql.ConnectionMYSQL;
 import com.iangongwer.utils.Util;
 
 public class TeamManager {
@@ -27,6 +28,7 @@ public class TeamManager {
 	private int totalTeams = 0;
 	public static Map<UUID, Team> listOfTeams = new HashMap<UUID, Team>();
 	public static Map<UUID, Integer> listOfTeamNumbers = new HashMap<UUID, Integer>();
+	ConnectionMYSQL dbm = ConnectionMYSQL.getInstance();
 
 	public int getTotalTeams() {
 		return totalTeams;
@@ -38,6 +40,7 @@ public class TeamManager {
 		listOfTeams.put(leader, team);
 		listOfTeamNumbers.put(leader, totalTeams);
 		totalTeams++;
+		dbm.addTeam(leader);
 	}
 
 	public void deleteTeam(UUID leader) {
@@ -45,6 +48,7 @@ public class TeamManager {
 			if (Bukkit.getPlayer(member) != null) {
 				Bukkit.getPlayer(member).sendMessage(Util.getInstance()
 						.messageFormat(Bukkit.getPlayer(leader).getDisplayName() + " has disbanded the team", "c"));
+				dbm.removeTeam(member);
 			}
 		}
 
@@ -62,6 +66,7 @@ public class TeamManager {
 		Team team = listOfTeams.get(leader);
 		team.members.remove(member);
 		team.size--;
+		dbm.removeTeam(member);
 	}
 
 	// Player Commands
@@ -138,6 +143,7 @@ public class TeamManager {
 		if (getTeam(leader).invited.contains(invited)) {
 			getTeam(leader).members.add(invited);
 			getTeam(leader).size++;
+			dbm.addTeam(invited);
 		}
 	}
 
@@ -146,6 +152,7 @@ public class TeamManager {
 			getTeam(player).size--;
 			getTeam(player).invited.remove(player);
 			getTeam(player).members.remove(player);
+			dbm.removeTeam(player);
 		}
 	}
 
