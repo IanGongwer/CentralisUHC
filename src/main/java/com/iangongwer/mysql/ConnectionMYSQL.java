@@ -327,6 +327,7 @@ public class ConnectionMYSQL {
 		}
 	}
 
+	@Deprecated
 	public UUID getMostKillsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
@@ -347,6 +348,7 @@ public class ConnectionMYSQL {
 		return null;
 	}
 
+	@Deprecated
 	public UUID getMostDeathsUUID() {
 		try {
 			PreparedStatement ps = getConnection()
@@ -367,6 +369,7 @@ public class ConnectionMYSQL {
 		return null;
 	}
 
+	@Deprecated
 	public UUID getMostWinsUUID() {
 		try {
 			PreparedStatement ps = getConnection()

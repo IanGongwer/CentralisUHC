@@ -21,6 +21,7 @@ public class Break implements Listener {
 	Util u = Util.getInstance();
 	GameManager gm = GameManager.getInstance();
 
+	@Deprecated
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		Player player = event.getPlayer();

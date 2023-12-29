@@ -15,6 +15,7 @@ public class UnBanPlayerCommand implements CommandExecutor {
 
 	ConnectionMYSQL cm = ConnectionMYSQL.getInstance();
 
+	@Deprecated
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("unbanplayer") && sender instanceof Player) {
 			Player player = (Player) sender;
