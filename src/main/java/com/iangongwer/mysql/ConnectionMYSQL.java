@@ -65,7 +65,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), player_team VARCHAR(128), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,6 +99,17 @@ public class ConnectionMYSQL {
 		try {
 			ps = getConnection().prepareStatement(
 					"CREATE TABLE IF NOT EXISTS kill_feed (player_name VARCHAR(48), player_uuid VARCHAR(128), killer_name VARCHAR(48), killer_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createTeamTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement(
+					"CREATE TABLE IF NOT EXISTS player_teams (team_name VARCHAR(48), team_member VARCHAR(128)");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,23 +170,64 @@ public class ConnectionMYSQL {
 		}
 	}
 
-	public void addTeam(UUID playerUUID) {
+	public String getTeamMembers(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
-					"UPDATE player_statistics SET player_team = ? WHERE player_uuid = ?");
+					"SELECT team_member FROM player_teams WHERE team_name = ?");
 			ps.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
-			ps.setString(2, playerUUID.toString());
+			ResultSet results = ps.executeQuery();
+			String teamMembers;
+			if (results.next()) {
+				teamMembers = results.getString("team_member");
+				return teamMembers;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public void createTeam(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"INSERT IGNORE INTO player_teams (team_name, team_member) VALUES(?, ?)");
+			ps.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
+			ps.setString(2, Bukkit.getPlayer(playerUUID).getDisplayName());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void removeTeam(UUID playerUUID) {
+	public void addTeam(UUID playerUUID, UUID leaderUUID) {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
-					"UPDATE player_statistics SET player_team = NULL WHERE player_uuid = ?");
-			ps.setString(1, playerUUID.toString());
+					"UPDATE player_teams SET team_member = ? WHERE team_name = ?");
+			ps.setString(1, getTeamMembers(leaderUUID) + "," + Bukkit.getPlayer(playerUUID).getDisplayName());
+			ps.setString(2, Bukkit.getPlayer(leaderUUID).getDisplayName());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void disbandTeam(UUID playerUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"DELETE FROM player_teams WHERE team_name = ?");
+			ps.setString(1, Bukkit.getPlayer(playerUUID).getDisplayName());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void removeTeam(UUID playerUUID, UUID leaderUUID) {
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(
+					"UPDATE player_teams SET team_member = ? WHERE team_name = ?");
+			ps.setString(1, getTeamMembers(leaderUUID).replace(Bukkit.getPlayer(playerUUID).getDisplayName() + ",", ""));
+			ps.setString(2, Bukkit.getPlayer(leaderUUID).getDisplayName());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
