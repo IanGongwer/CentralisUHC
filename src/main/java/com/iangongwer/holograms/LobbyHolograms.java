@@ -42,6 +42,7 @@ public class LobbyHolograms {
 		// mostWins(loc);
 	}
 
+	@Deprecated
 	public void mostKills(Location loc) {
 		ArmorStand hologram = (ArmorStand) loc.getWorld().spawnEntity(killsLoc, EntityType.ARMOR_STAND);
 		hologram.setVisible(false);
@@ -78,6 +79,7 @@ public class LobbyHolograms {
 		}
 	}
 
+	@Deprecated
 	public void mostDeaths(Location loc) {
 		ArmorStand hologram = (ArmorStand) loc.getWorld().spawnEntity(deathsLoc, EntityType.ARMOR_STAND);
 		hologram.setVisible(false);
@@ -115,6 +117,7 @@ public class LobbyHolograms {
 		}
 	}
 
+	@Deprecated
 	public void mostWins(Location loc) {
 		ArmorStand hologram = (ArmorStand) loc.getWorld().spawnEntity(winsLoc, EntityType.ARMOR_STAND);
 		hologram.setVisible(false);
