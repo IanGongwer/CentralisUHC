@@ -65,7 +65,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_statistics (player_name VARCHAR(48), player_uuid VARCHAR(128), player_kills int(11), player_deaths int(11), game_wins int(11), PRIMARY KEY (player_uuid))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_banned (player_name VARCHAR(48), player_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS player_banned (player_name VARCHAR(48), player_uuid VARCHAR(128), PRIMARY KEY (player_uuid))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,7 +87,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS game_information (players_left int(11), border_size int(11), game_time int(11)");
+					"CREATE TABLE IF NOT EXISTS game_information (players_left int(11), border_size int(11), game_time int(11), game_state VARCHAR(48))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS kill_feed (player_name VARCHAR(48), player_uuid VARCHAR(128), killer_name VARCHAR(48), killer_uuid VARCHAR(128), PRIMARY KEY (player_uuid)");
+					"CREATE TABLE IF NOT EXISTS kill_feed (player_name VARCHAR(48), player_uuid VARCHAR(128), killer_name VARCHAR(48), killer_uuid VARCHAR(128), PRIMARY KEY (player_uuid))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,7 +109,7 @@ public class ConnectionMYSQL {
 		PreparedStatement ps;
 		try {
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE IF NOT EXISTS player_teams (team_name VARCHAR(48), team_member VARCHAR(128)");
+					"CREATE TABLE IF NOT EXISTS player_teams (team_name VARCHAR(48), team_member VARCHAR(128))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,7 +122,7 @@ public class ConnectionMYSQL {
 			ps = getConnection().prepareStatement("DROP TABLE sorted_leaderboard;");
 			ps.executeUpdate();
 			ps = getConnection().prepareStatement(
-					"CREATE TABLE sorted_leaderboard (rank int(11) AUTO_INCREMENT, PRIMARY KEY (rank)) AS (SELECT * FROM player_statistics ORDER BY game_wins DESC, player_kills DESC, player_deaths ASC);");
+					"CREATE TABLE sorted_leaderboard (rank int(11) AUTO_INCREMENT, PRIMARY KEY (rank)) AS (SELECT * FROM player_statistics ORDER BY game_wins DESC, player_kills DESC, player_deaths ASC))");
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
