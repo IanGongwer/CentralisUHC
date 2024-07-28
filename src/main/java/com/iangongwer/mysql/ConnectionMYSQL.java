@@ -42,7 +42,6 @@ public class ConnectionMYSQL {
 					yml.getString("Configuration.Username"),
 					yml.getString("Configuration.Password"));
 			connectedSuccessfully = true;
-			createSortedLeaderboardTable();
 		} catch (SQLException e) {
 			Main.setRedisEnabled(true);
 			connectedSuccessfully = false;
