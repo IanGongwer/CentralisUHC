@@ -184,10 +184,7 @@ public class Main extends JavaPlugin {
 		ConnectionMYSQL.getInstance().createKillFeedTable();
 		ConnectionMYSQL.getInstance().createTeamTable();
 
-		ConnectionMYSQL.getInstance().setBorderSize(0);
-		ConnectionMYSQL.getInstance().setPlayersLeft();
-		ConnectionMYSQL.getInstance().setGameTime(0);
-		ConnectionMYSQL.getInstance().setGameState(GameState.Lobby);
+		ConnectionMYSQL.getInstance().createGameInfo();
 		ConnectionMYSQL.getInstance().removeKillFeedData();
 
 		GameState.setState(GameState.Lobby);

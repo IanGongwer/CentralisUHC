@@ -154,6 +154,17 @@ public class ConnectionMYSQL {
 		}
 	}
 
+	public void createGameInfo() {
+		try {
+			PreparedStatement ps2 = getConnection().prepareStatement(
+					"INSERT IGNORE INTO game_information (players_left, border_size, game_time, game_state) VALUES(0, 0, 0, 'LOBBY')");
+			ps2.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public boolean playerExists(UUID playerUUID) {
 		try {
 			PreparedStatement ps = getConnection()
@@ -238,7 +249,8 @@ public class ConnectionMYSQL {
 		try {
 			PreparedStatement ps = getConnection().prepareStatement(
 					"UPDATE player_teams SET team_member = ? WHERE team_name = ?");
-			ps.setString(1, getTeamMembers(leaderUUID).replace(Bukkit.getPlayer(playerUUID).getDisplayName() + ",", ""));
+			ps.setString(1,
+					getTeamMembers(leaderUUID).replace(Bukkit.getPlayer(playerUUID).getDisplayName() + ",", ""));
 			ps.setString(2, Bukkit.getPlayer(leaderUUID).getDisplayName());
 			ps.executeUpdate();
 		} catch (SQLException e) {
