@@ -182,7 +182,6 @@ public class Main extends JavaPlugin {
 		ConnectionMYSQL.getInstance().createBannedTable();
 		ConnectionMYSQL.getInstance().createGameInfoTable();
 		ConnectionMYSQL.getInstance().createKillFeedTable();
-		ConnectionMYSQL.getInstance().createSortedLeaderboardTable();
 		ConnectionMYSQL.getInstance().createTeamTable();
 
 		ConnectionMYSQL.getInstance().setBorderSize(0);
