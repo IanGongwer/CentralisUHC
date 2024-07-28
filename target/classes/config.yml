@@ -1,9 +1,0 @@
-Configuration:
-  Host: localhost
-  Port: 3306
-  Database: UHC
-  Username: tutorial
-  Password: tutorial
-Redis:
-  Host: localhost
-  Password: locahost
