@@ -116,6 +116,19 @@ public class ConnectionMYSQL {
 		}
 	}
 
+	public void createSortedLeaderboardTable() {
+		PreparedStatement ps;
+		try {
+			ps = getConnection().prepareStatement("DROP TABLE sorted_leaderboard;");
+			ps.executeUpdate();
+			ps = getConnection().prepareStatement(
+					"CREATE TABLE sorted_leaderboard (rank int(11) AUTO_INCREMENT, PRIMARY KEY (rank)) AS (SELECT * FROM player_statistics ORDER BY game_wins DESC, player_kills DESC, player_deaths ASC);");
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void removeKillFeedData() {
 		PreparedStatement ps;
 		try {
@@ -436,19 +449,6 @@ public class ConnectionMYSQL {
 		}
 		return false;
 
-	}
-
-	public void createSortedLeaderboardTable() {
-		PreparedStatement ps;
-		try {
-			ps = getConnection().prepareStatement("DROP TABLE sorted_leaderboard;");
-			ps.executeUpdate();
-			ps = getConnection().prepareStatement(
-					"CREATE TABLE sorted_leaderboard (rank int(11) AUTO_INCREMENT, PRIMARY KEY (rank)) AS (SELECT * FROM player_statistics ORDER BY game_wins DESC, player_kills DESC, player_deaths ASC);");
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public int getPlayerRank(UUID playerUUID) {

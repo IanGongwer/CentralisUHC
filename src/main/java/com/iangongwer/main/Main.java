@@ -178,6 +178,13 @@ public class Main extends JavaPlugin {
 		GoldCraft.createGoldCraft();
 		LegendSword.createLegendSword();
 
+		ConnectionMYSQL.getInstance().createTable();
+		ConnectionMYSQL.getInstance().createBannedTable();
+		ConnectionMYSQL.getInstance().createGameInfoTable();
+		ConnectionMYSQL.getInstance().createKillFeedTable();
+		ConnectionMYSQL.getInstance().createSortedLeaderboardTable();
+		ConnectionMYSQL.getInstance().createTeamTable();
+
 		ConnectionMYSQL.getInstance().setBorderSize(0);
 		ConnectionMYSQL.getInstance().setPlayersLeft();
 		ConnectionMYSQL.getInstance().setGameTime(0);
